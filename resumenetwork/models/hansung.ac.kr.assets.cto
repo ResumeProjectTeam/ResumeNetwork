@@ -1,0 +1,79 @@
+
+namespace hansung.ac.kr.assets
+import hansung.ac.kr.participants.*
+
+
+
+asset ResumeInfoUser identified by assetId {
+    o String assetId
+    o DateTime dob
+    o String supportField
+    o String salaryRequirement regex=/[1-9][0-9]{2,}/ optional
+    o String majorActivities optional
+    o String socialExperience optional
+    o String skillsAndCapabilities optional
+    o Boolean isPublic
+}
+
+
+asset Certificate identified by assetId {
+    o String assetId 
+    o String ownerId
+    o String certificateName
+    o Integer certificateScore default=0 range=[0,] optional
+	o String organizationId
+    o String organizationName
+    o DateTime dob
+    o DateTime expirationDate optional
+    o DateTime transactionTime
+    o Boolean isPublic
+}
+
+asset AwardDetails identified by assetId {
+   o String assetId
+   o String ownerId
+   o String contestName
+   o String organizationId
+   o String organizationName
+   o DateTime dateOfAward
+   o DateTime transactionTime
+   o String awardGrade optional 
+   o String description optional
+   o Boolean isPublic
+}
+
+asset UserInfoInEnt identified by assetId {
+    o String assetId
+    o String ownerId
+    o String enterpriseId
+    o String enterpriseName
+	o String userPosition
+    o String performingTask
+    o DateTime dateOfEmployment optional
+    o DateTime retirementDate optional
+    o DateTime transactionTime
+    o Boolean isPublic
+}
+
+asset UserInfoInSch identified by assetId {
+    o String assetId
+    o String ownerId
+    o String schoolId
+    o String schoolName
+  	o DateTime entranceDate
+    o DateTime graduationDate optional
+    o DateTime transactionTime
+    o String majorField optional
+    o Double gradeAverage default=0.0 range=[0.0, 4.5] optional
+    o Boolean isPublic
+}
+
+
+concept Address {
+    o String street
+    o String house
+    o String city
+    o String county
+    o String country
+    o String zip
+}

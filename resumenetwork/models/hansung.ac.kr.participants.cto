@@ -1,0 +1,61 @@
+
+namespace hansung.ac.kr.participants
+import hansung.ac.kr.assets.*
+
+participant User identified by userId {
+    o String userId
+    o String userName
+    o DateTime dob
+    o Address address
+    o String phoneNumber
+    o String email
+    o Boolean isPublic
+    o Boolean isHuntingForJob
+
+}
+
+participant Organization identified by orgId {
+    o String orgId
+    o String orgName
+    o Address address
+    o String contactAdress
+    o String homepage optional
+    o String discription optional
+    --> User[] requestUser optional
+}
+
+participant Enterprise identified by entId {
+    o String entId
+  	o String entName
+    o Address address
+    o String contactAdress
+    o String hompage optional
+    o String numberOfemployees optional
+    o String sales optional
+    o IndustryCategory industryCategory optional
+    o String discription optional
+    --> User[] requestUser optional
+}
+
+participant School identified by schId {
+ 	o String schId
+    o String schName
+    o Address address optional
+    o String contactAdress optional
+    o String hompage optional
+    --> User[] requestUser optional
+}
+
+
+enum IndustryCategory {
+  o  Synthesis
+  o  ProduceAndChemistry
+  o  ServiceBusiness
+  o  BankFinancial
+  o  IT
+  o  Media
+  o  MedicalAndPharmaceuticals
+  o  Construction
+  o  SaleAndDistribution
+  o  Education
+}

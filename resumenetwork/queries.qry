@@ -1,0 +1,115 @@
+query selectUserById {
+  description: "Select user by Id"
+  statement:
+      SELECT hansung.ac.kr.participants.User
+      WHERE (userId == _$targetId)
+}
+
+query selectResumeById {
+  description: "Select Resume by Id"
+  statement:
+      SELECT hansung.ac.kr.assets.ResumeInfoUser
+      WHERE (assetId == _$targetId)
+}
+
+
+query selectUser {
+  description: "Select all users"
+  statement:
+      SELECT hansung.ac.kr.participants.User
+}
+
+query selectOrganization {
+  description: "Select all organizations"
+  statement:
+      SELECT hansung.ac.kr.participants.Organization
+}
+
+query selectEnterprise {
+  description: "Select all enterprise"
+  statement:
+      SELECT hansung.ac.kr.participants.Enterprise
+}
+
+query selectSchool {
+  description: "Select all school"
+  statement:
+      SELECT hansung.ac.kr.participants.School
+}
+
+
+query selectResumeInfoUser{
+  description: "ResumeInfoUser"
+  statement:
+      SELECT hansung.ac.kr.assets.ResumeInfoUser
+      WHERE (assetId == _$resumeAssetId)
+}
+
+
+query selectMyCertificate {
+  description: " certificate"
+  statement:
+      SELECT hansung.ac.kr.assets.Certificate
+      WHERE (ownerId == _$CurrentUserId)
+}
+
+query selectMyAwardDetails {
+  description: " AwardDetails"
+  statement:
+      SELECT hansung.ac.kr.assets.AwardDetails
+      WHERE (ownerId == _$CurrentUserId)
+}
+
+query selectMyUserInfoInEnt {
+  description: " UserInfoInEnt"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInEnt
+      WHERE (ownerId == _$CurrentUserId)
+}
+
+
+query selectMyUserInfoInSch {
+  description: " UserInfoInSch"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInSch
+      WHERE (ownerId == _$CurrentUserId)
+}
+
+
+
+query selectResumeInfoUserByAssetId{
+  description: "ResumeInfoUser"
+  statement:
+      SELECT hansung.ac.kr.assets.ResumeInfoUser
+      WHERE (assetId == _$tagetAssetId)
+}
+
+
+query selectCertificateByName {
+  description: " certificate"
+  statement:
+      SELECT hansung.ac.kr.assets.Certificate
+      WHERE (certificateName == _$targetName)
+}
+
+query selectAwardDetailsByName {
+  description: " AwardDetails"
+  statement:
+      SELECT hansung.ac.kr.assets.AwardDetails
+      WHERE (contestName == _$targetName)
+}
+
+query selectUserInfoInEntByName {
+  description: " UserInfoInEnt"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInEnt
+      WHERE (enterpriseName == _$targetName)
+}
+
+
+query selectUserInfoInSchByName {
+  description: " UserInfoInSch"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInSch
+      WHERE (schoolName == _$targetName)
+}
