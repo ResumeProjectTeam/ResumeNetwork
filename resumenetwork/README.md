@@ -1,57 +1,28 @@
-# Basic Sample Business Network
+# resumenetwork
 
-> This is the "Hello World" of Hyperledger Composer samples, which demonstrates the core functionality of Hyperledger Composer by changing the value of an asset.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
-This business network defines:
+## Development server
 
-**Participant**
-`SampleParticipant`
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-**Asset**
-`SampleAsset`
+## Code scaffolding
 
-**Transaction**
-`SampleTransaction`
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
 
-**Event**
-`SampleEvent`
+## Build
 
-SampleAssets are owned by a SampleParticipant, and the value property on a SampleAsset can be modified by submitting a SampleTransaction. The SampleTransaction emits a SampleEvent that notifies applications of the old and new values for each modified SampleAsset.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-To test this Business Network Definition in the **Test** tab:
+## Running unit tests
 
-Create a `SampleParticipant` participant:
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-```
-{
-  "$class": "org.acme.sample.SampleParticipant",
-  "participantId": "Toby",
-  "firstName": "Tobias",
-  "lastName": "Hunter"
-}
-```
+## Running end-to-end tests
 
-Create a `SampleAsset` asset:
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `npm start`.
 
-```
-{
-  "$class": "org.acme.sample.SampleAsset",
-  "assetId": "assetId:1",
-  "owner": "resource:org.acme.sample.SampleParticipant#Toby",
-  "value": "original value"
-}
-```
+## Further help
 
-Submit a `SampleTransaction` transaction:
-
-```
-{
-  "$class": "org.acme.sample.SampleTransaction",
-  "asset": "resource:org.acme.sample.SampleAsset#assetId:1",
-  "newValue": "new value"
-}
-```
-
-After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted. As a result, the value of the `assetId:1` should now be `new value` in the Asset Registry.
-
-Congratulations!
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
