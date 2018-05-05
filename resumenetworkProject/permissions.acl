@@ -7,64 +7,6 @@
 
 
 
-
-/* Query */
-
-rule selectUserByCertificateName {
-    description: ""
-  	participant: "hansung.ac.kr.participants.Enterprise"
-  	operation: CREATE
-	resource: "hansung.ac.kr.transaction.selectUserByCertificateName"
-    action: ALLOW
-}
-
-
-rule selectResumeInfoUser {
-    description: ""
-  	participant: "hansung.ac.kr.participants.User"
-  	operation: ALL
-	resource: "hansung.ac.kr.transaction.selectResumeInfoUser"
-    action: ALLOW
-}
-
-
-rule selectMyCertificate {
-    description: ""
-  	participant: "hansung.ac.kr.participants.User"
-  	operation: ALL
-	resource: "hansung.ac.kr.transaction.selectMyCertificate"
-    action: ALLOW
-}
-
-
-rule selectMyAwardDetails {
-    description: ""
-  	participant: "hansung.ac.kr.participants.User"
-  	operation: ALL
-	resource: "hansung.ac.kr.transaction.selectMyAwardDetails"
-    action: ALLOW
-}
-
-rule selectMyUserInfoInEnt {
-    description: ""
-  	participant: "hansung.ac.kr.participants.User"
-  	operation: ALL
-	resource: "hansung.ac.kr.transaction.selectMyUserInfoInEnt"
-    action: ALLOW
-}
-
-rule selectMyUserInfoInSch {
-    description: ""
-  	participant: "hansung.ac.kr.participants.User"
-  	operation: ALL
-	resource: "hansung.ac.kr.transaction.selectMyUserInfoInSch"
-    action: ALLOW
-}
-
-
-
-
-
 /* Read asset */
 
 rule readAssetByEnterprise{

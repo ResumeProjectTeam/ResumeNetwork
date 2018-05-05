@@ -66,6 +66,7 @@ export class selectUserByCertificateNameComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAll();
+    
   }
 
   loadAll(): Promise<any> {

@@ -50,6 +50,6 @@ export class selectUserByCertificateNameService {
     public deleteTransaction(id: any): Observable<selectUserByCertificateName> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
-
+ 
 }
 

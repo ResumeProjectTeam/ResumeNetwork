@@ -1,11 +1,11 @@
-query selectUserById {
+query searchUserById {
   description: "Select user by Id"
   statement:
       SELECT hansung.ac.kr.participants.User
       WHERE (userId == _$targetId)
 }
 
-query selectResumeById {
+query searchResumeById {
   description: "Select Resume by Id"
   statement:
       SELECT hansung.ac.kr.assets.ResumeInfoUser
@@ -13,54 +13,45 @@ query selectResumeById {
 }
 
 
-query selectUser {
+query searchAlltUser {
   description: "Select all users"
   statement:
       SELECT hansung.ac.kr.participants.User
 }
 
-query selectOrganization {
+query searchAllOrganization {
   description: "Select all organizations"
   statement:
       SELECT hansung.ac.kr.participants.Organization
 }
 
-query selectEnterprise {
+query searchAllEnterprise {
   description: "Select all enterprise"
   statement:
       SELECT hansung.ac.kr.participants.Enterprise
 }
 
-query selectSchool {
+query searchAllSchool {
   description: "Select all school"
   statement:
       SELECT hansung.ac.kr.participants.School
 }
 
-
-query selectResumeInfoUser{
-  description: "ResumeInfoUser"
-  statement:
-      SELECT hansung.ac.kr.assets.ResumeInfoUser
-      WHERE (assetId == _$resumeAssetId)
-}
-
-
-query selectMyCertificate {
+query searchMyCertificate {
   description: " certificate"
   statement:
       SELECT hansung.ac.kr.assets.Certificate
       WHERE (ownerId == _$CurrentUserId)
 }
 
-query selectMyAwardDetails {
+query searchMyAwardDetails {
   description: " AwardDetails"
   statement:
       SELECT hansung.ac.kr.assets.AwardDetails
       WHERE (ownerId == _$CurrentUserId)
 }
 
-query selectMyUserInfoInEnt {
+query searchMyUserInfoInEnt {
   description: " UserInfoInEnt"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInEnt
@@ -68,7 +59,14 @@ query selectMyUserInfoInEnt {
 }
 
 
-query selectMyUserInfoInSch {
+query searchMyUserInfoInSch {
+  description: " UserInfoInSch"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInSch
+      WHERE (ownerId == _$CurrentUserId)
+}
+
+query searchMyResumeInfoUser {
   description: " UserInfoInSch"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch
@@ -77,7 +75,7 @@ query selectMyUserInfoInSch {
 
 
 
-query selectResumeInfoUserByAssetId{
+query searchResumeInfoUserByAssetId{
   description: "ResumeInfoUser"
   statement:
       SELECT hansung.ac.kr.assets.ResumeInfoUser
@@ -85,21 +83,21 @@ query selectResumeInfoUserByAssetId{
 }
 
 
-query selectCertificateByName {
+query searchCertificateByName {
   description: " certificate"
   statement:
       SELECT hansung.ac.kr.assets.Certificate
       WHERE (certificateName == _$targetName)
 }
 
-query selectAwardDetailsByName {
+query searchAwardDetailsByName {
   description: " AwardDetails"
   statement:
       SELECT hansung.ac.kr.assets.AwardDetails
       WHERE (contestName == _$targetName)
 }
 
-query selectUserInfoInEntByName {
+query searchUserInfoInEntByName {
   description: " UserInfoInEnt"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInEnt
@@ -107,7 +105,7 @@ query selectUserInfoInEntByName {
 }
 
 
-query selectUserInfoInSchByName {
+query searchUserInfoInSchByName {
   description: " UserInfoInSch"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch

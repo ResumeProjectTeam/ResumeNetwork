@@ -17,6 +17,9 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { selectMyCertificate } from '../hansung.ac.kr.transaction';
 import 'rxjs/Rx';
+import { MapType } from '@angular/compiler/src/output/output_ast';
+import { Certificate } from '../hansung.ac.kr.assets';
+
 
 // Can be injected into a constructor
 @Injectable()
@@ -24,11 +27,14 @@ export class selectMyCertificateService {
 
 	
 		private NAMESPACE: string = 'selectMyCertificate';
-	
+	  private NAMESPACE2: string = 'Certificate'
 
-
-
-    constructor(private dataService: DataService<selectMyCertificate>) {
+   
+ 
+    constructor(
+      private dataService: DataService<selectMyCertificate>,
+      private dataService2: DataService<Certificate>
+    ) {
     };
 
     public getAll(): Observable<selectMyCertificate[]> {
@@ -51,5 +57,19 @@ export class selectMyCertificateService {
       return this.dataService.delete(this.NAMESPACE, id);
     }
 
-}
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public deleteCertficate(id: any): Observable<Certificate> {
+      return this.dataService2.delete(this.NAMESPACE2,id);
+    }
+    
+    public getSystemIdentities(): Observable<selectMyCertificate> {
+      return this.dataService.getSystemIdentities();
+    }
+    public getSystemQueryCertificate(parameterName: string, id: string) : Observable<Certificate[]> {
+      return this.dataService.getSystemQueryCertificate(this.NAMESPACE, parameterName, id);
+    }
+  }
 

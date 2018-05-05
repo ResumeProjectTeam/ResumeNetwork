@@ -16,6 +16,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { selectMyCertificateService } from './selectMyCertificate.service';
 import 'rxjs/add/operator/toPromise';
+import { Participant } from '../org.hyperledger.composer.system';
 @Component({
 	selector: 'app-selectMyCertificate',
 	templateUrl: './selectMyCertificate.component.html',
@@ -29,15 +30,19 @@ export class selectMyCertificateComponent implements OnInit {
   private allTransactions;
   private Transaction;
   private currentId;
+  private selectAssetId;
 	private errorMessage;
-
+  private myCertificate;
   
       
           transactionId = new FormControl("", Validators.required);
         
-  
+
       
           timestamp = new FormControl("", Validators.required);
+
+
+          
         
   
 
@@ -56,9 +61,59 @@ export class selectMyCertificateComponent implements OnInit {
     });
   };
 
-  ngOnInit(): void {
+  ngOnInit(): Promise<any> {
     this.loadAll();
+    return this.serviceselectMyCertificate.getSystemPing()
+    .toPromise()
+    .then((result) => {
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.getMyCertificate();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
+
+
+  deleteCertificate(): Promise<any> {
+    
+    console.log("test:" + this.selectAssetId);
+    return this.serviceselectMyCertificate.deleteCertficate(this.selectAssetId)
+		.toPromise()
+		.then(() => {
+			this.errorMessage = null;
+		})
+		.catch((error) => {
+            if(error == 'Server error'){
+				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+			}
+			else if(error == '404 - Not Found'){
+				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+			}
+			else{
+				this.errorMessage = error;
+			}
+    });
+  }
+
+
+
+
+  getMyCertificate(): Promise<any> {
+
+    return this.serviceselectMyCertificate.getSystemQueryCertificate("CurrentUserId", this.currentId)
+    .toPromise()
+    .then((result) => {
+      this.myCertificate = result;
+      console.log(this.myCertificate);
+    })
+   
+  }
+
 
   loadAll(): Promise<any> {
     let tempList = [];
@@ -219,6 +274,10 @@ export class selectMyCertificateComponent implements OnInit {
 
   setId(id: any): void{
     this.currentId = id;
+  }
+
+  setSelectAssetId(id: any): void{
+    this.selectAssetId = id;
   }
 
   getForm(id: any): Promise<any>{

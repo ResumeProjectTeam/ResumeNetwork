@@ -17,6 +17,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Certificate } from './hansung.ac.kr.assets';
 
 @Injectable()
 export class DataService<Type> {
@@ -45,6 +46,31 @@ export class DataService<Type> {
           .map(this.extractData)
           .catch(this.handleError);
     }
+
+    public getSystemIdentities(): Observable<Type> {
+        console.log("system Identities : " + this.actionUrl +   "system/identities");
+
+        return this.http.get(this.actionUrl + "system/identities")
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    public getSystemPing() :Observable<JSON> {
+        console.log("system ping : " + this.actionUrl +   "system/ping");
+        return this.http.get(this.actionUrl + "system/ping")
+          .map(this.extractData)
+          .catch(this.handleError);
+
+    }
+    
+    public getSystemQueryCertificate(ns: string,  parameterName: string, param: string): Observable<Certificate[]> {
+        console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+    
 
     public add(ns: string, asset: Type): Observable<Type> {
         console.log('Entered DataService add');
@@ -86,5 +112,7 @@ export class DataService<Type> {
     private extractData(res: Response): any {
         return res.json();
     }
+
+
 
 }

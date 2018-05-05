@@ -87,20 +87,6 @@ transaction CreateUserInfoInSch extends TxForUser {
 }
   
 
-transaction selectResumeInfoUser{
-}
-transaction selectMyCertificate {
-}
-transaction selectMyAwardDetails {
-}
-transaction selectMyUserInfoInEnt {
-}
-transaction selectMyUserInfoInSch {
-}
-transaction selectUserByCertificateName {
-    o String certificateName
-
-}
 
 event SendEvent {
     o Certificate certificate optional
