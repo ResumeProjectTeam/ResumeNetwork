@@ -31,7 +31,6 @@ transaction RevokeRequestUser extends  TxForUser {
 
 transaction CreateResumeInfoUser extends TxForUser {
     o DateTime dob
-    o String ownerId
     o String supportField
     o String salaryRequirement optional
     o String majorActivities optional
