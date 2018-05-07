@@ -42,12 +42,6 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
   import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
   import { CreateUserInfoInEntComponent } from './CreateUserInfoInEnt/CreateUserInfoInEnt.component';
   import { CreateUserInfoInSchComponent } from './CreateUserInfoInSch/CreateUserInfoInSch.component';
-  import { selectResumeInfoUserComponent } from './selectResumeInfoUser/selectResumeInfoUser.component';
-  import { selectMyCertificateComponent } from './selectMyCertificate/selectMyCertificate.component';
-  import { selectMyAwardDetailsComponent } from './selectMyAwardDetails/selectMyAwardDetails.component';
-  import { selectMyUserInfoInEntComponent } from './selectMyUserInfoInEnt/selectMyUserInfoInEnt.component';
-  import { selectMyUserInfoInSchComponent } from './selectMyUserInfoInSch/selectMyUserInfoInSch.component';
-  import { selectUserByCertificateNameComponent } from './selectUserByCertificateName/selectUserByCertificateName.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,14 +68,8 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
         CreateCertificateComponent,
         CreateAwardDetailsComponent,
         CreateUserInfoInEntComponent,
-        CreateUserInfoInSchComponent,
-        selectResumeInfoUserComponent,
-        selectMyCertificateComponent,
-        selectMyAwardDetailsComponent,
-        selectMyUserInfoInEntComponent,
-        selectMyUserInfoInSchComponent,
         
-        selectUserByCertificateNameComponent
+        CreateUserInfoInSchComponent
         
   ],
   imports: [

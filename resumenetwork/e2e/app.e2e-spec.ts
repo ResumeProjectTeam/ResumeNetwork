@@ -31,13 +31,13 @@ describe('Starting tests for resumenetwork', function() {
     })
   });
 
-  it('network-name should be resumenetwork@0.0.2-deploy.26',() => {
+  it('network-name should be resumenetwork@0.0.2-deploy.33',() => {
     element(by.css('.network-name')).getWebElement()
     .then((webElement) => {
       return webElement.getText();
     })
     .then((txt) => {
-      expect(txt).toBe('resumenetwork@0.0.2-deploy.26.bna');
+      expect(txt).toBe('resumenetwork@0.0.2-deploy.33.bna');
     });
   });
 
@@ -63,10 +63,10 @@ describe('Starting tests for resumenetwork', function() {
       });
     });
 
-    it('ResumeInfoUser table should have 9 columns',() => {
+    it('ResumeInfoUser table should have 10 columns',() => {
       page.navigateTo('/ResumeInfoUser');
       element.all(by.css('.thead-cols th')).then(function(arr) {
-        expect(arr.length).toEqual(9); // Addition of 1 for 'Action' column
+        expect(arr.length).toEqual(10); // Addition of 1 for 'Action' column
       });
     });
   
@@ -292,72 +292,6 @@ describe('Starting tests for resumenetwork', function() {
       })
       .then((txt) => {
         expect(txt).toBe('CreateUserInfoInSch');
-      });
-    });
-  
-    it('selectResumeInfoUser component should be loadable',() => {
-      page.navigateTo('/selectResumeInfoUser');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectResumeInfoUser');
-      });
-    });
-  
-    it('selectMyCertificate component should be loadable',() => {
-      page.navigateTo('/selectMyCertificate');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectMyCertificate');
-      });
-    });
-  
-    it('selectMyAwardDetails component should be loadable',() => {
-      page.navigateTo('/selectMyAwardDetails');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectMyAwardDetails');
-      });
-    });
-  
-    it('selectMyUserInfoInEnt component should be loadable',() => {
-      page.navigateTo('/selectMyUserInfoInEnt');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectMyUserInfoInEnt');
-      });
-    });
-  
-    it('selectMyUserInfoInSch component should be loadable',() => {
-      page.navigateTo('/selectMyUserInfoInSch');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectMyUserInfoInSch');
-      });
-    });
-  
-    it('selectUserByCertificateName component should be loadable',() => {
-      page.navigateTo('/selectUserByCertificateName');
-      browser.findElement(by.id('transactionName'))
-      .then((transactionName) => {
-        return transactionName.getText();
-      })
-      .then((txt) => {
-        expect(txt).toBe('selectUserByCertificateName');
       });
     });
   

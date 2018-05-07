@@ -64,13 +64,14 @@ export class CreateResumeInfoUserComponent implements OnInit {
           userId = new FormControl("", Validators.required);
         
   
-        /*
+      
           transactionId = new FormControl("", Validators.required);
         
   
       
           timestamp = new FormControl("", Validators.required);
-        */
+        
+  
 
 
   constructor(private serviceCreateResumeInfoUser:CreateResumeInfoUserService, fb: FormBuilder) {
@@ -108,13 +109,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
           userId:this.userId,
         
     
-        /*
+        
           transactionId:this.transactionId,
         
     
         
           timestamp:this.timestamp
-        */
+        
     
     });
   };
@@ -208,13 +209,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
           "userId":this.userId.value,
         
       
-        /*
+        
           "transactionId":this.transactionId.value,
         
       
         
           "timestamp":this.timestamp.value
-        */
+        
       
     };
 
@@ -252,13 +253,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null
-        */
+        
       
     });
 
@@ -300,13 +301,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
     })
@@ -368,7 +369,7 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
     
         
-          /*
+          
             "userId":this.userId.value,
           
         
@@ -380,7 +381,7 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
           
             "timestamp":this.timestamp.value
-          */
+          
         
     
     };
@@ -468,13 +469,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
             "userId":null,
           
         
-          /*
+          
             "transactionId":null,
           
         
           
             "timestamp":null 
-          */
+          
         
       };
 
@@ -545,7 +546,6 @@ export class CreateResumeInfoUserComponent implements OnInit {
           formObject.userId = null;
         }
       
-        /*
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -561,7 +561,7 @@ export class CreateResumeInfoUserComponent implements OnInit {
         }else{
           formObject.timestamp = null;
         }
-      */
+      
 
       this.myForm.setValue(formObject);
 
@@ -615,13 +615,13 @@ export class CreateResumeInfoUserComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
   }

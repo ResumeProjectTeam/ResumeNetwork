@@ -25,11 +25,14 @@ import 'rxjs/add/operator/toPromise';
 export class UserInfoInSchComponent implements OnInit {
 
   myForm: FormGroup;
+  myForm2: FormGroup;
 
   private allAssets;
   private asset;
+  private Transaction;
   private currentId;
-	private errorMessage;
+  private errorMessage;
+  private myUserInfoInSch;
 
   
       
@@ -70,6 +73,18 @@ export class UserInfoInSchComponent implements OnInit {
   
       
           isPublic = new FormControl("", Validators.required);
+
+
+
+          userId = new FormControl("", Validators.required);
+        
+  
+      
+          transactionId = new FormControl("", Validators.required);
+        
+  
+      
+          timestamp = new FormControl("", Validators.required);
         
   
 
@@ -118,6 +133,51 @@ export class UserInfoInSchComponent implements OnInit {
         
     
     });
+
+
+    this.myForm2 = fb.group({
+    
+        
+      schoolId:this.schoolId,
+    
+
+    
+      schoolName:this.schoolName,
+    
+
+    
+      entranceDate:this.entranceDate,
+    
+
+    
+      graduationDate:this.graduationDate,
+    
+
+    
+      majorField:this.majorField,
+    
+
+    
+      gradeAverage:this.gradeAverage,
+    
+
+    
+      isPublic:this.isPublic,
+    
+
+    
+      userId:this.userId,
+    
+
+    /*
+      transactionId:this.transactionId,
+    
+
+    
+      timestamp:this.timestamp
+    */
+
+    });
   };
 
   ngOnInit(): void {
@@ -126,14 +186,19 @@ export class UserInfoInSchComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceUserInfoInSch.getAll()
+    return this.serviceUserInfoInSch.getSystemPing()
     .toPromise()
     .then((result) => {
-			this.errorMessage = null;
-      result.forEach(asset => {
-        tempList.push(asset);
-      });
-      this.allAssets = tempList;
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.serviceUserInfoInSch.getSystemQueryUserInfoInSch("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((UserInfoInSch) => {
+          this.myUserInfoInSch = UserInfoInSch;
+        })
     })
     .catch((error) => {
         if(error == 'Server error'){
@@ -320,6 +385,159 @@ export class UserInfoInSchComponent implements OnInit {
         }
     });
   }
+
+
+  addTransaction(form: any): Promise<any> {
+    this.Transaction = {
+      $class: "hansung.ac.kr.transaction.CreateUserInfoInSch",
+      
+        
+          "schoolId":this.schoolId.value,
+        
+      
+        
+          "schoolName":this.schoolName.value,
+        
+      
+        
+          "entranceDate":this.entranceDate.value,
+        
+      
+        
+          "graduationDate":this.graduationDate.value,
+        
+      
+        
+          "majorField":this.majorField.value,
+        
+      
+        
+          "gradeAverage":this.gradeAverage.value,
+        
+      
+        
+          "isPublic":this.isPublic.value,
+        
+      
+        
+          "userId":this.userId.value,
+        
+      
+        /*
+          "transactionId":this.transactionId.value,
+        
+      
+        
+          "timestamp":this.timestamp.value
+        */
+      
+    };
+
+    this.myForm2.setValue({
+      
+        
+          "schoolId":null,
+        
+      
+        
+          "schoolName":null,
+        
+      
+        
+          "entranceDate":null,
+        
+      
+        
+          "graduationDate":null,
+        
+      
+        
+          "majorField":null,
+        
+      
+        
+          "gradeAverage":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null
+        */
+      
+    });
+
+    return this.serviceUserInfoInSch.addTransaction(this.Transaction)
+    .toPromise()
+    .then(() => {
+			this.errorMessage = null;
+      this.myForm2.setValue({
+      
+        
+          "schoolId":null,
+        
+      
+        
+          "schoolName":null,
+        
+      
+        
+          "entranceDate":null,
+        
+      
+        
+          "graduationDate":null,
+        
+      
+        
+          "majorField":null,
+        
+      
+        
+          "gradeAverage":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null 
+        */
+      
+      });
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+  }
+
+
+  
+
 
 
    updateAsset(form: any): Promise<any> {

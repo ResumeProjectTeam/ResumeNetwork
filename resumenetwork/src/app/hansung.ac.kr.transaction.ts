@@ -67,19 +67,6 @@ import {User} from './hansung.ac.kr.participants';
       gradeAverage: number;
       isPublic: boolean;
    }
-   export class selectResumeInfoUser extends Transaction {
-   }
-   export class selectMyCertificate extends Transaction {
-   }
-   export class selectMyAwardDetails extends Transaction {
-   }
-   export class selectMyUserInfoInEnt extends Transaction {
-   }
-   export class selectMyUserInfoInSch extends Transaction {
-   }
-   export class selectUserByCertificateName extends Transaction {
-      certificateName: string;
-   }
    export class SendEvent extends Event {
       certificate: Certificate;
       awardDetails: AwardDetails;

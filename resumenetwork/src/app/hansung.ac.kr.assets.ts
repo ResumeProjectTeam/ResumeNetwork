@@ -5,6 +5,7 @@ import {Event} from './org.hyperledger.composer.system';
 // export namespace hansung.ac.kr.assets{
    export class ResumeInfoUser extends Asset {
       assetId: string;
+      ownerId: string;
       dob: Date;
       supportField: string;
       salaryRequirement: string;

@@ -214,8 +214,8 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
   .then(function (allResumeAssetRegistry) {
      allResume = allResumeAssetRegistry;
 
-       var newResumeAsset = factory.newResource(NAMESAPCE_ASSETS, RESUME, "ResumeAssetInfoUser" + me.getIdentifier() );
-
+       var newResumeAsset = factory.newResource(NAMESAPCE_ASSETS, RESUME,  me.getIdentifier()+ getRandomIntInclusive(1, 100000000000) );
+       newResumeAsset.ownerId = me.getIdentifier();
        newResumeAsset.dob = txCreateResumeInfoUser.dob;
        newResumeAsset.supportField = txCreateResumeInfoUser.supportField;
        newResumeAsset.salaryRequirement  = txCreateResumeInfoUser.salaryRequirement ;

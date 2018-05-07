@@ -17,18 +17,23 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { ResumeInfoUser } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
+import { CreateResumeInfoUser } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
 export class ResumeInfoUserService {
 
 	
-		private NAMESPACE: string = 'ResumeInfoUser';
+    private NAMESPACE: string = 'ResumeInfoUser';
+    private NAMESPACE2: string = 'CreateResumeInfoUser';
 	
 
 
 
-    constructor(private dataService: DataService<ResumeInfoUser>) {
+    constructor(
+      private dataService: DataService<ResumeInfoUser>,
+      private dataService2: DataService<CreateResumeInfoUser>
+    ) {
     };
 
     public getAll(): Observable<ResumeInfoUser[]> {
@@ -43,6 +48,11 @@ export class ResumeInfoUserService {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
 
+    public addTransaction(itemToAdd: any): Observable<CreateResumeInfoUser> {
+      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+
+    }
+
     public updateAsset(id: any, itemToUpdate: any): Observable<ResumeInfoUser> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
     }
@@ -51,4 +61,11 @@ export class ResumeInfoUserService {
       return this.dataService.delete(this.NAMESPACE, id);
     }
 
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public getSystemQueryResumeInfoUser(parameterName: string, id: string) : Observable<ResumeInfoUser[]> {
+      return this.dataService.getSystemQueryResumeInfoUser("searchResumeInfoUserByOwnerId", parameterName, id);
+    }
 }

@@ -17,6 +17,8 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Certificate } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
+import { CreateCertificateComponent } from '../CreateCertificate/CreateCertificate.component';
+import { CreateCertificate } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
@@ -24,11 +26,14 @@ export class CertificateService {
 
 	
 		private NAMESPACE: string = 'Certificate';
-	
+    private NAMESPACE2: string = 'CreateCertificate';
 
 
 
-    constructor(private dataService: DataService<Certificate>) {
+    constructor(
+      private dataService: DataService<Certificate> ,
+      private dataService2: DataService<CreateCertificate>
+    ) {
     };
 
     public getAll(): Observable<Certificate[]> {
@@ -39,8 +44,14 @@ export class CertificateService {
       return this.dataService.getSingle(this.NAMESPACE, id);
     }
 
+
     public addAsset(itemToAdd: any): Observable<Certificate> {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
+    }
+
+    public addTransaction(itemToAdd: any): Observable<CreateCertificate> {
+      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+
     }
 
     public updateAsset(id: any, itemToUpdate: any): Observable<Certificate> {
@@ -49,6 +60,14 @@ export class CertificateService {
 
     public deleteAsset(id: any): Observable<Certificate> {
       return this.dataService.delete(this.NAMESPACE, id);
+    }
+
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public getSystemQueryCertificate(parameterName: string, id: string) : Observable<Certificate[]> {
+      return this.dataService.getSystemQueryCertificate("searchCertificateByOwnerId", parameterName, id);
     }
 
 }

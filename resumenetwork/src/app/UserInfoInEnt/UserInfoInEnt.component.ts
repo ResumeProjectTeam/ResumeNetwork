@@ -25,11 +25,14 @@ import 'rxjs/add/operator/toPromise';
 export class UserInfoInEntComponent implements OnInit {
 
   myForm: FormGroup;
+  myForm2: FormGroup;
 
   private allAssets;
   private asset;
+  private Transaction;
   private currentId;
-	private errorMessage;
+  private errorMessage;
+  private myUserInfoInEnt;
 
   
       
@@ -61,7 +64,7 @@ export class UserInfoInEntComponent implements OnInit {
         
   
       
-          retirementDate = new FormControl("", Validators.required);
+          retirementDate = new FormControl("");
         
   
       
@@ -70,6 +73,15 @@ export class UserInfoInEntComponent implements OnInit {
   
       
           isPublic = new FormControl("", Validators.required);
+
+
+          userId = new FormControl("",Validators.required);  
+
+    
+          transactionId = new FormControl("",Validators.required);  
+        
+    
+          timestamp = new FormControl("",Validators.required);  
         
   
 
@@ -118,6 +130,50 @@ export class UserInfoInEntComponent implements OnInit {
         
     
     });
+
+      this.myForm2 = fb.group({
+    
+        
+         enterpriseId:this.enterpriseId,
+    
+
+    
+          enterpriseName:this.enterpriseName,
+    
+
+    
+         userPosition:this.userPosition,
+    
+
+    
+         performingTask:this.performingTask,
+    
+
+    
+        dateOfEmployment:this.dateOfEmployment,
+    
+
+    
+        retirementDate:this.retirementDate,
+    
+
+    
+        isPublic:this.isPublic,
+    
+
+    
+        userId:this.userId,
+    
+
+      /*
+        transactionId:this.transactionId,
+    
+
+    
+        timestamp:this.timestamp
+     */
+
+    });
   };
 
   ngOnInit(): void {
@@ -126,14 +182,19 @@ export class UserInfoInEntComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceUserInfoInEnt.getAll()
+    return this.serviceUserInfoInEnt.getSystemPing()
     .toPromise()
     .then((result) => {
-			this.errorMessage = null;
-      result.forEach(asset => {
-        tempList.push(asset);
-      });
-      this.allAssets = tempList;
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((UserInfoInEnt) => {
+          this.myUserInfoInEnt = UserInfoInEnt;
+        })
     })
     .catch((error) => {
         if(error == 'Server error'){
@@ -321,6 +382,155 @@ export class UserInfoInEntComponent implements OnInit {
     });
   }
 
+
+
+
+  addTransaction(form: any): Promise<any> {
+    this.Transaction = {
+      $class: "hansung.ac.kr.transaction.CreateUserInfoInEnt",
+      
+        
+          "enterpriseId":this.enterpriseId.value,
+        
+      
+        
+          "enterpriseName":this.enterpriseName.value,
+        
+      
+        
+          "userPosition":this.userPosition.value,
+        
+      
+        
+          "performingTask":this.performingTask.value,
+        
+      
+        
+          "dateOfEmployment":this.dateOfEmployment.value,
+        
+
+          "retirementDate":this.retirementDate.value,
+      
+        
+          "isPublic":this.isPublic.value,
+        
+      
+        
+          "userId":this.userId.value,
+        
+      
+        /*
+          "transactionId":this.transactionId.value,
+        
+      
+        
+          "timestamp":this.timestamp.value
+          */
+        
+      
+    };
+
+    this.myForm2.setValue({
+      
+        
+          "enterpriseId":null,
+        
+      
+        
+          "enterpriseName":null,
+        
+      
+        
+          "userPosition":null,
+        
+      
+        
+          "performingTask":null,
+        
+      
+        
+          "dateOfEmployment":null,
+        
+      
+        
+          "retirementDate":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null
+        */
+      
+    });
+
+    return this.serviceUserInfoInEnt.addTransaction(this.Transaction)
+    .toPromise()
+    .then(() => {
+			this.errorMessage = null;
+      this.myForm2.setValue({
+      
+        
+          "enterpriseId":null,
+        
+      
+        
+          "enterpriseName":null,
+        
+      
+        
+          "userPosition":null,
+        
+      
+        
+          "performingTask":null,
+        
+      
+        
+          "dateOfEmployment":null,
+        
+      
+        
+          "retirementDate":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null 
+        */
+      
+      });
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+  }
 
    updateAsset(form: any): Promise<any> {
     this.asset = {

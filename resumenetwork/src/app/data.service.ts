@@ -17,7 +17,8 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Certificate } from './hansung.ac.kr.assets';
+import { Certificate, AwardDetails, UserInfoInEnt, UserInfoInSch, ResumeInfoUser } from './hansung.ac.kr.assets';
+
 
 @Injectable()
 export class DataService<Type> {
@@ -33,67 +34,45 @@ export class DataService<Type> {
     }
 
     public getAll(ns: string): Observable<Type[]> {
-        console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
+        //console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
         return this.http.get(`${this.actionUrl}${ns}`)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     public getSingle(ns: string, id: string): Observable<Type> {
-        console.log('GetSingle ' + ns);
+        //console.log('GetSingle ' + ns);
 
         return this.http.get(this.actionUrl + ns + '/' + id + this.resolveSuffix)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
-    public getSystemIdentities(): Observable<Type> {
-        console.log("system Identities : " + this.actionUrl +   "system/identities");
-
-        return this.http.get(this.actionUrl + "system/identities")
-          .map(this.extractData)
-          .catch(this.handleError);
-    }
-
-    public getSystemPing() :Observable<JSON> {
-        console.log("system ping : " + this.actionUrl +   "system/ping");
-        return this.http.get(this.actionUrl + "system/ping")
-          .map(this.extractData)
-          .catch(this.handleError);
-
-    }
-    
-    public getSystemQueryCertificate(ns: string,  parameterName: string, param: string): Observable<Certificate[]> {
-        console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
-
-        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
-          .map(this.extractData)
-          .catch(this.handleError);
-    }
-    
-
     public add(ns: string, asset: Type): Observable<Type> {
+       /*
         console.log('Entered DataService add');
         console.log('Add ' + ns);
         console.log('asset', asset);
-
+        */
         return this.http.post(this.actionUrl + ns, asset)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     public update(ns: string, id: string, itemToUpdate: Type): Observable<Type> {
+        /*
         console.log('Update ' + ns);
         console.log('what is the id?', id);
         console.log('what is the updated item?', itemToUpdate);
         console.log('what is the updated item?', JSON.stringify(itemToUpdate));
+        */
         return this.http.put(`${this.actionUrl}${ns}/${id}`, itemToUpdate)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     public delete(ns: string, id: string): Observable<Type> {
-        console.log('Delete ' + ns);
+        //console.log('Delete ' + ns);
 
         return this.http.delete(this.actionUrl + ns + '/' + id)
           .map(this.extractData)
@@ -114,5 +93,63 @@ export class DataService<Type> {
     }
 
 
+
+    public getSystemIdentities(): Observable<Type> {
+        //console.log("system Identities : " + this.actionUrl +   "system/identities");
+
+        return this.http.get(this.actionUrl + "system/identities")
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    public getSystemPing() :Observable<JSON> {
+        //console.log("system ping : " + this.actionUrl +   "system/ping");
+        return this.http.get(this.actionUrl + "system/ping")
+          .map(this.extractData)
+          .catch(this.handleError);
+
+    }
+
+
+    public getSystemQueryResumeInfoUser(ns: string,  parameterName: string, param: string): Observable<ResumeInfoUser[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    
+    public getSystemQueryCertificate(ns: string,  parameterName: string, param: string): Observable<Certificate[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    public getSystemQueryAwardDetails(ns: string,  parameterName: string, param: string): Observable<AwardDetails[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    public getSystemQueryUserInfoInEnt(ns: string,  parameterName: string, param: string): Observable<UserInfoInEnt[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
+    public getSystemQueryUserInfoInSch(ns: string,  parameterName: string, param: string): Observable<UserInfoInSch[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
 
 }

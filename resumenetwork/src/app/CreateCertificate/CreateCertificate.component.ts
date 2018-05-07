@@ -64,13 +64,13 @@ export class CreateCertificateComponent implements OnInit {
           userId = new FormControl("", Validators.required);
         
   
-      /*
+      
           transactionId = new FormControl("", Validators.required);
         
   
       
           timestamp = new FormControl("", Validators.required);
-        */
+        
   
 
 
@@ -109,13 +109,13 @@ export class CreateCertificateComponent implements OnInit {
           userId:this.userId,
         
     
-        /*
+        
           transactionId:this.transactionId,
         
     
         
           timestamp:this.timestamp
-        */
+        
     
     });
   };
@@ -209,13 +209,13 @@ export class CreateCertificateComponent implements OnInit {
           "userId":this.userId.value,
         
       
-        /*
+        
           "transactionId":this.transactionId.value,
         
       
         
           "timestamp":this.timestamp.value
-        */
+        
       
     };
 
@@ -253,13 +253,13 @@ export class CreateCertificateComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null
-        */
+        
       
     });
 
@@ -301,13 +301,13 @@ export class CreateCertificateComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
     })
@@ -375,13 +375,13 @@ export class CreateCertificateComponent implements OnInit {
         
     
         
-          /*
+          
         
     
         
           
             "timestamp":this.timestamp.value
-          */
+          
         
     
     };
@@ -469,13 +469,13 @@ export class CreateCertificateComponent implements OnInit {
             "userId":null,
           
         
-          /*
+          
             "transactionId":null,
           
         
           
             "timestamp":null 
-          */
+          
         
       };
 
@@ -545,7 +545,7 @@ export class CreateCertificateComponent implements OnInit {
         }else{
           formObject.userId = null;
         }
-      /*
+      
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -561,7 +561,7 @@ export class CreateCertificateComponent implements OnInit {
         }else{
           formObject.timestamp = null;
         }
-      */
+      
 
       this.myForm.setValue(formObject);
 
@@ -615,13 +615,13 @@ export class CreateCertificateComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
   }

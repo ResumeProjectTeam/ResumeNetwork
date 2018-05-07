@@ -65,14 +65,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
         
   
       
-          /*
           transactionId = new FormControl("", Validators.required);
         
   
       
           timestamp = new FormControl("", Validators.required);
         
-            */
+  
 
 
   constructor(private serviceCreateUserInfoInSch:CreateUserInfoInSchService, fb: FormBuilder) {
@@ -110,13 +109,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
           userId:this.userId,
         
     
-        /*
+        
           transactionId:this.transactionId,
         
     
         
           timestamp:this.timestamp
-        */
+        
     
     });
   };
@@ -210,13 +209,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
           "userId":this.userId.value,
         
       
-        /*
+        
           "transactionId":this.transactionId.value,
         
       
         
           "timestamp":this.timestamp.value
-        */
+        
       
     };
 
@@ -254,13 +253,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null
-        */
+        
       
     });
 
@@ -302,13 +301,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
     })
@@ -377,13 +376,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
     
         
           
-        /*
+        
     
         
           
             "timestamp":this.timestamp.value
           
-        */
+        
     
     };
 
@@ -470,13 +469,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
             "userId":null,
           
         
-          /*
+          
             "transactionId":null,
           
         
           
             "timestamp":null 
-          */
+          
         
       };
 
@@ -547,7 +546,6 @@ export class CreateUserInfoInSchComponent implements OnInit {
           formObject.userId = null;
         }
       
-        /*
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -563,7 +561,7 @@ export class CreateUserInfoInSchComponent implements OnInit {
         }else{
           formObject.timestamp = null;
         }
-      */
+      
 
       this.myForm.setValue(formObject);
 
@@ -617,13 +615,13 @@ export class CreateUserInfoInSchComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
   }

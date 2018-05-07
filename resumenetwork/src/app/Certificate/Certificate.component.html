@@ -19,17 +19,17 @@
         <h4 class="modal-title" id="addAssetModalLabel">Create asset</h4>
           <p class="modal-intro">Enter the required values below.</p>
       </div>
-      <form [formGroup]="myForm">
+      <form [formGroup]="myForm2">
         <div class="modal-body">
 
 
           
 
-            
+            <!--
               <div class="form-group text-left">
                 <label for="assetId">assetId</label>
                 
-                  <input formControlName="assetId" type="text" class="form-control">
+                  <input formControlName="assetId" type="hidden" class="form-control" value="test">
                 
               </div>
             
@@ -39,11 +39,11 @@
               <div class="form-group text-left">
                 <label for="ownerId">ownerId</label>
                 
-                  <input formControlName="ownerId" type="text" class="form-control">
+                  <input formControlName="ownerId" type="hidden" class="form-control" value="test">
                 
               </div>
             
-          
+            -->
 
             
               <div class="form-group text-left">
@@ -103,16 +103,23 @@
                 
               </div>
             
+
+              <div class="form-group text-left">
+                <label for="userId">userId</label>
+                
+                  <input formControlName="userId" type="text" class="form-control">
+                
+              </div>
           
 
-            
+            <!--
               <div class="form-group text-left">
                 <label for="transactionTime">transactionTime</label>
                 
                   <input formControlName="transactionTime" type="text" class="form-control">
                 
               </div>
-            
+            -->
           
 
             
@@ -128,7 +135,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+          <button (click)="addTransaction(myForm2);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
 
         </div>
       </form>
@@ -164,7 +171,7 @@
               <label for="ownerId">ownerId</label>
               
               
-                <input [ngModel]="ownerId"formControlName="ownerId" type="text" class="form-control">
+                <input [ngModel]="ownerId"formControlName="ownerId" type="text" class="form-control" disabled="disabled">
               
 
             </div>
@@ -292,10 +299,8 @@
   
   <div class="row">
     <div class="col-md-9">
-        <h1 class="asset-title" id='assetName'>Certificate
-        </h1>
+        <h1 class="asset-title" id='assetName'>Certificate</h1>
     </div>
-    <!--
     <div class="col-md-3">
       <button (click)="resetForm()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAssetModal">
           <span style="font-size: 14px;font-family: inherit;border-right:1px solid rgba(255,255,255,0.5);padding-right:0.6em;margin-right:0.5em;vertical-align:middle;">
@@ -305,10 +310,8 @@
           </span>
         Create Asset
       </button>
-    </div>  
-      -->
+    </div>
   </div>
-
   <br>
   <div class="row">
     <div class="col-md-12">
@@ -335,12 +338,12 @@
                 <th class="info">transactionTime</th>
             
                 <th class="info">isPublic</th>
-            
+
               <th class="info-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let asset of allAssets">
+          <tr *ngFor="let asset of myCertificateList">
 
             
                 <td class="asset-properties">{{asset.assetId}}</td>

@@ -17,6 +17,7 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { AwardDetails } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
+import { CreateAwardDetails } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
@@ -24,11 +25,15 @@ export class AwardDetailsService {
 
 	
 		private NAMESPACE: string = 'AwardDetails';
-	
+    private NAMESPACE2: string = 'CreateAwardDetails';
 
 
 
-    constructor(private dataService: DataService<AwardDetails>) {
+    constructor(
+      private dataService: DataService<AwardDetails>,
+      private dataService2: DataService<CreateAwardDetails>
+    
+    ) {
     };
 
     public getAll(): Observable<AwardDetails[]> {
@@ -43,6 +48,11 @@ export class AwardDetailsService {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
 
+    public addTransaction(itemToAdd: any): Observable<CreateAwardDetails> {
+      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+
+    }
+
     public updateAsset(id: any, itemToUpdate: any): Observable<AwardDetails> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
     }
@@ -50,5 +60,14 @@ export class AwardDetailsService {
     public deleteAsset(id: any): Observable<AwardDetails> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
+
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public getSystemQueryAwardDetails(parameterName: string, id: string) : Observable<AwardDetails[]> {
+      return this.dataService.getSystemQueryAwardDetails("searchAwardDetailsByOwnerId", parameterName, id);
+    }
+
 
 }

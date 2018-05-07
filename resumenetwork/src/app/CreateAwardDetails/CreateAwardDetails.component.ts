@@ -64,13 +64,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           userId = new FormControl("", Validators.required);
         
   
-         /*
+      
           transactionId = new FormControl("", Validators.required);
         
   
       
           timestamp = new FormControl("", Validators.required);
-         */
+        
   
 
 
@@ -109,13 +109,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           userId:this.userId,
         
     
-          /*
+        
           transactionId:this.transactionId,
         
     
         
           timestamp:this.timestamp
-          */
+        
     
     });
   };
@@ -209,13 +209,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           "userId":this.userId.value,
         
       
-        /*
+        
           "transactionId":this.transactionId.value,
         
       
         
           "timestamp":this.timestamp.value
-        */
+        
       
     };
 
@@ -253,13 +253,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           "userId":null,
         
       
-         /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null
-        */
+        
       
     });
 
@@ -301,13 +301,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           "userId":null,
         
       
-        /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+        
       
       });
     })
@@ -375,13 +375,13 @@ export class CreateAwardDetailsComponent implements OnInit {
         
     
         
-          /*
-            "transacitonId":this.transactionId,
+          
+        
     
         
           
             "timestamp":this.timestamp.value
-          */
+          
         
     
     };
@@ -469,13 +469,13 @@ export class CreateAwardDetailsComponent implements OnInit {
             "userId":null,
           
         
-          /*
+          
             "transactionId":null,
           
         
           
             "timestamp":null 
-          */
+          
         
       };
 
@@ -546,7 +546,6 @@ export class CreateAwardDetailsComponent implements OnInit {
           formObject.userId = null;
         }
       
-        /*
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -563,7 +562,7 @@ export class CreateAwardDetailsComponent implements OnInit {
           formObject.timestamp = null;
         }
       
-        */
+
       this.myForm.setValue(formObject);
 
     })
@@ -616,13 +615,13 @@ export class CreateAwardDetailsComponent implements OnInit {
           "userId":null,
         
       
-          /*
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-          */
+        
       
       });
   }

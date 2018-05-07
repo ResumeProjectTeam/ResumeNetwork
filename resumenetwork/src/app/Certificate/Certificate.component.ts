@@ -16,6 +16,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CertificateService } from './Certificate.service';
 import 'rxjs/add/operator/toPromise';
+import { NullAstVisitor } from '@angular/compiler';
 @Component({
 	selector: 'app-Certificate',
 	templateUrl: './Certificate.component.html',
@@ -25,19 +26,21 @@ import 'rxjs/add/operator/toPromise';
 export class CertificateComponent implements OnInit {
 
   myForm: FormGroup;
-
+  myForm2: FormGroup;
   private allAssets;
   private asset;
+  private Transaction;
   private currentId;
 	private errorMessage;
-
+  private myCertificateList;
   
       
-          assetId = new FormControl("", Validators.required);
+  
+          assetId = new FormControl("test",Validators.required);
         
   
       
-          ownerId = new FormControl("", Validators.required);
+          ownerId = new FormControl("test",Validators.required);
         
   
       
@@ -65,11 +68,23 @@ export class CertificateComponent implements OnInit {
         
   
       
-          transactionTime = new FormControl("", Validators.required);
+          transactionTime = new FormControl("",Validators.required);
         
   
       
           isPublic = new FormControl("", Validators.required);
+
+
+
+          userId  = new FormControl("test",Validators.required);
+        
+      
+        
+          transactionId  = new FormControl("",Validators.required);
+        
+      
+        
+          timestamp  = new FormControl("",Validators.required);
         
   
 
@@ -114,8 +129,52 @@ export class CertificateComponent implements OnInit {
         
     
         
-          isPublic:this.isPublic
+          isPublic:this.isPublic,
+
         
+    
+    });
+    this.myForm2 = fb.group({
+
+    
+      certificateName:this.certificateName,
+    
+
+    
+      certificateScore:this.certificateScore,
+    
+
+    
+      organizationId:this.organizationId,
+    
+
+    
+      organizationName:this.organizationName,
+    
+
+    
+      dob:this.dob,
+    
+
+    
+      expirationDate:this.expirationDate,
+    
+
+    
+      isPublic:this.isPublic,
+
+
+
+      userId: null,
+    
+  
+    /*
+      transactionId: null,
+    
+  
+    
+      timestamp: null
+      */
     
     });
   };
@@ -126,6 +185,24 @@ export class CertificateComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
+    return this.serviceCertificate.getSystemPing()
+    .toPromise()
+    .then((result) => {
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.serviceCertificate.getSystemQueryCertificate("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((certificateList) => {
+          this.myCertificateList = certificateList;
+        })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    /*
     return this.serviceCertificate.getAll()
     .toPromise()
     .then((result) => {
@@ -135,6 +212,8 @@ export class CertificateComponent implements OnInit {
       });
       this.allAssets = tempList;
     })
+    */
+
     .catch((error) => {
         if(error == 'Server error'){
             this.errorMessage = "Could not connect to REST server. Please check your configuration details";
@@ -172,6 +251,168 @@ export class CertificateComponent implements OnInit {
   hasArrayValue(name: string, value: any): boolean {
     return this[name].value.indexOf(value) !== -1;
   }
+
+
+  addTransaction(form:any): Promise<any> {
+    this.Transaction = {
+      $class: "hansung.ac.kr.transaction.CreateCertificate",
+      
+        
+          "certificateName":this.certificateName.value,
+        
+      
+        
+          "certificateScore":this.certificateScore.value,
+        
+      
+        
+          "organizationId":this.organizationId.value,
+        
+      
+        
+          "organizationName":this.organizationName.value,
+        
+      
+        
+          "dob":this.dob.value,
+        
+      
+        
+          "expirationDate":this.expirationDate.value,
+        
+      
+        
+          "isPublic":this.isPublic.value,
+        
+      
+        
+          "userId":this.userId.value,
+        
+      
+        /*
+          "transactionId":this.transactionId.value,
+        
+      
+        
+          "timestamp":this.timestamp.value
+          */
+        
+      
+    };
+
+
+    console.log(this.Transaction);
+
+
+    this.myForm2.setValue({
+      
+        
+          "certificateName":null,
+        
+      
+        
+          "certificateScore":null,
+        
+      
+        
+          "organizationId":null,
+        
+      
+        
+          "organizationName":null,
+        
+      
+        
+          "dob":null,
+        
+      
+        
+          "expirationDate":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+       
+          "userId":null,
+        
+      
+         /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null
+          */
+        
+      
+    });
+
+    return this.serviceCertificate.addTransaction(this.Transaction)
+    .toPromise()
+    .then(() => {
+			this.errorMessage = null;
+      this.myForm2.setValue({
+      
+        
+          "certificateName":null,
+        
+      
+        
+          "certificateScore":null,
+        
+      
+        
+          "organizationId":null,
+        
+      
+        
+          "organizationName":null,
+        
+      
+        
+          "dob":null,
+        
+      
+        
+          "expirationDate":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null 
+          */
+        
+      
+      });
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+
+
+
+
+
+  }
+
 
   addAsset(form: any): Promise<any> {
     this.asset = {

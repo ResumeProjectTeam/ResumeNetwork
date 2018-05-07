@@ -25,17 +25,23 @@ import 'rxjs/add/operator/toPromise';
 export class ResumeInfoUserComponent implements OnInit {
 
   myForm: FormGroup;
+  myForm2: FormGroup;
 
   private allAssets;
   private asset;
+  private Transaction
   private currentId;
-	private errorMessage;
+  private errorMessage;
+  private myResumeInfoUser;
 
   
       
           assetId = new FormControl("", Validators.required);
         
   
+          ownerId = new FormControl("", Validators.required);
+        
+
       
           dob = new FormControl("", Validators.required);
         
@@ -62,6 +68,18 @@ export class ResumeInfoUserComponent implements OnInit {
   
       
           isPublic = new FormControl("", Validators.required);
+
+
+          
+          userId  = new FormControl("test",Validators.required);
+        
+      
+        
+          transactionId  = new FormControl("",Validators.required);
+        
+      
+        
+          timestamp  = new FormControl("",Validators.required);
         
   
 
@@ -73,6 +91,9 @@ export class ResumeInfoUserComponent implements OnInit {
           assetId:this.assetId,
         
     
+          ownerId:this.ownerId,
+
+          
         
           dob:this.dob,
         
@@ -101,7 +122,53 @@ export class ResumeInfoUserComponent implements OnInit {
           isPublic:this.isPublic
         
     
+     });
+
+    this.myForm2 = fb.group({
+
+    
+        
+        dob:this.dob,
+      
+  
+      
+        supportField:this.supportField,
+      
+  
+      
+        salaryRequirement:this.salaryRequirement,
+      
+  
+      
+        majorActivities:this.majorActivities,
+      
+  
+      
+        socialExperience:this.socialExperience,
+      
+  
+      
+        skillsAndCapabilities:this.skillsAndCapabilities,
+      
+  
+      
+        isPublic:this.isPublic,
+      
+  
+      
+        userId:this.userId,
+      
+  
+      /*
+        transactionId:this.transactionId,
+      
+  
+      
+        timestamp:this.timestamp
+        */
+    
     });
+
   };
 
   ngOnInit(): void {
@@ -110,14 +177,19 @@ export class ResumeInfoUserComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceResumeInfoUser.getAll()
+    return this.serviceResumeInfoUser.getSystemPing()
     .toPromise()
     .then((result) => {
-			this.errorMessage = null;
-      result.forEach(asset => {
-        tempList.push(asset);
-      });
-      this.allAssets = tempList;
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.serviceResumeInfoUser.getSystemQueryResumeInfoUser("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((resumeInfoUser) => {
+          this.myResumeInfoUser = resumeInfoUser;
+        })
     })
     .catch((error) => {
         if(error == 'Server error'){
@@ -164,6 +236,8 @@ export class ResumeInfoUserComponent implements OnInit {
         
           "assetId":this.assetId.value,
         
+
+          "ownerId":this.ownerId.value,
       
         
           "dob":this.dob.value,
@@ -200,6 +274,8 @@ export class ResumeInfoUserComponent implements OnInit {
         
           "assetId":null,
         
+
+          "ownerId":null,
       
         
           "dob":null,
@@ -241,6 +317,9 @@ export class ResumeInfoUserComponent implements OnInit {
           "assetId":null,
         
       
+
+          "ownerId":null,
+
         
           "dob":null,
         
@@ -282,18 +361,171 @@ export class ResumeInfoUserComponent implements OnInit {
   }
 
 
+
+  addTransaction(form: any): Promise<any> {
+    this.Transaction = {
+      $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
+      
+        
+          "dob":this.dob.value,
+        
+
+
+      
+        
+          "supportField":this.supportField.value,
+        
+      
+        
+          "salaryRequirement":this.salaryRequirement.value,
+        
+      
+        
+          "majorActivities":this.majorActivities.value,
+        
+      
+        
+          "socialExperience":this.socialExperience.value,
+        
+      
+        
+          "skillsAndCapabilities":this.skillsAndCapabilities.value,
+        
+      
+        
+          "isPublic":this.isPublic.value,
+        
+      
+        
+          "userId":this.userId.value,
+        
+      
+        /*
+          "transactionId":this.transactionId.value,
+        
+      
+        
+          "timestamp":this.timestamp.value
+        */
+      
+    };
+
+    this.myForm2.setValue({
+      
+        
+          "dob":null,
+        
+      
+        
+          "supportField":null,
+        
+      
+        
+          "salaryRequirement":null,
+        
+      
+        
+          "majorActivities":null,
+        
+      
+        
+          "socialExperience":null,
+        
+      
+        
+          "skillsAndCapabilities":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null
+        */
+      
+    });
+
+    return this.serviceResumeInfoUser.addTransaction(this.Transaction)
+    .toPromise()
+    .then(() => {
+			this.errorMessage = null;
+      this.myForm2.setValue({
+      
+        
+          "dob":null,
+        
+      
+        
+          "supportField":null,
+        
+      
+        
+          "salaryRequirement":null,
+        
+      
+        
+          "majorActivities":null,
+        
+      
+        
+          "socialExperience":null,
+        
+      
+        
+          "skillsAndCapabilities":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null 
+        */
+      
+      });
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+  }
+
+
    updateAsset(form: any): Promise<any> {
     this.asset = {
       $class: "hansung.ac.kr.assets.ResumeInfoUser",
       
         
           
+            "ownerId":this.ownerId.value,
         
     
         
           
             "dob":this.dob.value,
-          
+        
         
     
         
@@ -388,6 +620,8 @@ export class ResumeInfoUserComponent implements OnInit {
           
             "assetId":null,
           
+
+            "ownerId":null,
         
           
             "dob":null,
@@ -428,6 +662,14 @@ export class ResumeInfoUserComponent implements OnInit {
           
         }else{
           formObject.assetId = null;
+        }
+
+        if(result.ownerId){
+          
+          formObject.ownerId = result.ownerId;
+        
+        }else{
+          formObject.ownerId = null;
         }
       
         if(result.dob){
@@ -511,6 +753,8 @@ export class ResumeInfoUserComponent implements OnInit {
           "assetId":null,
         
       
+          "ownerId":null,
+
         
           "dob":null,
         

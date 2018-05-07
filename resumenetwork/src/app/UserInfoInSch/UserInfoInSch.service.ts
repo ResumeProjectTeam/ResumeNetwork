@@ -17,6 +17,7 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { UserInfoInSch } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
+import { CreateUserInfoInSch } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
@@ -24,11 +25,15 @@ export class UserInfoInSchService {
 
 	
 		private NAMESPACE: string = 'UserInfoInSch';
-	
+    private NAMESPACE2: string = 'CreateUserInfoInSch';
 
 
 
-    constructor(private dataService: DataService<UserInfoInSch>) {
+    constructor(
+      private dataService: DataService<UserInfoInSch>,
+      private dataService2: DataService<CreateUserInfoInSch>
+    
+    ) {
     };
 
     public getAll(): Observable<UserInfoInSch[]> {
@@ -43,12 +48,25 @@ export class UserInfoInSchService {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
 
+    public addTransaction(itemToAdd: any): Observable<CreateUserInfoInSch> {
+      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+
+    }
+
     public updateAsset(id: any, itemToUpdate: any): Observable<UserInfoInSch> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
     }
 
     public deleteAsset(id: any): Observable<UserInfoInSch> {
       return this.dataService.delete(this.NAMESPACE, id);
+    }
+
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public getSystemQueryUserInfoInSch(parameterName: string, id: string) : Observable<UserInfoInSch[]> {
+      return this.dataService.getSystemQueryUserInfoInSch("searchUserInfoInSchByOwnerId", parameterName, id);
     }
 
 }

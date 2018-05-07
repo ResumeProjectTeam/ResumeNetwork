@@ -5,14 +5,6 @@ query searchUserById {
       WHERE (userId == _$targetId)
 }
 
-query searchResumeById {
-  description: "Select Resume by Id"
-  statement:
-      SELECT hansung.ac.kr.assets.ResumeInfoUser
-      WHERE (assetId == _$targetId)
-}
-
-
 query searchAlltUser {
   description: "Select all users"
   statement:
@@ -37,21 +29,21 @@ query searchAllSchool {
       SELECT hansung.ac.kr.participants.School
 }
 
-query searchMyCertificate {
+query searchCertificateByOwnerId {
   description: " certificate"
   statement:
       SELECT hansung.ac.kr.assets.Certificate
       WHERE (ownerId == _$CurrentUserId)
 }
 
-query searchMyAwardDetails {
+query searchAwardDetailsByOwnerId {
   description: " AwardDetails"
   statement:
       SELECT hansung.ac.kr.assets.AwardDetails
       WHERE (ownerId == _$CurrentUserId)
 }
 
-query searchMyUserInfoInEnt {
+query searchUserInfoInEntByOwnerId {
   description: " UserInfoInEnt"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInEnt
@@ -59,14 +51,14 @@ query searchMyUserInfoInEnt {
 }
 
 
-query searchMyUserInfoInSch {
+query searchUserInfoInSchByOwnerId {
   description: " UserInfoInSch"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch
       WHERE (ownerId == _$CurrentUserId)
 }
 
-query searchMyResumeInfoUser {
+query searchResumeInfoUserByOwnerId {
   description: " UserInfoInSch"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch

@@ -25,11 +25,14 @@ import 'rxjs/add/operator/toPromise';
 export class AwardDetailsComponent implements OnInit {
 
   myForm: FormGroup;
+  myForm2: FormGroup;
 
   private allAssets;
   private asset;
+  private Transaction;
   private currentId;
-	private errorMessage;
+  private errorMessage;
+  private myAwardDetailsList;
 
   
       
@@ -70,6 +73,18 @@ export class AwardDetailsComponent implements OnInit {
   
       
           isPublic = new FormControl("", Validators.required);
+
+
+
+          userId  = new FormControl("test",Validators.required);
+        
+      
+        
+          transactionId  = new FormControl("",Validators.required);
+        
+      
+        
+          timestamp  = new FormControl("",Validators.required);
         
   
 
@@ -118,6 +133,51 @@ export class AwardDetailsComponent implements OnInit {
         
     
     });
+
+
+
+    this.myForm2 = fb.group({
+    
+      contestName:this.contestName,
+        
+    
+        
+      organizationId:this.organizationId,
+    
+
+    
+      organizationName:this.organizationName,
+    
+
+    
+      dateOfAward:this.dateOfAward,
+    
+
+    
+      awardGrade:this.awardGrade,
+    
+
+    
+      description:this.description,
+    
+
+    
+      isPublic:this.isPublic,
+    
+
+    
+      userId:this.userId,
+    
+
+    /*
+      transactionId:this.transactionId,
+    
+
+    
+      timestamp:this.timestamp
+    
+*/
+});
   };
 
   ngOnInit(): void {
@@ -126,14 +186,19 @@ export class AwardDetailsComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceAwardDetails.getAll()
+    return this.serviceAwardDetails.getSystemPing()
     .toPromise()
     .then((result) => {
-			this.errorMessage = null;
-      result.forEach(asset => {
-        tempList.push(asset);
-      });
-      this.allAssets = tempList;
+     var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+        this.serviceAwardDetails.getSystemQueryAwardDetails("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((awardDetailsList) => {
+          this.myAwardDetailsList = awardDetailsList;
+        })
     })
     .catch((error) => {
         if(error == 'Server error'){
@@ -320,6 +385,159 @@ export class AwardDetailsComponent implements OnInit {
         }
     });
   }
+
+
+
+
+  addTransaction(form: any): Promise<any> {
+    this.Transaction = {
+      $class: "hansung.ac.kr.transaction.CreateAwardDetails",
+      
+        
+          "contestName":this.contestName.value,
+        
+      
+        
+          "organizationId":this.organizationId.value,
+        
+      
+        
+          "organizationName":this.organizationName.value,
+        
+      
+        
+          "dateOfAward":this.dateOfAward.value,
+        
+      
+        
+          "awardGrade":this.awardGrade.value,
+        
+      
+        
+          "description":this.description.value,
+        
+      
+        
+          "isPublic":this.isPublic.value,
+        
+      
+        
+          "userId":this.userId.value,
+        
+      
+        /*
+          "transactionId":this.transactionId.value,
+        
+      
+        
+          "timestamp":this.timestamp.value
+        */
+      
+    };
+
+    this.myForm2.setValue({
+      
+        
+          "contestName":null,
+        
+      
+        
+          "organizationId":null,
+        
+      
+        
+          "organizationName":null,
+        
+      
+        
+          "dateOfAward":null,
+        
+      
+        
+          "awardGrade":null,
+        
+      
+        
+          "description":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null
+        */
+      
+    });
+
+    return this.serviceAwardDetails.addTransaction(this.Transaction)
+    .toPromise()
+    .then(() => {
+			this.errorMessage = null;
+      this.myForm2.setValue({
+      
+        
+          "contestName":null,
+        
+      
+        
+          "organizationId":null,
+        
+      
+        
+          "organizationName":null,
+        
+      
+        
+          "dateOfAward":null,
+        
+      
+        
+          "awardGrade":null,
+        
+      
+        
+          "description":null,
+        
+      
+        
+          "isPublic":null,
+        
+      
+        
+          "userId":null,
+        
+      
+        /*
+          "transactionId":null,
+        
+      
+        
+          "timestamp":null 
+        */
+      
+      });
+    })
+    .catch((error) => {
+        if(error == 'Server error'){
+            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else{
+            this.errorMessage = error;
+        }
+    });
+  }
+
+
 
 
    updateAsset(form: any): Promise<any> {

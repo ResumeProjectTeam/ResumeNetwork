@@ -36,13 +36,7 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
   import { CreateCertificateComponent } from './CreateCertificate/CreateCertificate.component';
   import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
   import { CreateUserInfoInEntComponent } from './CreateUserInfoInEnt/CreateUserInfoInEnt.component';
-  import { CreateUserInfoInSchComponent } from './CreateUserInfoInSch/CreateUserInfoInSch.component';
-  import { selectResumeInfoUserComponent } from './selectResumeInfoUser/selectResumeInfoUser.component';
-  import { selectMyCertificateComponent } from './selectMyCertificate/selectMyCertificate.component';
-  import { selectMyAwardDetailsComponent } from './selectMyAwardDetails/selectMyAwardDetails.component';
-  import { selectMyUserInfoInEntComponent } from './selectMyUserInfoInEnt/selectMyUserInfoInEnt.component';
-  import { selectMyUserInfoInSchComponent } from './selectMyUserInfoInSch/selectMyUserInfoInSch.component';
-  import { selectUserByCertificateNameComponent } from './selectUserByCertificateName/selectUserByCertificateName.component';  
+  import { CreateUserInfoInSchComponent } from './CreateUserInfoInSch/CreateUserInfoInSch.component';  
 const routes: Routes = [
      //{ path: 'transaction', component: TransactionComponent },
     {path: '', component: HomeComponent},
@@ -80,18 +74,6 @@ const routes: Routes = [
         { path: 'CreateUserInfoInEnt', component: CreateUserInfoInEntComponent},
         
         { path: 'CreateUserInfoInSch', component: CreateUserInfoInSchComponent},
-        
-        { path: 'selectResumeInfoUser', component: selectResumeInfoUserComponent},
-        
-        { path: 'selectMyCertificate', component: selectMyCertificateComponent},
-        
-        { path: 'selectMyAwardDetails', component: selectMyAwardDetailsComponent},
-        
-        { path: 'selectMyUserInfoInEnt', component: selectMyUserInfoInEntComponent},
-        
-        { path: 'selectMyUserInfoInSch', component: selectMyUserInfoInSchComponent},
-        
-        { path: 'selectUserByCertificateName', component: selectUserByCertificateNameComponent},
         
 		{path: '**', redirectTo:''}
 
