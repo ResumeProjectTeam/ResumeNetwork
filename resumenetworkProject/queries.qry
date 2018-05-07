@@ -59,9 +59,9 @@ query searchUserInfoInSchByOwnerId {
 }
 
 query searchResumeInfoUserByOwnerId {
-  description: " UserInfoInSch"
+  description: " ResumeInfoUser"
   statement:
-      SELECT hansung.ac.kr.assets.UserInfoInSch
+      SELECT hansung.ac.kr.assets.ResumeInfoUser
       WHERE (ownerId == _$CurrentUserId)
 }
 
