@@ -17,9 +17,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ResumeInfoUserService } from './ResumeInfoUser.service';
 import 'rxjs/add/operator/toPromise';
 @Component({
-	selector: 'app-ResumeInfoUser',
-	templateUrl: './ResumeInfoUser.component.html',
-	styleUrls: ['./ResumeInfoUser.component.css'],
+  selector: 'app-ResumeInfoUser',
+  templateUrl: './ResumeInfoUser.component.html',
+  styleUrls: ['./ResumeInfoUser.component.css'],
   providers: [ResumeInfoUserService]
 })
 export class ResumeInfoUserComponent implements OnInit {
@@ -34,131 +34,138 @@ export class ResumeInfoUserComponent implements OnInit {
   private errorMessage;
   private myResumeInfoUser;
 
-  
-      
-          assetId = new FormControl("", Validators.required);
-        
-  
-          ownerId = new FormControl("", Validators.required);
-        
 
-      
-          dob = new FormControl("", Validators.required);
-        
-  
-      
-          supportField = new FormControl("", Validators.required);
-        
-  
-      
-          salaryRequirement = new FormControl("", Validators.required);
-        
-  
-      
-          majorActivities = new FormControl("", Validators.required);
-        
-  
-      
-          socialExperience = new FormControl("", Validators.required);
-        
-  
-      
-          skillsAndCapabilities = new FormControl("", Validators.required);
-        
-  
-      
-          isPublic = new FormControl("", Validators.required);
+  name = new FormControl("", Validators.required);
 
 
-          
-          userId  = new FormControl("test",Validators.required);
-        
-      
-        
-          transactionId  = new FormControl("",Validators.required);
-        
-      
-        
-          timestamp  = new FormControl("",Validators.required);
-        
-  
+  assetId = new FormControl("", Validators.required);
 
 
-  constructor(private serviceResumeInfoUser:ResumeInfoUserService, fb: FormBuilder) {
+  ownerId = new FormControl("", Validators.required);
+
+
+
+  dob = new FormControl("", Validators.required);
+
+
+
+  supportField = new FormControl("", Validators.required);
+
+
+
+  salaryRequirement = new FormControl("", Validators.required);
+
+
+
+  majorActivities = new FormControl("", Validators.required);
+
+
+
+  socialExperience = new FormControl("", Validators.required);
+
+
+
+  skillsAndCapabilities = new FormControl("", Validators.required);
+
+
+
+  isPublic = new FormControl("", Validators.required);
+
+
+
+  userId = new FormControl("test", Validators.required);
+
+
+
+  transactionId = new FormControl("", Validators.required);
+
+
+
+  timestamp = new FormControl("", Validators.required);
+
+
+
+
+  constructor(private serviceResumeInfoUser: ResumeInfoUserService, fb: FormBuilder) {
     this.myForm = fb.group({
-    
-        
-          assetId:this.assetId,
-        
-    
-          ownerId:this.ownerId,
 
-          
-        
-          dob:this.dob,
-        
-    
-        
-          supportField:this.supportField,
-        
-    
-        
-          salaryRequirement:this.salaryRequirement,
-        
-    
-        
-          majorActivities:this.majorActivities,
-        
-    
-        
-          socialExperience:this.socialExperience,
-        
-    
-        
-          skillsAndCapabilities:this.skillsAndCapabilities,
-        
-    
-        
-          isPublic:this.isPublic
-        
-    
-     });
+
+      name: this.name,
+
+
+      assetId: this.assetId,
+
+
+      ownerId: this.ownerId,
+
+
+
+      dob: this.dob,
+
+
+
+      supportField: this.supportField,
+
+
+
+      salaryRequirement: this.salaryRequirement,
+
+
+
+      majorActivities: this.majorActivities,
+
+
+
+      socialExperience: this.socialExperience,
+
+
+
+      skillsAndCapabilities: this.skillsAndCapabilities,
+
+
+
+      isPublic: this.isPublic
+
+
+    });
 
     this.myForm2 = fb.group({
 
-    
-        
-        dob:this.dob,
-      
-  
-      
-        supportField:this.supportField,
-      
-  
-      
-        salaryRequirement:this.salaryRequirement,
-      
-  
-      
-        majorActivities:this.majorActivities,
-      
-  
-      
-        socialExperience:this.socialExperience,
-      
-  
-      
-        skillsAndCapabilities:this.skillsAndCapabilities,
-      
-  
-      
-        isPublic:this.isPublic,
-      
-  
-      
-        userId:this.userId,
-      
-  
+
+      name: this.name,
+
+
+      dob: this.dob,
+
+
+
+      supportField: this.supportField,
+
+
+
+      salaryRequirement: this.salaryRequirement,
+
+
+
+      majorActivities: this.majorActivities,
+
+
+
+      socialExperience: this.socialExperience,
+
+
+
+      skillsAndCapabilities: this.skillsAndCapabilities,
+
+
+
+      isPublic: this.isPublic,
+
+
+
+      userId: this.userId,
+
+
       /*
         transactionId:this.transactionId,
       
@@ -166,7 +173,7 @@ export class ResumeInfoUserComponent implements OnInit {
       
         timestamp:this.timestamp
         */
-    
+
     });
 
   };
@@ -178,30 +185,30 @@ export class ResumeInfoUserComponent implements OnInit {
   loadAll(): Promise<any> {
     let tempList = [];
     return this.serviceResumeInfoUser.getSystemPing()
-    .toPromise()
-    .then((result) => {
-     var Id;
+      .toPromise()
+      .then((result) => {
+        var Id;
         Id = result['participant'];
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
         this.serviceResumeInfoUser.getSystemQueryResumeInfoUser("CurrentUserId", this.currentId)
-        .toPromise()
-        .then((resumeInfoUser) => {
-          this.myResumeInfoUser = resumeInfoUser;
-        })
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+          .toPromise()
+          .then((resumeInfoUser) => {
+            this.myResumeInfoUser = resumeInfoUser;
+          })
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
   }
 
 	/**
@@ -232,132 +239,145 @@ export class ResumeInfoUserComponent implements OnInit {
   addAsset(form: any): Promise<any> {
     this.asset = {
       $class: "hansung.ac.kr.assets.ResumeInfoUser",
-      
-        
-          "assetId":this.assetId.value,
-        
 
-          "ownerId":this.ownerId.value,
-      
-        
-          "dob":this.dob.value,
-        
-      
-        
-          "supportField":this.supportField.value,
-        
-      
-        
-          "salaryRequirement":this.salaryRequirement.value,
-        
-      
-        
-          "majorActivities":this.majorActivities.value,
-        
-      
-        
-          "socialExperience":this.socialExperience.value,
-        
-      
-        
-          "skillsAndCapabilities":this.skillsAndCapabilities.value,
-        
-      
-        
-          "isPublic":this.isPublic.value
-        
-      
+
+      "assetId": this.assetId.value,
+
+
+      "ownerId": this.ownerId.value,
+
+
+      "name": this.name.value,
+
+
+
+      "dob": this.dob.value,
+
+
+
+      "supportField": this.supportField.value,
+
+
+
+      "salaryRequirement": this.salaryRequirement.value,
+
+
+
+      "majorActivities": this.majorActivities.value,
+
+
+
+      "socialExperience": this.socialExperience.value,
+
+
+
+      "skillsAndCapabilities": this.skillsAndCapabilities.value,
+
+
+
+      "isPublic": this.isPublic.value
+
+
     };
 
     this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
 
-          "ownerId":null,
-      
-        
-          "dob":null,
-        
-      
-        
-          "supportField":null,
-        
-      
-        
-          "salaryRequirement":null,
-        
-      
-        
-          "majorActivities":null,
-        
-      
-        
-          "socialExperience":null,
-        
-      
-        
-          "skillsAndCapabilities":null,
-        
-      
-        
-          "isPublic":null
-        
-      
+
+      "assetId": null,
+
+
+      "ownerId": null,
+
+
+
+      "name": null,
+
+
+
+      "dob": null,
+
+
+
+      "supportField": null,
+
+
+
+      "salaryRequirement": null,
+
+
+
+      "majorActivities": null,
+
+
+
+      "socialExperience": null,
+
+
+
+      "skillsAndCapabilities": null,
+
+
+
+      "isPublic": null
+
+
     });
 
     return this.serviceResumeInfoUser.addAsset(this.asset)
-    .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+        this.myForm.setValue({
 
-          "ownerId":null,
 
-        
-          "dob":null,
-        
-      
-        
-          "supportField":null,
-        
-      
-        
-          "salaryRequirement":null,
-        
-      
-        
-          "majorActivities":null,
-        
-      
-        
-          "socialExperience":null,
-        
-      
-        
-          "skillsAndCapabilities":null,
-        
-      
-        
-          "isPublic":null 
-        
-      
+          "assetId": null,
+
+
+
+          "ownerId": null,
+
+
+          "name": null,
+
+
+
+          "dob": null,
+
+
+
+          "supportField": null,
+
+
+
+          "salaryRequirement": null,
+
+
+
+          "majorActivities": null,
+
+
+
+          "socialExperience": null,
+
+
+
+          "skillsAndCapabilities": null,
+
+
+
+          "isPublic": null
+
+
+        });
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else {
+          this.errorMessage = error;
+        }
       });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
   }
 
 
@@ -365,425 +385,450 @@ export class ResumeInfoUserComponent implements OnInit {
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
       $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
-      
-        
-          "dob":this.dob.value,
-        
 
 
+      "dob": this.dob.value,
+
+
+      "name": this.name.value,
+
+
+
+      "supportField": this.supportField.value,
+
+
+
+      "salaryRequirement": this.salaryRequirement.value,
+
+
+
+      "majorActivities": this.majorActivities.value,
+
+
+
+      "socialExperience": this.socialExperience.value,
+
+
+
+      "skillsAndCapabilities": this.skillsAndCapabilities.value,
+
+
+
+      "isPublic": this.isPublic.value,
+
+
+
+      "userId": this.userId.value,
+
+
+      /*
+        "transactionId":this.transactionId.value,
       
-        
-          "supportField":this.supportField.value,
-        
+    
       
-        
-          "salaryRequirement":this.salaryRequirement.value,
-        
-      
-        
-          "majorActivities":this.majorActivities.value,
-        
-      
-        
-          "socialExperience":this.socialExperience.value,
-        
-      
-        
-          "skillsAndCapabilities":this.skillsAndCapabilities.value,
-        
-      
-        
-          "isPublic":this.isPublic.value,
-        
-      
-        
-          "userId":this.userId.value,
-        
-      
-        /*
-          "transactionId":this.transactionId.value,
-        
-      
-        
-          "timestamp":this.timestamp.value
-        */
-      
+        "timestamp":this.timestamp.value
+      */
+
     };
 
     this.myForm2.setValue({
+
+
+      "name": null,
+
+
+      "dob": null,
+
+
+
+      "supportField": null,
+
+
+
+      "salaryRequirement": null,
+
+
+
+      "majorActivities": null,
+
+
+
+      "socialExperience": null,
+
+
+
+      "skillsAndCapabilities": null,
+
+
+
+      "isPublic": null,
+
+
+
+      "userId": null,
+
+
+      /*
+        "transactionId":null,
       
-        
-          "dob":null,
-        
+    
       
-        
-          "supportField":null,
-        
-      
-        
-          "salaryRequirement":null,
-        
-      
-        
-          "majorActivities":null,
-        
-      
-        
-          "socialExperience":null,
-        
-      
-        
-          "skillsAndCapabilities":null,
-        
-      
-        
-          "isPublic":null,
-        
-      
-        
-          "userId":null,
-        
-      
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null
-        */
-      
+        "timestamp":null
+      */
+
     });
 
     return this.serviceResumeInfoUser.addTransaction(this.Transaction)
-    .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm2.setValue({
-      
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+        this.myForm2.setValue({
+
+
+          "name": null,
+
+
+          "dob": null,
+
+
+
+          "supportField": null,
+
+
+
+          "salaryRequirement": null,
+
+
+
+          "majorActivities": null,
+
+
+
+          "socialExperience": null,
+
+
+
+          "skillsAndCapabilities": null,
+
+
+
+          "isPublic": null,
+
+
+
+          "userId": null,
+
+
+          /*
+            "transactionId":null,
+          
         
-          "dob":null,
-        
-      
-        
-          "supportField":null,
-        
-      
-        
-          "salaryRequirement":null,
-        
-      
-        
-          "majorActivities":null,
-        
-      
-        
-          "socialExperience":null,
-        
-      
-        
-          "skillsAndCapabilities":null,
-        
-      
-        
-          "isPublic":null,
-        
-      
-        
-          "userId":null,
-        
-      
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null 
-        */
-      
+          
+            "timestamp":null 
+          */
+
+        });
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else {
+          this.errorMessage = error;
+        }
       });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
   }
 
 
-   updateAsset(form: any): Promise<any> {
+  updateAsset(form: any): Promise<any> {
     this.asset = {
       $class: "hansung.ac.kr.assets.ResumeInfoUser",
-      
-        
-          
-            "ownerId":this.ownerId.value,
-        
-    
-        
-          
-            "dob":this.dob.value,
-        
-        
-    
-        
-          
-            "supportField":this.supportField.value,
-          
-        
-    
-        
-          
-            "salaryRequirement":this.salaryRequirement.value,
-          
-        
-    
-        
-          
-            "majorActivities":this.majorActivities.value,
-          
-        
-    
-        
-          
-            "socialExperience":this.socialExperience.value,
-          
-        
-    
-        
-          
-            "skillsAndCapabilities":this.skillsAndCapabilities.value,
-          
-        
-    
-        
-          
-            "isPublic":this.isPublic.value
-          
-        
-    
+
+
+
+      "ownerId": this.ownerId.value,
+
+
+
+      "name": this.name.value,
+
+
+
+      "dob": this.dob.value,
+
+
+
+
+
+      "supportField": this.supportField.value,
+
+
+
+
+
+      "salaryRequirement": this.salaryRequirement.value,
+
+
+
+
+
+      "majorActivities": this.majorActivities.value,
+
+
+
+
+
+      "socialExperience": this.socialExperience.value,
+
+
+
+
+
+      "skillsAndCapabilities": this.skillsAndCapabilities.value,
+
+
+
+
+
+      "isPublic": this.isPublic.value
+
+
+
     };
 
-    return this.serviceResumeInfoUser.updateAsset(form.get("assetId").value,this.asset)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-            else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
+    return this.serviceResumeInfoUser.updateAsset(form.get("assetId").value, this.asset)
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
   }
 
 
   deleteAsset(): Promise<any> {
 
     return this.serviceResumeInfoUser.deleteAsset(this.currentId)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-			else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
   }
 
-  setId(id: any): void{
+  setId(id: any): void {
     this.currentId = id;
   }
 
-  getForm(id: any): Promise<any>{
+  getForm(id: any): Promise<any> {
 
     return this.serviceResumeInfoUser.getAsset(id)
-    .toPromise()
-    .then((result) => {
-			this.errorMessage = null;
-      let formObject = {
-        
-          
-            "assetId":null,
-          
+      .toPromise()
+      .then((result) => {
+        this.errorMessage = null;
+        let formObject = {
 
-            "ownerId":null,
-        
-          
-            "dob":null,
-          
-        
-          
-            "supportField":null,
-          
-        
-          
-            "salaryRequirement":null,
-          
-        
-          
-            "majorActivities":null,
-          
-        
-          
-            "socialExperience":null,
-          
-        
-          
-            "skillsAndCapabilities":null,
-          
-        
-          
-            "isPublic":null 
-          
-        
-      };
+
+          "assetId": null,
+
+
+          "ownerId": null,
+
+
+          "name": null,
+
+
+          "dob": null,
 
 
 
-      
-        if(result.assetId){
-          
-            formObject.assetId = result.assetId;
-          
-        }else{
+          "supportField": null,
+
+
+
+          "salaryRequirement": null,
+
+
+
+          "majorActivities": null,
+
+
+
+          "socialExperience": null,
+
+
+
+          "skillsAndCapabilities": null,
+
+
+
+          "isPublic": null
+
+
+        };
+
+
+
+
+        if (result.assetId) {
+
+          formObject.assetId = result.assetId;
+
+        } else {
           formObject.assetId = null;
         }
 
-        if(result.ownerId){
-          
+        if (result.ownerId) {
+
           formObject.ownerId = result.ownerId;
-        
-        }else{
+
+        } else {
           formObject.ownerId = null;
         }
-      
-        if(result.dob){
-          
-            formObject.dob = result.dob;
-          
-        }else{
+
+        if (result.name) {
+
+          formObject.name = result.name;
+
+        } else {
+          formObject.name = null;
+        }
+
+
+        if (result.dob) {
+
+          formObject.dob = result.dob;
+
+        } else {
           formObject.dob = null;
         }
-      
-        if(result.supportField){
-          
-            formObject.supportField = result.supportField;
-          
-        }else{
+
+        if (result.supportField) {
+
+          formObject.supportField = result.supportField;
+
+        } else {
           formObject.supportField = null;
         }
-      
-        if(result.salaryRequirement){
-          
-            formObject.salaryRequirement = result.salaryRequirement;
-          
-        }else{
+
+        if (result.salaryRequirement) {
+
+          formObject.salaryRequirement = result.salaryRequirement;
+
+        } else {
           formObject.salaryRequirement = null;
         }
-      
-        if(result.majorActivities){
-          
-            formObject.majorActivities = result.majorActivities;
-          
-        }else{
+
+        if (result.majorActivities) {
+
+          formObject.majorActivities = result.majorActivities;
+
+        } else {
           formObject.majorActivities = null;
         }
-      
-        if(result.socialExperience){
-          
-            formObject.socialExperience = result.socialExperience;
-          
-        }else{
+
+        if (result.socialExperience) {
+
+          formObject.socialExperience = result.socialExperience;
+
+        } else {
           formObject.socialExperience = null;
         }
-      
-        if(result.skillsAndCapabilities){
-          
-            formObject.skillsAndCapabilities = result.skillsAndCapabilities;
-          
-        }else{
+
+        if (result.skillsAndCapabilities) {
+
+          formObject.skillsAndCapabilities = result.skillsAndCapabilities;
+
+        } else {
           formObject.skillsAndCapabilities = null;
         }
-      
-        if(result.isPublic){
-          
-            formObject.isPublic = result.isPublic;
-          
-        }else{
+
+        if (result.isPublic) {
+
+          formObject.isPublic = result.isPublic;
+
+        } else {
           formObject.isPublic = null;
         }
-      
 
-      this.myForm.setValue(formObject);
 
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        this.myForm.setValue(formObject);
+
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
 
   }
 
-  resetForm(): void{
+  resetForm(): void {
     this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
-          "ownerId":null,
 
-        
-          "dob":null,
-        
-      
-        
-          "supportField":null,
-        
-      
-        
-          "salaryRequirement":null,
-        
-      
-        
-          "majorActivities":null,
-        
-      
-        
-          "socialExperience":null,
-        
-      
-        
-          "skillsAndCapabilities":null,
-        
-      
-        
-          "isPublic":null 
-        
-      
-      });
+
+      "assetId": null,
+
+
+      "ownerId": null,
+
+
+      "name":null,
+
+
+      "dob": null,
+
+
+
+      "supportField": null,
+
+
+
+      "salaryRequirement": null,
+
+
+
+      "majorActivities": null,
+
+
+
+      "socialExperience": null,
+
+
+
+      "skillsAndCapabilities": null,
+
+
+
+      "isPublic": null
+
+
+    });
   }
 
 }

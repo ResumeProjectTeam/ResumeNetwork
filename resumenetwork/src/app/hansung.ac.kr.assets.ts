@@ -6,6 +6,7 @@ import {Event} from './org.hyperledger.composer.system';
    export class ResumeInfoUser extends Asset {
       assetId: string;
       ownerId: string;
+      name: string;
       dob: Date;
       supportField: string;
       salaryRequirement: string;
