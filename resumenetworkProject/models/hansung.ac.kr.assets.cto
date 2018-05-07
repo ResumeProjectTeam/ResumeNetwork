@@ -7,6 +7,7 @@ import hansung.ac.kr.participants.*
 asset ResumeInfoUser identified by assetId {
     o String assetId
     o String ownerId
+    o String name
     o DateTime dob
     o String supportField
     o String salaryRequirement regex=/[1-9][0-9]{2,}/ optional
