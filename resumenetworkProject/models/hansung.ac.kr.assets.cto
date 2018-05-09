@@ -2,6 +2,13 @@
 namespace hansung.ac.kr.assets
 import hansung.ac.kr.participants.*
 
+asset Authentication identified by assetId {
+    o String assetId
+    o String ownerId
+    o String resumeName
+    o String resmueAssetId
+    o DateTime AuthenticationTime
+}
 
 
 asset ResumeInfoUser identified by assetId {
