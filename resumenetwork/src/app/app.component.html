@@ -18,9 +18,8 @@
         <p class="navbar-brand">resumenetwork</p>
       </div>
       <ul class="nav navbar-nav">
-        <li class="dropdown active">
-            <a class="dropdown-toggle" data-toggle="dropdown">Assets</a>
-            <ul class="dropdown-menu scrollable-menu">
+      
+            <ul>
               
               <li><a [routerLink]="['/ResumeInfoUser']">ResumeInfoUser</a></li>
               
@@ -33,41 +32,7 @@
               <li><a [routerLink]="['/UserInfoInSch']">UserInfoInSch</a></li>
               
             </ul>
-        </li>
-        <li class="dropdown active">
-          <a class="dropdown-toggle" data-toggle="dropdown">Participants</a>
-          <ul class="dropdown-menu scrollable-menu">
-            
-            <li><a [routerLink]="['/User']">User</a></li>
-            
-            <li><a [routerLink]="['/Organization']">Organization</a></li>
-            
-            <li><a [routerLink]="['/Enterprise']">Enterprise</a></li>
-            
-            <li><a [routerLink]="['/School']">School</a></li>
-            
-          </ul>
-      </li>
-      <li class="dropdown active">
-        <a class="dropdown-toggle" data-toggle="dropdown">Transactions</a>
-        <ul class="dropdown-menu scrollable-menu">
-          
-          <li><a [routerLink]="['/AddRequestUser']">AddRequestUser</a></li>
-          
-          <li><a [routerLink]="['/RevokeRequestUser']">RevokeRequestUser</a></li>
-          
-          <li><a [routerLink]="['/CreateResumeInfoUser']">CreateResumeInfoUser</a></li>
-          
-          <li><a [routerLink]="['/CreateCertificate']">CreateCertificate</a></li>
-          
-          <li><a [routerLink]="['/CreateAwardDetails']">CreateAwardDetails</a></li>
-          
-          <li><a [routerLink]="['/CreateUserInfoInEnt']">CreateUserInfoInEnt</a></li>
-          
-          <li><a [routerLink]="['/CreateUserInfoInSch']">CreateUserInfoInSch</a></li>
-          
-        </ul>
-    </li>
+
       </ul>
     </div>
   </nav>
