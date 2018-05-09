@@ -6,7 +6,7 @@ asset Authentication identified by assetId {
     o String assetId
     o String ownerId
     o String resumeName
-    o String resmueAssetId
+    o String resumeAssetId
     o DateTime AuthenticationTime
 }
 
@@ -30,7 +30,7 @@ asset Certificate identified by assetId {
     o String ownerId
     o String certificateName
     o Integer certificateScore default=0 range=[0,] optional
-	o String organizationId
+    o String authorizedParticipantId
     o String organizationName
     o DateTime dob
     o DateTime expirationDate optional
@@ -43,7 +43,7 @@ asset AwardDetails identified by assetId {
    o String ownerId
    o String contestName
    o String organizationId
-   o String organizationName
+   o String authorizedParticipantId
    o DateTime dateOfAward
    o DateTime transactionTime
    o String awardGrade optional 
@@ -54,9 +54,9 @@ asset AwardDetails identified by assetId {
 asset UserInfoInEnt identified by assetId {
     o String assetId
     o String ownerId
-    o String enterpriseId
+    o String authorizedParticipantId
     o String enterpriseName
-	o String userPosition
+    o String userPosition
     o String performingTask
     o DateTime dateOfEmployment optional
     o DateTime retirementDate optional
@@ -67,9 +67,9 @@ asset UserInfoInEnt identified by assetId {
 asset UserInfoInSch identified by assetId {
     o String assetId
     o String ownerId
-    o String schoolId
+    o String authorizedParticipantId
     o String schoolName
-  	o DateTime entranceDate
+    o DateTime entranceDate
     o DateTime graduationDate optional
     o DateTime transactionTime
     o String majorField optional

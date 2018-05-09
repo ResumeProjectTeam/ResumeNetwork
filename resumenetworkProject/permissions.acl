@@ -169,7 +169,7 @@ rule OrgReadUserAsset {
   	participant(p): "hansung.ac.kr.participants.Organization"
   	operation: READ
 	resource(r): "hansung.ac.kr.assets.**"
-    condition: (p.getIdentifier() == r.organizationId )
+    condition: (p.getIdentifier() == r.authorizedParticipantId )
     action: ALLOW
 }
 
@@ -179,7 +179,7 @@ rule EntReadUserAsset {
   	participant(p): "hansung.ac.kr.participants.Enterprise"
   	operation: READ
 	resource(r): "hansung.ac.kr.assets.**"
-    condition: (p.getIdentifier() == r.enterpriseId)
+    condition: (p.getIdentifier() == r.authorizedParticipantId)
     action: ALLOW
 }
 
@@ -189,7 +189,7 @@ rule SchReadUserAsset {
   	participant(p): "hansung.ac.kr.participants.School"
   	operation: READ
 	resource(r): "hansung.ac.kr.assets.**"
-    condition: (p.getIdentifier() == r.schoolId )
+    condition: (p.getIdentifier() == r.authorizedParticipantId)
     action: ALLOW
 }
 

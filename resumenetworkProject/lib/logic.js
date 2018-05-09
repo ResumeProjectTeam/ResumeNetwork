@@ -63,15 +63,16 @@ function CreateCertificate (txCreateCertificate) {
        newCertificate.ownerId = me.getIdentifier();
        newCertificate.certificateName = txCreateCertificate.certificateName;
        newCertificate.certificateScore = txCreateCertificate.certificateScore;
-       newCertificate.organizationId  = txCreateCertificate.organizationId ;
+       newCertificate.authorizedParticipantId  = txCreateCertificate.authorizedParticipantId;
        newCertificate.organizationName  = txCreateCertificate.organizationName ;
        newCertificate.dob  = txCreateCertificate.dob ;
        newCertificate.expirationDate  = txCreateCertificate.expirationDate;
        newCertificate.transactionTime  = actionDateTime;
        newCertificate.isPublic  = txCreateCertificate.isPublic;
-
+       
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       txCreateCertificate.userId = me.getIdentifier();
        sendEvent.txForUser = txCreateCertificate;
        emit(sendEvent);
 
@@ -104,7 +105,7 @@ function CreateAwardDetails (txCreateAwardDetails) {
      
        newAwardDetails.ownerId = me.getIdentifier();
        newAwardDetails.contestName = txCreateAwardDetails.contestName;
-       newAwardDetails.organizationId  = txCreateAwardDetails.organizationId ;
+       newAwardDetails.authorizedParticipantId  = txCreateAwardDetails.authorizedParticipantId;
        newAwardDetails.organizationName  = txCreateAwardDetails.organizationName ;
        newAwardDetails.dateOfAward  = txCreateAwardDetails.dateOfAward ;
        newAwardDetails.awardGrade  = txCreateAwardDetails.awardGrade;
@@ -114,6 +115,7 @@ function CreateAwardDetails (txCreateAwardDetails) {
 
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       txCreateAwardDetails.userId = me.getIdentifier();
        sendEvent.txForUser = txCreateAwardDetails;
        emit(sendEvent);
 
@@ -148,7 +150,7 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
      
      
        newUserInfoInEnt.ownerId = me.getIdentifier();
-       newUserInfoInEnt.enterpriseId  = txCreateUserInfoInEnt.enterpriseId ;
+       newUserInfoInEnt.authorizedParticipantId  = txCreateUserInfoInEnt.authorizedParticipantId ;
        newUserInfoInEnt.enterpriseName  = txCreateUserInfoInEnt.enterpriseName ;
        newUserInfoInEnt.userPosition  = txCreateUserInfoInEnt.userPosition ;
        newUserInfoInEnt.performingTask  = txCreateUserInfoInEnt.performingTask;
@@ -156,9 +158,10 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
        newUserInfoInEnt.retirementDate  = txCreateUserInfoInEnt.retirementDate;
        newUserInfoInEnt.transactionTime = actionDateTime;
        newUserInfoInEnt.isPublic  = txCreateUserInfoInEnt.isPublic;
-  
+       
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       txCreateUserInfo.userId = me.getIdentifer();
        sendEvent.txForUser = txCreateUserInfoInEnt;
        emit(sendEvent);
 
@@ -193,7 +196,7 @@ function CreateUserInfoInSch (txCreateUserInfoInSch) {
        var newUserInfoInSch = factory.newResource(NAMESAPCE_ASSETS, "UserInfoInSch", me.getIdentifier() + getRandomIntInclusive(1, 100000000000)  );
      
        newUserInfoInSch.ownerId = me.getIdentifier();
-       newUserInfoInSch.schoolId  = txCreateUserInfoInSch.schoolId ;
+       newUserInfoInSch.authorizedParticipantId  = txCreateUserInfoInSch.authorizedParticipantId;
        newUserInfoInSch.schoolName  = txCreateUserInfoInSch.schoolName ;
        newUserInfoInSch.entranceDate  = txCreateUserInfoInSch.entranceDate ;
        newUserInfoInSch.graduationDate  = txCreateUserInfoInSch.graduationDate;
@@ -204,6 +207,7 @@ function CreateUserInfoInSch (txCreateUserInfoInSch) {
 
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       txCreateUserInfoInSch.userId = me.getIdentifier();
        sendEvent.txForUser = txCreateUserInfoInSch;
        emit(sendEvent);
 
@@ -250,6 +254,7 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
 
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       txCreateUserInfoInSch = me.getIdentifer();
        sendEvent.txForUser = txCreateResumeInfoUser;
        emit(sendEvent);
 

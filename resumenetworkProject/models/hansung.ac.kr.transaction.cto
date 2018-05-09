@@ -29,6 +29,13 @@ transaction AddRequestUser extends TxForUser {
 transaction RevokeRequestUser extends  TxForUser {
 }
 
+
+transaction CreateAuthentication extends TxForUser {
+    o authorizedParticipant
+    o resumeName
+    o resumeAssetId
+}
+
 transaction CreateResumeInfoUser extends TxForUser {
     o DateTime dob
     o String name
