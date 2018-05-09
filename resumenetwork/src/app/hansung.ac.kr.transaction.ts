@@ -24,6 +24,7 @@ import {User} from './hansung.ac.kr.participants';
    }
    export class CreateResumeInfoUser extends TxForUser {
       dob: Date;
+      name: string;
       supportField: string;
       salaryRequirement: string;
       majorActivities: string;

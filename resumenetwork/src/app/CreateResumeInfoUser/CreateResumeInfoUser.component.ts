@@ -32,6 +32,9 @@ export class CreateResumeInfoUserComponent implements OnInit {
 	private errorMessage;
 
   
+          name = new FormControl("", Validators.required);
+
+
       
           dob = new FormControl("", Validators.required);
         
@@ -78,6 +81,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.myForm = fb.group({
     
         
+          name:this.name,
+
+
+
           dob:this.dob,
         
     
@@ -177,6 +184,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.Transaction = {
       $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
       
+
+          "name":this.name.value,
+          
+
         
           "dob":this.dob.value,
         
@@ -222,6 +233,11 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.myForm.setValue({
       
         
+
+          "name":null,
+
+
+
           "dob":null,
         
       
@@ -270,6 +286,9 @@ export class CreateResumeInfoUserComponent implements OnInit {
       this.myForm.setValue({
       
         
+          "name":null,
+
+
           "dob":null,
         
       
@@ -327,6 +346,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
       $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
       
         
+            "name":this.name.value,
+
+
+
           
             "dob":this.dob.value,
           
@@ -437,6 +460,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
 			this.errorMessage = null;
       let formObject = {
         
+
+            "name":null,
+
+
           
             "dob":null,
           
@@ -479,6 +506,16 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
       };
 
+
+
+
+      if(result.name){
+          
+         formObject.name = result.name;
+      
+      }else{
+          formObject.name = null;
+       }
 
 
       
@@ -583,6 +620,9 @@ export class CreateResumeInfoUserComponent implements OnInit {
   resetForm(): void{
     this.myForm.setValue({
       
+
+          "name":null,
+
         
           "dob":null,
         
