@@ -70,6 +70,11 @@ function CreateCertificate (txCreateCertificate) {
        newCertificate.transactionTime  = actionDateTime;
        newCertificate.isPublic  = txCreateCertificate.isPublic;
 
+       
+       let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       sendEvent.txForUser = txCreateCertificate;
+       emit(sendEvent);
+
        return allCertificateRegistry.add(newCertificate);
    })
   .catch(function (error){
@@ -106,6 +111,12 @@ function CreateAwardDetails (txCreateAwardDetails) {
        newAwardDetails.description  = txCreateAwardDetails.description;
        newAwardDetails.transactionTime  = actionDateTime;
        newAwardDetails.isPublic  = txCreateAwardDetails.isPublic;
+
+       
+       let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       sendEvent.txForUser = txCreateAwardDetails;
+       emit(sendEvent);
+
 
        return allAwardDetailsRegistry.add(newAwardDetails);
    })
@@ -146,6 +157,12 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
        newUserInfoInEnt.transactionTime = actionDateTime;
        newUserInfoInEnt.isPublic  = txCreateUserInfoInEnt.isPublic;
   
+       
+       let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       sendEvent.txForUser = txCreateUserInfoInEnt;
+       emit(sendEvent);
+
+
        return allUserInfoInEntRegistry.add(newUserInfoInEnt);
    })
   .catch(function (error){
@@ -184,6 +201,12 @@ function CreateUserInfoInSch (txCreateUserInfoInSch) {
        newUserInfoInSch.gradeAverage  = txCreateUserInfoInSch.gradeAverage;
        newUserInfoInSch.transactionTime = actionDateTime;
        newUserInfoInSch.isPublic  = txCreateUserInfoInSch.isPublic;
+
+       
+       let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       sendEvent.txForUser = txCreateUserInfoInSch;
+       emit(sendEvent);
+
 
        return allUserInfoInSchRegistry.add(newUserInfoInSch);
    })
@@ -224,6 +247,13 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
        newResumeAsset.socialExperience  = txCreateResumeInfoUser.socialExperience ;
        newResumeAsset.skillsAndCapabilities  = txCreateResumeInfoUser.skillsAndCapabilities ;
        newResumeAsset.isPublic  = txCreateResumeInfoUser.isPublic ;
+
+       
+       let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+       sendEvent.txForUser = txCreateResumeInfoUser;
+       emit(sendEvent);
+
+
 
        return allResume.add(newResumeAsset);
    })
@@ -278,13 +308,13 @@ function addRequestUser(addRequestUser) {
 
         return getParticipantRegistry(meType)
         .then(function (participantsRegistry) {
-            /*
+            
             // emit an event
-            var event = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, evetType);
-            event.txForUser = addRequestUser;
-            emit(event);
+            var SendEvent = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, "SendEvent");
+            SendEvent.txForUser = addRequestUser;
+            emit(SendEvent);
             // persist the state of the member
-            */
+            
             return participantsRegistry.update(me);
         });
     }
@@ -329,14 +359,14 @@ function revokeRequestUser(revokeRequestUser) {
           me.requestUser.splice(index, 1);
           return getParticipantRegistry(meType)
           .then(function (typeRegistry) {
-		      /*
+		      
               // emit an event
-              var event = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'OrganizationEvent');
-              event.txForOrg =  revokeRequestUser;
-              emit(event);
+              var SendEvent = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
+              SendEvent.txForUser =  revokeRequestUser;
+              emit(SendEvent);
 
               // persist the state of the member
-               */
+               
               return typeRegistry.update(me);
           });
       }

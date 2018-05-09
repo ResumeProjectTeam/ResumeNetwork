@@ -94,6 +94,7 @@ event SendEvent {
     o AwardDetails awardDetails optional
     o UserInfoInEnt userInfoInEnt optional
     o UserInfoInSch userInfoInSch optional
+    o TxForUser txForUser
 }
 
 event UserEvent {
