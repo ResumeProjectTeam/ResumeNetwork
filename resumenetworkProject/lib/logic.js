@@ -41,6 +41,41 @@ var NAMESPACE_EVENT_OR_TRANSACTION = CORE_NAMESPACE_PREFIX + "." + TRANSACTION ;
 
 
 
+
+/**
+ * @param {hansung.ac.kr.transaction.CreateAuthentication }  txCreateAuthentication   - the member to be processed
+ * @transaction
+ */
+function CreateAuthentication  (txCreateAuthentication ) {
+   var actionDateTime = new Date();
+   var me = getCurrentParticipant();
+   var factory = getFactory();
+
+   if(!me) {
+        throw new Error('can not find Participant');
+    }
+
+   return getAssetRegistry(NAMESAPCE_ASSETS + ".Authentication")
+  .then(function (allAuthenticationRegistry) {
+
+   
+      var newAuthentication = factory.newResource(NAMESAPCE_ASSETS, "Authentication", txCreateAuthentication.resumeAssetId );
+       newAuthentication.authorizedParticipantId = txCreateAuthentication.authorizedParticipantId;
+       newAuthentication.resumeName = txCreateAuthentication.resumeName;
+       newAuthentication.resumeAssetId =  txCreateAuthentication.resumeAssetId;
+       newAuthentication.authenticationTime = actionDateTime;
+       newAuthentication.ownerId = txCreateAuthentication.userId;
+       return allAuthenticationRegistry.add(newAuthentication);
+       })
+        .catch(function (error){
+        throw error;
+       });
+}
+
+
+
+
+
 /**
  * @param {hansung.ac.kr.transaction.CreateCertificate}  txCreateCertificate  - the member to be processed
  * @transaction
@@ -58,12 +93,13 @@ function CreateCertificate (txCreateCertificate) {
   .then(function (allCertificateRegistry) {
 
        // math.random은 완전한 난수를 보장하지 않기 때문에 보안에 안좋음, crypto 모듈 참고
-       var newCertificate = factory.newResource(NAMESAPCE_ASSETS, "Certificate",  me.getIdentifier() + getRandomIntInclusive(1, 100000000000) );
+      var randomIntId = me.getIdentifier() +  getRandomIntInclusive(1,100000000000);
+       var newCertificate = factory.newResource(NAMESAPCE_ASSETS, "Certificate", randomIntId );
 
        newCertificate.ownerId = me.getIdentifier();
        newCertificate.certificateName = txCreateCertificate.certificateName;
        newCertificate.certificateScore = txCreateCertificate.certificateScore;
-       newCertificate.authorizedParticipantId  = txCreateCertificate.authorizedParticipantId;
+       newCertificate.authorizedParticipantId = txCreateCertificate.authorizedParticipantId;
        newCertificate.organizationName  = txCreateCertificate.organizationName ;
        newCertificate.dob  = txCreateCertificate.dob ;
        newCertificate.expirationDate  = txCreateCertificate.expirationDate;
@@ -73,7 +109,9 @@ function CreateCertificate (txCreateCertificate) {
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
        txCreateCertificate.userId = me.getIdentifier();
+       txCreateCertificate.authorizedParticipantType = "Organization1";
        sendEvent.txForUser = txCreateCertificate;
+       sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
 
        return allCertificateRegistry.add(newCertificate);
@@ -100,12 +138,12 @@ function CreateAwardDetails (txCreateAwardDetails) {
 
    return getAssetRegistry(ASSET_AWARD_DETAILS)
   .then(function (allAwardDetailsRegistry) {
-
-       var newAwardDetails = factory.newResource(NAMESAPCE_ASSETS, "AwardDetails", me.getIdentifier() + getRandomIntInclusive(1, 100000000000)  );
+       var randomIntId = me.getIdentifier() +  getRandomIntInclusive(1,100000000000);
+       var newAwardDetails = factory.newResource(NAMESAPCE_ASSETS, "AwardDetails",  randomIntId  );
      
        newAwardDetails.ownerId = me.getIdentifier();
        newAwardDetails.contestName = txCreateAwardDetails.contestName;
-       newAwardDetails.authorizedParticipantId  = txCreateAwardDetails.authorizedParticipantId;
+       newAwardDetails.authorizedParticipantId = txCreateAwardDetails.authorizedParticipantId;
        newAwardDetails.organizationName  = txCreateAwardDetails.organizationName ;
        newAwardDetails.dateOfAward  = txCreateAwardDetails.dateOfAward ;
        newAwardDetails.awardGrade  = txCreateAwardDetails.awardGrade;
@@ -116,7 +154,9 @@ function CreateAwardDetails (txCreateAwardDetails) {
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
        txCreateAwardDetails.userId = me.getIdentifier();
+       txCreateAwardDetails.authorizedParticipantType = "Organziation2"
        sendEvent.txForUser = txCreateAwardDetails;
+       sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
 
 
@@ -145,8 +185,8 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
 
    return getAssetRegistry(USER_INFO_IN_ENT)
   .then(function (allUserInfoInEntRegistry) {
-
-       var newUserInfoInEnt = factory.newResource(NAMESAPCE_ASSETS, "UserInfoInEnt", me.getIdentifier() + getRandomIntInclusive(1, 100000000000)  );
+       var randomIntId = me.getIdentifier() +  getRandomIntInclusive(1,100000000000);
+       var newUserInfoInEnt = factory.newResource(NAMESAPCE_ASSETS, "UserInfoInEnt",  randomIntId );
      
      
        newUserInfoInEnt.ownerId = me.getIdentifier();
@@ -161,8 +201,10 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
        
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
-       txCreateUserInfo.userId = me.getIdentifer();
+       txCreateUserInfoEnt.authorizedParticipantType = "Enterprise"
+       txCreateUserInfoEnt.userId = me.getIdentifer();
        sendEvent.txForUser = txCreateUserInfoInEnt;
+       sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
 
 
@@ -192,8 +234,8 @@ function CreateUserInfoInSch (txCreateUserInfoInSch) {
 
    return getAssetRegistry(USER_INFO_IN_SCH)
   .then(function (allUserInfoInSchRegistry) {
-
-       var newUserInfoInSch = factory.newResource(NAMESAPCE_ASSETS, "UserInfoInSch", me.getIdentifier() + getRandomIntInclusive(1, 100000000000)  );
+       var randomIntId = me.getIdentifier() +  getRandomIntInclusive(1,100000000000);
+       var newUserInfoInSch = factory.newResource(NAMESAPCE_ASSETS, "UserInfoInSch",  randomIntId  );
      
        newUserInfoInSch.ownerId = me.getIdentifier();
        newUserInfoInSch.authorizedParticipantId  = txCreateUserInfoInSch.authorizedParticipantId;
@@ -208,7 +250,9 @@ function CreateUserInfoInSch (txCreateUserInfoInSch) {
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
        txCreateUserInfoInSch.userId = me.getIdentifier();
+       txCreateUserInfoInSch.authorizedParticipantType = "School";
        sendEvent.txForUser = txCreateUserInfoInSch;
+       sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
 
 
@@ -241,7 +285,7 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
   .then(function (allResumeAssetRegistry) {
      allResume = allResumeAssetRegistry;
 
-       var newResumeAsset = factory.newResource(NAMESAPCE_ASSETS, RESUME,  me.getIdentifier()+ getRandomIntInclusive(1, 100000000000) );
+       var newResumeAsset = factory.newResource(NAMESAPCE_ASSETS, RESUME,  me.getIdentifier()+  getRandomIntInclusive(1, 100000000000) );
        newResumeAsset.ownerId = me.getIdentifier();
        newResumeAsset.name = txCreateResumeInfoUser.name;
        newResumeAsset.dob = txCreateResumeInfoUser.dob;
@@ -252,12 +296,12 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
        newResumeAsset.skillsAndCapabilities  = txCreateResumeInfoUser.skillsAndCapabilities ;
        newResumeAsset.isPublic  = txCreateResumeInfoUser.isPublic ;
 
-       
+ /*      
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
-       txCreateUserInfoInSch = me.getIdentifer();
+       txCreateResumeInfoUser = me.getIdentifer();
        sendEvent.txForUser = txCreateResumeInfoUser;
        emit(sendEvent);
-
+*/
 
 
        return allResume.add(newResumeAsset);
@@ -380,3 +424,4 @@ function revokeRequestUser(revokeRequestUser) {
 function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+

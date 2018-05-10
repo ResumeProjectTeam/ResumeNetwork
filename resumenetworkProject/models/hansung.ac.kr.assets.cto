@@ -7,7 +7,8 @@ asset Authentication identified by assetId {
     o String ownerId
     o String resumeName
     o String resumeAssetId
-    o DateTime AuthenticationTime
+    o String authorizedParticipantId
+    o DateTime authenticationTime
 }
 
 

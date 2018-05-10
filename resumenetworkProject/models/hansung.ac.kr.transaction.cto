@@ -17,6 +17,7 @@ abstract transaction TxForSch {
 
 abstract transaction TxForUser {
     o String userId
+    o String authorizedParticipantType optional
 }
 
 
@@ -31,9 +32,9 @@ transaction RevokeRequestUser extends  TxForUser {
 
 
 transaction CreateAuthentication extends TxForUser {
-    o authorizedParticipant
-    o resumeName
-    o resumeAssetId
+    o String authorizedParticipantId
+    o String resumeName
+    o String resumeAssetId optional
 }
 
 transaction CreateResumeInfoUser extends TxForUser {
@@ -50,7 +51,7 @@ transaction CreateResumeInfoUser extends TxForUser {
 transaction CreateCertificate extends TxForUser {
     o String certificateName
     o Integer certificateScore default=0 range=[0,] optional
-	o String organizationId
+    o String authorizedParticipantId
     o String organizationName
     o DateTime dob
     o DateTime expirationDate optional
@@ -61,7 +62,7 @@ transaction CreateCertificate extends TxForUser {
 
 transaction CreateAwardDetails extends TxForUser {
    o String contestName
-   o String organizationId
+   o String authorizedParticipantId
    o String organizationName
    o DateTime dateOfAward
    o String awardGrade optional 
@@ -74,9 +75,9 @@ transaction CreateAwardDetails extends TxForUser {
   
   
 transaction CreateUserInfoInEnt extends TxForUser {
-    o String enterpriseId
+    o String authorizedParticipantId
     o String enterpriseName
-	o String userPosition
+    o String userPosition
     o String performingTask
     o DateTime dateOfEmployment optional
     o DateTime retirementDate optional
@@ -85,7 +86,7 @@ transaction CreateUserInfoInEnt extends TxForUser {
   
 
 transaction CreateUserInfoInSch extends TxForUser {
-    o String schoolId
+    o String authorizedParticipantId
     o String schoolName
   	o DateTime entranceDate
     o DateTime graduationDate optional
@@ -102,6 +103,7 @@ event SendEvent {
     o UserInfoInEnt userInfoInEnt optional
     o UserInfoInSch userInfoInSch optional
     o TxForUser txForUser
+    o String resumeAssetId
 }
 
 event UserEvent {
