@@ -41,25 +41,59 @@ class SitechainListener{
                              
                         var temp = JSON.stringify(getEvent['txForUser']);
                         var evt = JSON.parse(temp);
-                        console.log(evt['certificateName']);
-                        console.log(evt['certificateScore']);
-                        console.log(evt['authorizedParticipantId']);
-                        console.log(evt['organizationName']);
-                        console.log(evt['dob']);
-                        console.log(evt['expirationDate']);
-                        console.log(evt['isPublic']);
-                        console.log(evt['userId']);
-                        console.log(evt['timestamp']);
+                  
                         try{	
                             let factory = this.Factory;
+
+
+                            let addRequestUser =  factory.newTransaction('hansung.ac.kr.transaction', 'AddRequestUser');
+
+                             addRequestUser.requestUserId = evt['userId'];
+                             addRequestUser.targetParticipantId  =  evt['authorizedParticipantId'];
+			     addRequestUser.requestResumeAssetId = getEvent['resumeAssetId'];
+
+
+                             console.log(evt['authorizedParticipantType']);
+                             console.log(evt['authorizedParticipantId']);
+                             console.log(getEvent['resumeAssetId']);
+
+                              
+		             if(evt['authorizedParticipantType'] == "Organization1"){
+                                 addRequestUser.requestDetails = evt['certificateName'];
+                                 addRequestUser.targetparticipantType = "Organization";
+                                 console.log(addRequestUser);
+                             }
+ 
+                             if(evt['authorizedParticipantType'] == "Organization2"){
+                                 addRequestUser.requestDetails = evt['contestName'];
+                                 addRequestUser.targetparticipantType = "Organization";
+		                 console.log(addRequestUser);
+                             }
+
+
+                             if(evt['authorizedParticipantType'] == "Enterprise"){
+                                 addRequestUser.requestDetails = evt['EnterpriseName'];
+                                 addRequestUser.targetparticipantType = "Enterprise";
+                                 console.log(addRequestUser);
+                             }
+
+                             if(evt['authorizedParticipantType'] == "School"){
+                                addRequestUser.requestDetails = evt['schoolName'];
+                                addRequestUser.targetparticipantType = "School";
+                                console.log(addRequestUser);
+                             }
+
+
+                            this.NetworkConnection.submitTransaction(addRequestUser);
+
+/*
                             let createAuthentication = factory.newTransaction('hansung.ac.kr.transaction', 'CreateAuthentication');
                     
                    
         	             createAuthentication.authorizedParticipantId = evt['authorizedParticipantId'];
-                             console.log("***************************" + " " +  evt['certificateName'] );
-                             console.log(evt['authorizedParticipantType']); 
+                      
+                   
 			     if(evt['authorizedParticipantType'] == "Organization1"){
-                                 console.log("***************************" + " " +  evt['certificateName'] );
                                  createAuthentication.resumeName = evt['certificateName'];
                                  createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
         		     }
@@ -83,12 +117,14 @@ class SitechainListener{
                              createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
         		}
                         createAuthentication.userId = evt['userId'];
-                        console.log("--------------------------------------------------------------------");
 			console.log(createAuthentication);
 			
 			this.NetworkConnection.submitTransaction(createAuthentication);
+
+
+                        */
 			}catch(err){
-                          console.log("fucking error is    " + err);
+                          console.log("error in event.js : " + err);
                         }
                        
        })

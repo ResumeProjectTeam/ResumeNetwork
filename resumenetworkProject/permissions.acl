@@ -194,24 +194,6 @@ rule SchReadUserAsset {
 }
 
 
- rule addRequestUser {
-     description: ""
-     participant: "hansung.ac.kr.participants.*"
-     operation: CREATE, READ
-     resource: "hansung.ac.kr.transaction.AddRequestUser"
-     action: ALLOW
- }
-
- rule RevokeRequestUser {
-     description: ""
-     participant: "hansung.ac.kr.participants.*"
-     operation: CREATE, READ
-     resource: "hansung.ac.kr.transaction.RevokeRequestUser"
-     action: ALLOW
- }
-
-
-
 rule OwnRecordFullAccessUser {
     description: "Allow all User full access to their own record"
     participant(p): "hansung.ac.kr.participants.User"

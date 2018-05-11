@@ -23,8 +23,12 @@ abstract transaction TxForUser {
 
 
 
-transaction AddRequestUser extends TxForUser {
-   --> User user
+transaction AddRequestUser {
+    o String requestUserId
+    o String requestDetails
+    o String targetParticipantId
+    o String targetparticipantType
+    o String requestResumeAssetId
 }
 
 transaction RevokeRequestUser extends  TxForUser {

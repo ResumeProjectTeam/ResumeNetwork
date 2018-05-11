@@ -21,7 +21,7 @@ participant Organization identified by orgId {
     o String contactAdress
     o String homepage optional
     o String discription optional
-    --> User[] requestUser optional
+    o requestResume[] requestResumeList optional
 }
 
 participant Enterprise identified by entId {
@@ -34,7 +34,8 @@ participant Enterprise identified by entId {
     o String sales optional
     o IndustryCategory industryCategory optional
     o String discription optional
-    --> User[] requestUser optional
+    o requestResume[] requestResumeList optional
+
 }
 
 participant School identified by schId {
@@ -43,7 +44,15 @@ participant School identified by schId {
     o Address address optional
     o String contactAdress optional
     o String hompage optional
-    --> User[] requestUser optional
+    o requestResume[] requestResumeList optional
+
+}
+
+concept requestResume {
+    o String userId
+    o String requestDetails
+    --> User user optional
+    o String requestResumeAssetId 
 }
 
 

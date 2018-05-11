@@ -318,56 +318,58 @@ function CreateResumeInfoUser (txCreateResumeInfoUser) {
  */
 function addRequestUser(addRequestUser) {
 
-    var me = getCurrentParticipant();
-    var meType = null;
+
     var index = -1;
-    var evetType = null;
+    var targetType = null;
+    var participantList = null;   
+    var factory = getFactory();
 
-    if(!me) {
-        throw new Error('getCurrentParticipant is null');
-    }
+   if(addRequestUser.targetParticipantType == "Organization") {
+	targetType = NAMESPACE_ORG; 
+   }
+   if(addRequestUser.targetParticipantType == "Enterprise") {
+        targetType = NAMESPACE_ENT;
+   }
+   if(addRequestUser.targetParticipantType == "School") {
+        targetType = NAMESPACE_SCH;
+   }
+   console.log("--------------------------------------");
+   console.log(addRequestUser);
+   
+    getParticipantRegistry(targetType).then(function (participantRegistry) {
+        participantList = participantRegistry;
 
-    if(me.getFullyQualifiedType() === NAMESPACE_ORG) {
-        meType = NAMESPACE_ORG;
-        evetType = "OrganizationEvent"
-    }
+        return participantRegistry;
+    }).
+      then(function () {
 
-    else if(me.getFullyQualifiedType() === NAMESPACE_ENT) {
-        meType = NAMESPACE_ENT;
-        evetType = "OrganizationEvent"
-    }
+        return participantList.get(addRequestUser.targetParticipantId);
 
-    else if(me.getFullyQualifiedType() === NAMESPACE_INS) {
-        meType = NAMESPACE_INS;
-        evetType = "OrganizationEvent"
-    }
+    }).then(function (target){
 
-    if(!me.requestUser) {
-        me.requestUser = [];
-    }
-    else {
-        me.requestUser.findIndex(function getIndex(element, indexf, array) {
-         if(element.getIdentifier() == addRequestUser.userId)
-           index = indexf;
-        });
-    }
+	if(!target.requestResumeList) {
+     	  target.requestResumeList = [];
+ 
+        }
+          target.requestResumeList.findIndex(function testF(element, indexf, array){
+              if( (element.requestResumeAssetId) == addRequestUser.requestResumeAssetId ) {
+                 index = indexf;
+              }
+          });
+           
+        if(index < 0 ) {
+          var newRequestResume = factory.newConcept('NAMESPACE_PARTICIPANTS', 'requestResume');
+           newRequestResume.userId = addRequestUser.requestUserId;
+           newRequestResume.requestDetails =  addRequestUser.requestDetails;
+           newRequestResume.requestResumeAssetId = addRequestUser.requestResumeAssetId;
+           // Need to insert Relation User Type user 
 
-     if(index < 0) {
-        me.requestUser.push(addRequestUser.user);
-
-        return getParticipantRegistry(meType)
-        .then(function (participantsRegistry) {
-            
-            // emit an event
-            var SendEvent = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, "SendEvent");
-            SendEvent.txForUser = addRequestUser;
-            emit(SendEvent);
-            // persist the state of the member
-            
-            return participantsRegistry.update(me);
-        });
-    }
-  	else throw "Same Id already exist";
+          target.requestResumeList.push(newRequestResume);
+          return  participantList.update(target);
+        }
+  	else 
+          throw "Same requestResumeAssetId already exist";
+   });
 
 }
 
