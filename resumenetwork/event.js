@@ -4,6 +4,18 @@
 
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 
+var CORE_NAMESPACE_PREFIX = "hansung.ac.kr";
+var PARTICIPANTS = "participants";
+var ASSETS = "assets";
+var TRANSACTION = "transaction";
+var NAMESPACE_USER = CORE_NAMESPACE_PREFIX + "." + PARTICIPANTS + "." + "User";
+var NAMESPACE_ORG = CORE_NAMESPACE_PREFIX + "."  + PARTICIPANTS + "." + "Organization";
+var NAMESPACE_ENT = CORE_NAMESPACE_PREFIX + "."  + PARTICIPANTS + "." + "Enterprise";
+var NAMESPACE_INS = CORE_NAMESPACE_PREFIX + "."  + PARTICIPANTS + "." + "School";
+
+
+
+
 
 class SitechainListener{
         
@@ -60,26 +72,26 @@ class SitechainListener{
                               
 		             if(evt['authorizedParticipantType'] == "Organization1"){
                                  addRequestUser.requestDetails = evt['certificateName'];
-                                 addRequestUser.targetparticipantType = "Organization";
+                                 addRequestUser.targetParticipantType = NAMESPACE_ORG;
                                  console.log(addRequestUser);
                              }
  
                              if(evt['authorizedParticipantType'] == "Organization2"){
                                  addRequestUser.requestDetails = evt['contestName'];
-                                 addRequestUser.targetparticipantType = "Organization";
+                                 addRequestUser.targetParticipantType = NAMESPACE_ORG;
 		                 console.log(addRequestUser);
                              }
 
 
                              if(evt['authorizedParticipantType'] == "Enterprise"){
                                  addRequestUser.requestDetails = evt['EnterpriseName'];
-                                 addRequestUser.targetparticipantType = "Enterprise";
+                                 addRequestUser.targetParticipantType = NAMESPACE_ENT;
                                  console.log(addRequestUser);
                              }
 
                              if(evt['authorizedParticipantType'] == "School"){
                                 addRequestUser.requestDetails = evt['schoolName'];
-                                addRequestUser.targetparticipantType = "School";
+                                addRequestUser.targetParticipantType = NAMESPACE_SCH;
                                 console.log(addRequestUser);
                              }
 

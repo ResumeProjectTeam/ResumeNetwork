@@ -27,7 +27,7 @@ transaction AddRequestUser {
     o String requestUserId
     o String requestDetails
     o String targetParticipantId
-    o String targetparticipantType
+    o String targetParticipantType
     o String requestResumeAssetId
 }
 

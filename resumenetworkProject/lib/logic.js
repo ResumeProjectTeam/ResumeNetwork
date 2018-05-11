@@ -320,23 +320,13 @@ function addRequestUser(addRequestUser) {
 
 
     var index = -1;
-    var targetType = null;
     var participantList = null;   
     var factory = getFactory();
 
-   if(addRequestUser.targetParticipantType == "Organization") {
-	targetType = NAMESPACE_ORG; 
-   }
-   if(addRequestUser.targetParticipantType == "Enterprise") {
-        targetType = NAMESPACE_ENT;
-   }
-   if(addRequestUser.targetParticipantType == "School") {
-        targetType = NAMESPACE_SCH;
-   }
-   console.log("--------------------------------------");
-   console.log(addRequestUser);
+ 
    
-    getParticipantRegistry(targetType).then(function (participantRegistry) {
+    return getParticipantRegistry(addRequestUser.targetParticipantType)
+   .then(function (participantRegistry) {
         participantList = participantRegistry;
 
         return participantRegistry;
@@ -358,7 +348,7 @@ function addRequestUser(addRequestUser) {
           });
            
         if(index < 0 ) {
-          var newRequestResume = factory.newConcept('NAMESPACE_PARTICIPANTS', 'requestResume');
+          var newRequestResume = factory.newConcept(NAMESPACE_PARTICIPANTS, 'RequestResume');
            newRequestResume.userId = addRequestUser.requestUserId;
            newRequestResume.requestDetails =  addRequestUser.requestDetails;
            newRequestResume.requestResumeAssetId = addRequestUser.requestResumeAssetId;
