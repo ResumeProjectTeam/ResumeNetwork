@@ -50,6 +50,7 @@ rule OES_CreateAuthentication {
     transaction(tx): "hansung.ac.kr.transaction.CreateAuthentication"
     condition: (p.requestResumeList.findIndex(function check(element, index, array) {
       if(element.userId == r.ownerId) {
+       console.log(element);
        return true;    
       }    
     })
