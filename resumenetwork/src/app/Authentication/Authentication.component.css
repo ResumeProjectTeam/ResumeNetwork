@@ -161,11 +161,6 @@ label {
     fill: currentColor;
 }
 
-.left-sort{
-   vertical-align: left;
-   border-collapse: collapse;
-}
-
 /***.asset-properties:hover, .asset-properties:hover span{  
 overflow: visible;
 position: relative;

@@ -41,7 +41,7 @@ export class CreateCertificateComponent implements OnInit {
         
   
       
-          organizationId = new FormControl("", Validators.required);
+          authorizedParticipantId = new FormControl("", Validators.required);
         
   
       
@@ -62,6 +62,10 @@ export class CreateCertificateComponent implements OnInit {
   
       
           userId = new FormControl("", Validators.required);
+        
+  
+      
+          authorizedParticipantType = new FormControl("", Validators.required);
         
   
       
@@ -86,7 +90,7 @@ export class CreateCertificateComponent implements OnInit {
         
     
         
-          organizationId:this.organizationId,
+          authorizedParticipantId:this.authorizedParticipantId,
         
     
         
@@ -107,6 +111,10 @@ export class CreateCertificateComponent implements OnInit {
     
         
           userId:this.userId,
+        
+    
+        
+          authorizedParticipantType:this.authorizedParticipantType,
         
     
         
@@ -186,7 +194,7 @@ export class CreateCertificateComponent implements OnInit {
         
       
         
-          "organizationId":this.organizationId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -210,6 +218,10 @@ export class CreateCertificateComponent implements OnInit {
         
       
         
+          "authorizedParticipantType":this.authorizedParticipantType.value,
+        
+      
+        
           "transactionId":this.transactionId.value,
         
       
@@ -230,7 +242,7 @@ export class CreateCertificateComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -251,6 +263,10 @@ export class CreateCertificateComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -278,7 +294,7 @@ export class CreateCertificateComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -299,6 +315,10 @@ export class CreateCertificateComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -340,7 +360,7 @@ export class CreateCertificateComponent implements OnInit {
     
         
           
-            "organizationId":this.organizationId.value,
+            "authorizedParticipantId":this.authorizedParticipantId.value,
           
         
     
@@ -371,6 +391,12 @@ export class CreateCertificateComponent implements OnInit {
         
           
             "userId":this.userId.value,
+          
+        
+    
+        
+          
+            "authorizedParticipantType":this.authorizedParticipantType.value,
           
         
     
@@ -446,7 +472,7 @@ export class CreateCertificateComponent implements OnInit {
           
         
           
-            "organizationId":null,
+            "authorizedParticipantId":null,
           
         
           
@@ -467,6 +493,10 @@ export class CreateCertificateComponent implements OnInit {
         
           
             "userId":null,
+          
+        
+          
+            "authorizedParticipantType":null,
           
         
           
@@ -498,12 +528,12 @@ export class CreateCertificateComponent implements OnInit {
           formObject.certificateScore = null;
         }
       
-        if(result.organizationId){
+        if(result.authorizedParticipantId){
           
-            formObject.organizationId = result.organizationId;
+            formObject.authorizedParticipantId = result.authorizedParticipantId;
           
         }else{
-          formObject.organizationId = null;
+          formObject.authorizedParticipantId = null;
         }
       
         if(result.organizationName){
@@ -544,6 +574,14 @@ export class CreateCertificateComponent implements OnInit {
           
         }else{
           formObject.userId = null;
+        }
+      
+        if(result.authorizedParticipantType){
+          
+            formObject.authorizedParticipantType = result.authorizedParticipantType;
+          
+        }else{
+          formObject.authorizedParticipantType = null;
         }
       
         if(result.transactionId){
@@ -592,7 +630,7 @@ export class CreateCertificateComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -613,6 +651,10 @@ export class CreateCertificateComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         

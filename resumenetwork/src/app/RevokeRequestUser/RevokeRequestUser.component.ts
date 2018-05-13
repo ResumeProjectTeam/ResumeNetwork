@@ -37,6 +37,10 @@ export class RevokeRequestUserComponent implements OnInit {
         
   
       
+          authorizedParticipantType = new FormControl("", Validators.required);
+        
+  
+      
           transactionId = new FormControl("", Validators.required);
         
   
@@ -51,6 +55,10 @@ export class RevokeRequestUserComponent implements OnInit {
     
         
           userId:this.userId,
+        
+    
+        
+          authorizedParticipantType:this.authorizedParticipantType,
         
     
         
@@ -126,6 +134,10 @@ export class RevokeRequestUserComponent implements OnInit {
         
       
         
+          "authorizedParticipantType":this.authorizedParticipantType.value,
+        
+      
+        
           "transactionId":this.transactionId.value,
         
       
@@ -139,6 +151,10 @@ export class RevokeRequestUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -159,6 +175,10 @@ export class RevokeRequestUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -189,6 +209,12 @@ export class RevokeRequestUserComponent implements OnInit {
         
           
             "userId":this.userId.value,
+          
+        
+    
+        
+          
+            "authorizedParticipantType":this.authorizedParticipantType.value,
           
         
     
@@ -260,6 +286,10 @@ export class RevokeRequestUserComponent implements OnInit {
           
         
           
+            "authorizedParticipantType":null,
+          
+        
+          
             "transactionId":null,
           
         
@@ -278,6 +308,14 @@ export class RevokeRequestUserComponent implements OnInit {
           
         }else{
           formObject.userId = null;
+        }
+      
+        if(result.authorizedParticipantType){
+          
+            formObject.authorizedParticipantType = result.authorizedParticipantType;
+          
+        }else{
+          formObject.authorizedParticipantType = null;
         }
       
         if(result.transactionId){
@@ -319,6 +357,10 @@ export class RevokeRequestUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         

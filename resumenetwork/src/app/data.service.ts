@@ -17,7 +17,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Certificate, AwardDetails, UserInfoInEnt, UserInfoInSch, ResumeInfoUser } from './hansung.ac.kr.assets';
+import { Certificate, AwardDetails, UserInfoInEnt, UserInfoInSch, ResumeInfoUser, Authentication } from './hansung.ac.kr.assets';
 
 
 @Injectable()
@@ -109,6 +109,16 @@ export class DataService<Type> {
           .catch(this.handleError);
 
     }
+
+
+    public getSystemQueryAuthentication(ns: string,  parameterName: string, param: string): Observable<Authentication[]> {
+        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+
+        return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+
 
 
     public getSystemQueryResumeInfoUser(ns: string,  parameterName: string, param: string): Observable<ResumeInfoUser[]> {

@@ -23,106 +23,76 @@
         <div class="modal-body">
 
 
-          
-
-            <!--
-              <div class="form-group text-left">
-                <label for="assetId">assetId</label>
-                
-                  <input formControlName="assetId" type="text" class="form-control">
-                
-              </div>
+        
             
-          
-
+          <div class="form-group text-left">
+            <label for="authorizedParticipantId">authorizedParticipantId</label>
             
-              <div class="form-group text-left">
-                <label for="ownerId">ownerId</label>
-                
-                  <input formControlName="ownerId" type="text" class="form-control">
-                
-              </div>
+              <input formControlName="authorizedParticipantId" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        
+          <div class="form-group text-left">
+            <label for="resumeDetails">resumeDetails</label>
+            
+              <input formControlName="resumeDetails" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        
+          <div class="form-group text-left">
+            <label for="resumeAssetId">resumeAssetId</label>
+            
+              <input formControlName="resumeAssetId" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        
+          <div class="form-group text-left">
+            <label for="userId">userId</label>
+            
+              <input formControlName="userId" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        <!--
+          <div class="form-group text-left">
+            <label for="authorizedParticipantType">authorizedParticipantType</label>
+            
+              <input formControlName="authorizedParticipantType" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        
+          <div class="form-group text-left">
+            <label for="transactionId">transactionId</label>
+            
+              <input formControlName="transactionId" type="text" class="form-control">
+            
+          </div>
+        
+      
+
+        
+          <div class="form-group text-left">
+            <label for="timestamp">timestamp</label>
+            
+              <input formControlName="timestamp" type="text" class="form-control">
+            
+          </div>
             
           -->
-
-            
-              <div class="form-group text-left">
-                <label for="contestName">contestName</label>
-                
-                  <input formControlName="contestName" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="authorizedParticipantId">authorizedParticipantId</label>
-                
-                  <input formControlName="authorizedParticipantId" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="organizationName">organizationName</label>
-                
-                  <input formControlName="organizationName" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="dateOfAward">dateOfAward</label>
-                
-                  <input formControlName="dateOfAward" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="transactionTime">transactionTime</label>
-                
-                  <input formControlName="transactionTime" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="awardGrade">awardGrade</label>
-                
-                  <input formControlName="awardGrade" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="description">description</label>
-                
-                  <input formControlName="description" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="isPublic">isPublic</label>
-                
-                  <input formControlName="isPublic" type="checkbox" class="form-control">
-                
-              </div>
-            
           
 
         </div>
@@ -164,16 +134,25 @@
               <label for="ownerId">ownerId</label>
               
               
-                <input [ngModel]="ownerId"formControlName="ownerId" type="text" class="form-control" disabled="disabled">
+                <input [ngModel]="ownerId"formControlName="ownerId" type="text" class="form-control">
               
 
             </div>
           
             <div class="form-group text-left">
-              <label for="contestName">contestName</label>
+              <label for="resumeDetails">resumeDetails</label>
               
               
-                <input [ngModel]="contestName"formControlName="contestName" type="text" class="form-control">
+                <input [ngModel]="resumeDetails"formControlName="resumeDetails" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="resumeAssetId">resumeAssetId</label>
+              
+              
+                <input [ngModel]="resumeAssetId"formControlName="resumeAssetId" type="text" class="form-control">
               
 
             </div>
@@ -188,55 +167,10 @@
             </div>
           
             <div class="form-group text-left">
-              <label for="organizationName">organizationName</label>
+              <label for="authenticationTime">authenticationTime</label>
               
               
-                <input [ngModel]="organizationName"formControlName="organizationName" type="text" class="form-control">
-              
-
-            </div>
-          
-            <div class="form-group text-left">
-              <label for="dateOfAward">dateOfAward</label>
-              
-              
-                <input [ngModel]="dateOfAward"formControlName="dateOfAward" type="text" class="form-control">
-              
-
-            </div>
-          
-            <div class="form-group text-left">
-              <label for="transactionTime">transactionTime</label>
-              
-              
-                <input [ngModel]="transactionTime"formControlName="transactionTime" type="text" class="form-control">
-              
-
-            </div>
-          
-            <div class="form-group text-left">
-              <label for="awardGrade">awardGrade</label>
-              
-              
-                <input [ngModel]="awardGrade"formControlName="awardGrade" type="text" class="form-control">
-              
-
-            </div>
-          
-            <div class="form-group text-left">
-              <label for="description">description</label>
-              
-              
-                <input [ngModel]="description"formControlName="description" type="text" class="form-control">
-              
-
-            </div>
-          
-            <div class="form-group text-left">
-              <label for="isPublic">isPublic</label>
-              
-              
-                <input [ngModel]="isPublic" formControlName="isPublic" type="checkbox" class="form-control">
+                <input [ngModel]="authenticationTime"formControlName="authenticationTime" type="text" class="form-control">
               
 
             </div>
@@ -292,7 +226,7 @@
   
   <div class="row">
     <div class="col-md-9">
-        <h1 class="asset-title" id='assetName'>AwardDetails</h1>
+        <h1 class="asset-title" id='assetName'>Authentication</h1>
     </div>
     <div class="col-md-3">
       <button (click)="resetForm()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAssetModal">
@@ -316,48 +250,32 @@
             
                 <th class="info">ownerId</th>
             
-                <th class="info">contestName</th>
+                <th class="info">resumeDetails</th>
+            
+                <th class="info">resumeAssetId</th>
             
                 <th class="info">authorizedParticipantId</th>
             
-                <th class="info">organizationName</th>
-            
-                <th class="info">dateOfAward</th>
-            
-                <th class="info">transactionTime</th>
-            
-                <th class="info">awardGrade</th>
-            
-                <th class="info">description</th>
-            
-                <th class="info">isPublic</th>
+                <th class="info">authenticationTime</th>
             
               <th class="info-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let asset of myAwardDetailsList">
+          <tr *ngFor="let asset of myAuthenticationList">
 
             
                 <td class="asset-properties">{{asset.assetId}}</td>
             
                 <td class="asset-properties">{{asset.ownerId}}</td>
             
-                <td class="asset-properties">{{asset.contestName}}</td>
+                <td class="asset-properties">{{asset.resumeDetails}}</td>
+            
+                <td class="asset-properties">{{asset.resumeAssetId}}</td>
             
                 <td class="asset-properties">{{asset.authorizedParticipantId}}</td>
             
-                <td class="asset-properties">{{asset.organizationName}}</td>
-            
-                <td class="asset-properties">{{asset.dateOfAward}}</td>
-            
-                <td class="asset-properties">{{asset.transactionTime}}</td>
-            
-                <td class="asset-properties">{{asset.awardGrade}}</td>
-            
-                <td class="asset-properties">{{asset.description}}</td>
-            
-                <td class="asset-properties">{{asset.isPublic}}</td>
+                <td class="asset-properties">{{asset.authenticationTime}}</td>
             
             <td>
               <button (click)="getForm(asset.assetId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">

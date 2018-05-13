@@ -22,6 +22,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 
+import { AuthenticationComponent } from './Authentication/Authentication.component';
 import { ResumeInfoUserComponent } from './ResumeInfoUser/ResumeInfoUser.component';
 import { CertificateComponent } from './Certificate/Certificate.component';
 import { AwardDetailsComponent } from './AwardDetails/AwardDetails.component';
@@ -37,6 +38,7 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
 
   import { AddRequestUserComponent } from './AddRequestUser/AddRequestUser.component';
   import { RevokeRequestUserComponent } from './RevokeRequestUser/RevokeRequestUser.component';
+  import { CreateAuthenticationComponent } from './CreateAuthentication/CreateAuthentication.component';
   import { CreateResumeInfoUserComponent } from './CreateResumeInfoUser/CreateResumeInfoUser.component';
   import { CreateCertificateComponent } from './CreateCertificate/CreateCertificate.component';
   import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
@@ -47,6 +49,7 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
     AppComponent,
 		HomeComponent,
     // TransactionComponent,
+    AuthenticationComponent,
     ResumeInfoUserComponent,
     CertificateComponent,
     AwardDetailsComponent,
@@ -64,6 +67,7 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
 
     AddRequestUserComponent,
         RevokeRequestUserComponent,
+        CreateAuthenticationComponent,
         CreateResumeInfoUserComponent,
         CreateCertificateComponent,
         CreateAwardDetailsComponent,

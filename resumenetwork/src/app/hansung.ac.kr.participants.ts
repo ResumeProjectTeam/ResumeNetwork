@@ -21,7 +21,7 @@ import {Address} from './hansung.ac.kr.assets';
       contactAdress: string;
       homepage: string;
       discription: string;
-      requestUser: User[];
+      requestResumeList: RequestResume[];
    }
    export class Enterprise extends Participant {
       entId: string;
@@ -33,7 +33,7 @@ import {Address} from './hansung.ac.kr.assets';
       sales: string;
       industryCategory: IndustryCategory;
       discription: string;
-      requestUser: User[];
+      requestResumeList: RequestResume[];
    }
    export class School extends Participant {
       schId: string;
@@ -41,7 +41,13 @@ import {Address} from './hansung.ac.kr.assets';
       address: Address;
       contactAdress: string;
       hompage: string;
-      requestUser: User[];
+      requestResumeList: RequestResume[];
+   }
+   export class RequestResume {
+      userId: string;
+      requestDetails: string;
+      user: User;
+      requestResumeAssetId: string;
    }
    export enum IndustryCategory {
       Synthesis,

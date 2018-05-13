@@ -44,7 +44,7 @@ export class UserInfoInSchComponent implements OnInit {
         
   
       
-          schoolId = new FormControl("", Validators.required);
+          authorizedParticipantId = new FormControl("", Validators.required);
         
   
       
@@ -101,7 +101,7 @@ export class UserInfoInSchComponent implements OnInit {
         
     
         
-          schoolId:this.schoolId,
+          authorizedParticipantId:this.authorizedParticipantId,
         
     
         
@@ -138,7 +138,7 @@ export class UserInfoInSchComponent implements OnInit {
     this.myForm2 = fb.group({
     
         
-      schoolId:this.schoolId,
+      authorizedParticipantId:this.authorizedParticipantId,
     
 
     
@@ -251,7 +251,7 @@ export class UserInfoInSchComponent implements OnInit {
         
       
         
-          "schoolId":this.schoolId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -295,7 +295,7 @@ export class UserInfoInSchComponent implements OnInit {
         
       
         
-          "schoolId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -343,7 +343,7 @@ export class UserInfoInSchComponent implements OnInit {
         
       
         
-          "schoolId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -392,7 +392,7 @@ export class UserInfoInSchComponent implements OnInit {
       $class: "hansung.ac.kr.transaction.CreateUserInfoInSch",
       
         
-          "schoolId":this.schoolId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -436,7 +436,7 @@ export class UserInfoInSchComponent implements OnInit {
     this.myForm2.setValue({
       
         
-          "schoolId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -484,7 +484,7 @@ export class UserInfoInSchComponent implements OnInit {
       this.myForm2.setValue({
       
         
-          "schoolId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -556,7 +556,7 @@ export class UserInfoInSchComponent implements OnInit {
     
         
           
-            "schoolId":this.schoolId.value,
+            "authorizedParticipantId":this.authorizedParticipantId.value,
           
         
     
@@ -664,7 +664,7 @@ export class UserInfoInSchComponent implements OnInit {
           
         
           
-            "schoolId":null,
+            "authorizedParticipantId":null,
           
         
           
@@ -716,12 +716,12 @@ export class UserInfoInSchComponent implements OnInit {
           formObject.ownerId = null;
         }
       
-        if(result.schoolId){
+        if(result.authorizedParticipantId){
           
-            formObject.schoolId = result.schoolId;
+            formObject.authorizedParticipantId = result.authorizedParticipantId;
           
         }else{
-          formObject.schoolId = null;
+          formObject.authorizedParticipantId = null;
         }
       
         if(result.schoolName){
@@ -810,7 +810,7 @@ export class UserInfoInSchComponent implements OnInit {
         
       
         
-          "schoolId":null,
+          "authorizedParticipantId":null,
         
       
         

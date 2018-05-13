@@ -3,6 +3,14 @@ import {Participant} from './org.hyperledger.composer.system';
 import {Transaction} from './org.hyperledger.composer.system';
 import {Event} from './org.hyperledger.composer.system';
 // export namespace hansung.ac.kr.assets{
+   export class Authentication extends Asset {
+      assetId: string;
+      ownerId: string;
+      resumeDetails: string;
+      resumeAssetId: string;
+      authorizedParticipantId: string;
+      authenticationTime: Date;
+   }
    export class ResumeInfoUser extends Asset {
       assetId: string;
       ownerId: string;
@@ -20,7 +28,7 @@ import {Event} from './org.hyperledger.composer.system';
       ownerId: string;
       certificateName: string;
       certificateScore: number;
-      organizationId: string;
+      authorizedParticipantId: string;
       organizationName: string;
       dob: Date;
       expirationDate: Date;
@@ -31,8 +39,8 @@ import {Event} from './org.hyperledger.composer.system';
       assetId: string;
       ownerId: string;
       contestName: string;
-      organizationId: string;
       organizationName: string;
+      authorizedParticipantId: string;
       dateOfAward: Date;
       transactionTime: Date;
       awardGrade: string;
@@ -42,7 +50,7 @@ import {Event} from './org.hyperledger.composer.system';
    export class UserInfoInEnt extends Asset {
       assetId: string;
       ownerId: string;
-      enterpriseId: string;
+      authorizedParticipantId: string;
       enterpriseName: string;
       userPosition: string;
       performingTask: string;
@@ -54,7 +62,7 @@ import {Event} from './org.hyperledger.composer.system';
    export class UserInfoInSch extends Asset {
       assetId: string;
       ownerId: string;
-      schoolId: string;
+      authorizedParticipantId: string;
       schoolName: string;
       entranceDate: Date;
       graduationDate: Date;

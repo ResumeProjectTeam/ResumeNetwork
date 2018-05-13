@@ -47,9 +47,9 @@
 
             
               <div class="form-group text-left">
-                <label for="organizationId">organizationId</label>
+                <label for="authorizedParticipantId">authorizedParticipantId</label>
                 
-                  <input formControlName="organizationId" type="text" class="form-control">
+                  <input formControlName="authorizedParticipantId" type="text" class="form-control">
                 
               </div>
             
@@ -100,6 +100,16 @@
                 <label for="userId">userId</label>
                 
                   <input formControlName="userId" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="authorizedParticipantType">authorizedParticipantType</label>
+                
+                  <input formControlName="authorizedParticipantType" type="text" class="form-control">
                 
               </div>
             
@@ -170,10 +180,10 @@
             </div>
           
             <div class="form-group text-left">
-              <label for="organizationId">organizationId</label>
+              <label for="authorizedParticipantId">authorizedParticipantId</label>
 
               
-                <input [ngModel]="organizationId"formControlName="organizationId" type="text" class="form-control">
+                <input [ngModel]="authorizedParticipantId"formControlName="authorizedParticipantId" type="text" class="form-control">
               
 
             </div>
@@ -219,6 +229,15 @@
 
               
                 <input [ngModel]="userId"formControlName="userId" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="authorizedParticipantType">authorizedParticipantType</label>
+
+              
+                <input [ngModel]="authorizedParticipantType"formControlName="authorizedParticipantType" type="text" class="form-control">
               
 
             </div>
@@ -310,7 +329,7 @@
             
               <li><span class="attribute"><b>certificateScore</b></span></li>
             
-              <li><span class="attribute"><b>organizationId</b></span></li>
+              <li><span class="attribute"><b>authorizedParticipantId</b></span></li>
             
               <li><span class="attribute"><b>organizationName</b></span></li>
             
@@ -321,6 +340,8 @@
               <li><span class="attribute"><b>isPublic</b></span></li>
             
               <li><span class="attribute"><b>userId</b></span></li>
+            
+              <li><span class="attribute"><b>authorizedParticipantType</b></span></li>
             
               <li><span class="attribute"><b>transactionId</b></span></li>
             

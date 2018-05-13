@@ -15,63 +15,54 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
-import { Certificate, Authentication } from '../hansung.ac.kr.assets';
+import { Authentication } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
-import { CreateCertificateComponent } from '../CreateCertificate/CreateCertificate.component';
-import { CreateCertificate } from '../hansung.ac.kr.transaction';
-
-
+import { CreateAuthentication } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
-export class CertificateService {
+export class AuthenticationService {
 
-    //private businessNetworkConnection: BusinessNetworkConnection = null;
-		private NAMESPACE: string = 'Certificate';
-    private NAMESPACE2: string = 'CreateCertificate';
+	
+    private NAMESPACE: string = 'Authentication';
+    private NAMESPACE2: string = 'CreateAuthentication';
+	
+
 
 
     constructor(
-      private dataService: DataService<Certificate> ,
-      private dataService2: DataService<CreateCertificate>,
+      private dataService: DataService<Authentication>,
+      private dataService2: DataService<CreateAuthentication>
     ) {
     };
 
-
-
-
-    public getAll(): Observable<Certificate[]> {
+    public getAll(): Observable<Authentication[]> {
         return this.dataService.getAll(this.NAMESPACE);
     }
 
-    public getAsset(id: any): Observable<Certificate> {
+    public getAsset(id: any): Observable<Authentication> {
       return this.dataService.getSingle(this.NAMESPACE, id);
     }
 
-
-    public addAsset(itemToAdd: any): Observable<Certificate> {
+    public addAsset(itemToAdd: any): Observable<Authentication> {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
 
-    public addTransaction(itemToAdd: any): Observable<CreateCertificate> {
+    public addTransaction(itemToAdd: any): Observable<CreateAuthentication> {
       return this.dataService2.add(this.NAMESPACE2, itemToAdd);
 
     }
 
-    public updateAsset(id: any, itemToUpdate: any): Observable<Certificate> {
+    public updateAsset(id: any, itemToUpdate: any): Observable<Authentication> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
     }
 
-    public deleteAsset(id: any): Observable<Certificate> {
+    public deleteAsset(id: any): Observable<Authentication> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
 
     public getSystemPing(): Observable<JSON> {
       return this.dataService.getSystemPing();
-    }
-
-    public getSystemQueryCertificate(parameterName: string, id: string) : Observable<Certificate[]> {
-      return this.dataService.getSystemQueryCertificate("searchCertificateByOwnerId", parameterName, id);
     }
 
     public getSystemQueryAuthentication(parameterName: string, id: string) : Observable<Authentication[]> {

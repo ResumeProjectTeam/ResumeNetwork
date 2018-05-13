@@ -44,7 +44,7 @@ export class UserInfoInEntComponent implements OnInit {
         
   
       
-          enterpriseId = new FormControl("", Validators.required);
+          authorizedParticipantId = new FormControl("", Validators.required);
         
   
       
@@ -98,7 +98,7 @@ export class UserInfoInEntComponent implements OnInit {
         
     
         
-          enterpriseId:this.enterpriseId,
+          authorizedParticipantId:this.authorizedParticipantId,
         
     
         
@@ -134,7 +134,7 @@ export class UserInfoInEntComponent implements OnInit {
       this.myForm2 = fb.group({
     
         
-         enterpriseId:this.enterpriseId,
+        authorizedParticipantId:this.authorizedParticipantId,
     
 
     
@@ -247,7 +247,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseId":this.enterpriseId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -291,7 +291,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -339,7 +339,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -390,7 +390,7 @@ export class UserInfoInEntComponent implements OnInit {
       $class: "hansung.ac.kr.transaction.CreateUserInfoInEnt",
       
         
-          "enterpriseId":this.enterpriseId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -433,7 +433,7 @@ export class UserInfoInEntComponent implements OnInit {
     this.myForm2.setValue({
       
         
-          "enterpriseId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -481,7 +481,7 @@ export class UserInfoInEntComponent implements OnInit {
       this.myForm2.setValue({
       
         
-          "enterpriseId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -548,7 +548,7 @@ export class UserInfoInEntComponent implements OnInit {
     
         
           
-            "enterpriseId":this.enterpriseId.value,
+            "authorizedParticipantId":this.authorizedParticipantId.value,
           
         
     
@@ -656,7 +656,7 @@ export class UserInfoInEntComponent implements OnInit {
           
         
           
-            "enterpriseId":null,
+            "authorizedParticipantId":null,
           
         
           
@@ -708,12 +708,12 @@ export class UserInfoInEntComponent implements OnInit {
           formObject.ownerId = null;
         }
       
-        if(result.enterpriseId){
+        if(result.authorizedParticipantId){
           
-            formObject.enterpriseId = result.enterpriseId;
+            formObject.authorizedParticipantId = result.authorizedParticipantId;
           
         }else{
-          formObject.enterpriseId = null;
+          formObject.authorizedParticipantId = null;
         }
       
         if(result.enterpriseName){

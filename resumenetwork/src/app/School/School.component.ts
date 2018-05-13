@@ -53,7 +53,7 @@ export class SchoolComponent implements OnInit {
         
   
       
-          requestUser = new FormControl("", Validators.required);
+          requestResumeList = new FormControl("", Validators.required);
         
   
 
@@ -82,7 +82,7 @@ export class SchoolComponent implements OnInit {
         
     
         
-          requestUser:this.requestUser
+          requestResumeList:this.requestResumeList
         
     
     });
@@ -166,7 +166,7 @@ export class SchoolComponent implements OnInit {
         
       
         
-          "requestUser":this.requestUser.value
+          "requestResumeList":this.requestResumeList.value
         
       
     };
@@ -194,7 +194,7 @@ export class SchoolComponent implements OnInit {
         
       
         
-          "requestUser":null
+          "requestResumeList":null
         
       
     });
@@ -226,7 +226,7 @@ export class SchoolComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });
@@ -276,7 +276,7 @@ export class SchoolComponent implements OnInit {
     
         
           
-            "requestUser":this.requestUser.value
+            "requestResumeList":this.requestResumeList.value
           
         
     
@@ -354,7 +354,7 @@ export class SchoolComponent implements OnInit {
           
         
           
-            "requestUser":null 
+            "requestResumeList":null 
           
         
       };
@@ -402,12 +402,12 @@ export class SchoolComponent implements OnInit {
           formObject.hompage = null;
         }
       
-        if(result.requestUser){
+        if(result.requestResumeList){
           
-            formObject.requestUser = result.requestUser;
+            formObject.requestResumeList = result.requestResumeList;
           
         }else{
-          formObject.requestUser = null;
+          formObject.requestResumeList = null;
         }
       
 
@@ -452,7 +452,7 @@ export class SchoolComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });

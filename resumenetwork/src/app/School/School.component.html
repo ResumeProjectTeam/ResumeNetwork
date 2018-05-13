@@ -77,9 +77,9 @@
   
               
                 <div class="form-group text-left">
-                  <label for="requestUser">requestUser</label>
+                  <label for="requestResumeList">requestResumeList</label>
                   
-                      <textarea formControlName="requestUser" class="form-control" rows="3"></textarea>
+                      <textarea formControlName="requestResumeList" class="form-control" rows="3"></textarea>
                   
                 </div>
               
@@ -159,11 +159,11 @@
               </div>
             
               <div class="form-group text-left">
-                <label for="requestUser">requestUser</label>
+                <label for="requestResumeList">requestResumeList</label>
   
                 
                   
-                    <textarea [ngModel]="requestUser" formControlName="requestUser" class="form-control" rows="3"></textarea>
+                    <textarea [ngModel]="requestResumeList" formControlName="requestResumeList" class="form-control" rows="3"></textarea>
                   
                 
   
@@ -250,7 +250,7 @@
               
                   <th class="info">hompage</th>
               
-                  <th class="info">requestUser</th>
+                  <th class="info">requestResumeList</th>
               
                 <th class="info-actions">Actions</th>
             </tr>
@@ -269,7 +269,7 @@
               
                   <td class="participant-properties">{{participant.hompage}}</td>
               
-                  <td class="participant-properties">{{participant.requestUser}}</td>
+                  <td class="participant-properties">{{participant.requestResumeList}}</td>
               
               <td>
                 <button (click)="getForm(participant.schId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateParticipantModal">

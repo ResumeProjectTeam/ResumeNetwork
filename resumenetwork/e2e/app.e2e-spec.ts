@@ -31,13 +31,13 @@ describe('Starting tests for resumenetwork', function() {
     })
   });
 
-  it('network-name should be resumenetwork@0.0.2-deploy.33',() => {
+  it('network-name should be resumenetwork@0.0.2-deploy.52',() => {
     element(by.css('.network-name')).getWebElement()
     .then((webElement) => {
       return webElement.getText();
     })
     .then((txt) => {
-      expect(txt).toBe('resumenetwork@0.0.2-deploy.33.bna');
+      expect(txt).toBe('resumenetwork@0.0.2-deploy.52.bna');
     });
   });
 
@@ -52,6 +52,24 @@ describe('Starting tests for resumenetwork', function() {
   });
 
   
+    it('Authentication component should be loadable',() => {
+      page.navigateTo('/Authentication');
+      browser.findElement(by.id('assetName'))
+      .then((assetName) => {
+        return assetName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('Authentication');
+      });
+    });
+
+    it('Authentication table should have 7 columns',() => {
+      page.navigateTo('/Authentication');
+      element.all(by.css('.thead-cols th')).then(function(arr) {
+        expect(arr.length).toEqual(7); // Addition of 1 for 'Action' column
+      });
+    });
+  
     it('ResumeInfoUser component should be loadable',() => {
       page.navigateTo('/ResumeInfoUser');
       browser.findElement(by.id('assetName'))
@@ -63,10 +81,10 @@ describe('Starting tests for resumenetwork', function() {
       });
     });
 
-    it('ResumeInfoUser table should have 10 columns',() => {
+    it('ResumeInfoUser table should have 11 columns',() => {
       page.navigateTo('/ResumeInfoUser');
       element.all(by.css('.thead-cols th')).then(function(arr) {
-        expect(arr.length).toEqual(10); // Addition of 1 for 'Action' column
+        expect(arr.length).toEqual(11); // Addition of 1 for 'Action' column
       });
     });
   
@@ -237,6 +255,17 @@ describe('Starting tests for resumenetwork', function() {
       })
       .then((txt) => {
         expect(txt).toBe('RevokeRequestUser');
+      });
+    });
+  
+    it('CreateAuthentication component should be loadable',() => {
+      page.navigateTo('/CreateAuthentication');
+      browser.findElement(by.id('transactionName'))
+      .then((transactionName) => {
+        return transactionName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('CreateAuthentication');
       });
     });
   

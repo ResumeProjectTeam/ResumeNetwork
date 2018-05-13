@@ -43,7 +43,7 @@ asset AwardDetails identified by assetId {
    o String assetId
    o String ownerId
    o String contestName
-   o String organizationId
+   o String organizationName
    o String authorizedParticipantId
    o DateTime dateOfAward
    o DateTime transactionTime

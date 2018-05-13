@@ -37,7 +37,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
   
       
-          organizationId = new FormControl("", Validators.required);
+          authorizedParticipantId = new FormControl("", Validators.required);
         
   
       
@@ -65,6 +65,10 @@ export class CreateAwardDetailsComponent implements OnInit {
         
   
       
+          authorizedParticipantType = new FormControl("", Validators.required);
+        
+  
+      
           transactionId = new FormControl("", Validators.required);
         
   
@@ -82,7 +86,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
     
         
-          organizationId:this.organizationId,
+          authorizedParticipantId:this.authorizedParticipantId,
         
     
         
@@ -107,6 +111,10 @@ export class CreateAwardDetailsComponent implements OnInit {
     
         
           userId:this.userId,
+        
+    
+        
+          authorizedParticipantType:this.authorizedParticipantType,
         
     
         
@@ -182,7 +190,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
       
         
-          "organizationId":this.organizationId.value,
+          "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
@@ -210,6 +218,10 @@ export class CreateAwardDetailsComponent implements OnInit {
         
       
         
+          "authorizedParticipantType":this.authorizedParticipantType.value,
+        
+      
+        
           "transactionId":this.transactionId.value,
         
       
@@ -226,7 +238,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -251,6 +263,10 @@ export class CreateAwardDetailsComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -274,7 +290,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -299,6 +315,10 @@ export class CreateAwardDetailsComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -334,7 +354,7 @@ export class CreateAwardDetailsComponent implements OnInit {
     
         
           
-            "organizationId":this.organizationId.value,
+            "authorizedParticipantId":this.authorizedParticipantId.value,
           
         
     
@@ -371,6 +391,12 @@ export class CreateAwardDetailsComponent implements OnInit {
         
           
             "userId":this.userId.value,
+          
+        
+    
+        
+          
+            "authorizedParticipantType":this.authorizedParticipantType.value,
           
         
     
@@ -442,7 +468,7 @@ export class CreateAwardDetailsComponent implements OnInit {
           
         
           
-            "organizationId":null,
+            "authorizedParticipantId":null,
           
         
           
@@ -470,6 +496,10 @@ export class CreateAwardDetailsComponent implements OnInit {
           
         
           
+            "authorizedParticipantType":null,
+          
+        
+          
             "transactionId":null,
           
         
@@ -490,12 +520,12 @@ export class CreateAwardDetailsComponent implements OnInit {
           formObject.contestName = null;
         }
       
-        if(result.organizationId){
+        if(result.authorizedParticipantId){
           
-            formObject.organizationId = result.organizationId;
+            formObject.authorizedParticipantId = result.authorizedParticipantId;
           
         }else{
-          formObject.organizationId = null;
+          formObject.authorizedParticipantId = null;
         }
       
         if(result.organizationName){
@@ -546,6 +576,14 @@ export class CreateAwardDetailsComponent implements OnInit {
           formObject.userId = null;
         }
       
+        if(result.authorizedParticipantType){
+          
+            formObject.authorizedParticipantType = result.authorizedParticipantType;
+          
+        }else{
+          formObject.authorizedParticipantType = null;
+        }
+      
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -588,7 +626,7 @@ export class CreateAwardDetailsComponent implements OnInit {
         
       
         
-          "organizationId":null,
+          "authorizedParticipantId":null,
         
       
         
@@ -613,6 +651,10 @@ export class CreateAwardDetailsComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         

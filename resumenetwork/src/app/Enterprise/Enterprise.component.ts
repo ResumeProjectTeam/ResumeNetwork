@@ -69,7 +69,7 @@ export class EnterpriseComponent implements OnInit {
         
   
       
-          requestUser = new FormControl("", Validators.required);
+          requestResumeList = new FormControl("", Validators.required);
         
   
 
@@ -114,7 +114,7 @@ export class EnterpriseComponent implements OnInit {
         
     
         
-          requestUser:this.requestUser
+          requestResumeList:this.requestResumeList
         
     
     });
@@ -214,7 +214,7 @@ export class EnterpriseComponent implements OnInit {
         
       
         
-          "requestUser":this.requestUser.value
+          "requestResumeList":this.requestResumeList.value
         
       
     };
@@ -258,7 +258,7 @@ export class EnterpriseComponent implements OnInit {
         
       
         
-          "requestUser":null
+          "requestResumeList":null
         
       
     });
@@ -306,7 +306,7 @@ export class EnterpriseComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });
@@ -380,7 +380,7 @@ export class EnterpriseComponent implements OnInit {
     
         
           
-            "requestUser":this.requestUser.value
+            "requestResumeList":this.requestResumeList.value
           
         
     
@@ -474,7 +474,7 @@ export class EnterpriseComponent implements OnInit {
           
         
           
-            "requestUser":null 
+            "requestResumeList":null 
           
         
       };
@@ -554,12 +554,12 @@ export class EnterpriseComponent implements OnInit {
           formObject.discription = null;
         }
       
-        if(result.requestUser){
+        if(result.requestResumeList){
           
-            formObject.requestUser = result.requestUser;
+            formObject.requestResumeList = result.requestResumeList;
           
         }else{
-          formObject.requestUser = null;
+          formObject.requestResumeList = null;
         }
       
 
@@ -620,7 +620,7 @@ export class EnterpriseComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });

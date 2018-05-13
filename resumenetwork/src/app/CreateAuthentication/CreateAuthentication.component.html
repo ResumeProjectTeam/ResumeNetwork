@@ -27,6 +27,36 @@
 
             
               <div class="form-group text-left">
+                <label for="authorizedParticipantId">authorizedParticipantId</label>
+                
+                  <input formControlName="authorizedParticipantId" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="resumeDetails">resumeDetails</label>
+                
+                  <input formControlName="resumeDetails" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="resumeAssetId">resumeAssetId</label>
+                
+                  <input formControlName="resumeAssetId" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
                 <label for="userId">userId</label>
                 
                   <input formControlName="userId" type="text" class="form-control">
@@ -90,6 +120,33 @@
         <div class="modal-body">
 
 
+          
+            <div class="form-group text-left">
+              <label for="authorizedParticipantId">authorizedParticipantId</label>
+
+              
+                <input [ngModel]="authorizedParticipantId"formControlName="authorizedParticipantId" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="resumeDetails">resumeDetails</label>
+
+              
+                <input [ngModel]="resumeDetails"formControlName="resumeDetails" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="resumeAssetId">resumeAssetId</label>
+
+              
+                <input [ngModel]="resumeAssetId"formControlName="resumeAssetId" type="text" class="form-control">
+              
+
+            </div>
           
             <div class="form-group text-left">
               <label for="userId">userId</label>
@@ -178,7 +235,7 @@
   
   <div class="row">
     <div class="col-md-9">
-        <h1 class="transaction-title" id='transactionName'>RevokeRequestUser</h1>
+        <h1 class="transaction-title" id='transactionName'>CreateAuthentication</h1>
     </div>
     <div class="col-md-3">
     </div>
@@ -191,6 +248,12 @@
           When invoked, this transaction will have the following attributes:
           <br>
           <ul>
+            
+              <li><span class="attribute"><b>authorizedParticipantId</b></span></li>
+            
+              <li><span class="attribute"><b>resumeDetails</b></span></li>
+            
+              <li><span class="attribute"><b>resumeAssetId</b></span></li>
             
               <li><span class="attribute"><b>userId</b></span></li>
             

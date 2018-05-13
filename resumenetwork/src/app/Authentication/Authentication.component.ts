@@ -14,25 +14,24 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AwardDetailsService } from './AwardDetails.service';
+import { AuthenticationService } from './Authentication.service';
 import 'rxjs/add/operator/toPromise';
 @Component({
-	selector: 'app-AwardDetails',
-	templateUrl: './AwardDetails.component.html',
-	styleUrls: ['./AwardDetails.component.css'],
-  providers: [AwardDetailsService]
+	selector: 'app-Authentication',
+	templateUrl: './Authentication.component.html',
+	styleUrls: ['./Authentication.component.css'],
+  providers: [AuthenticationService]
 })
-export class AwardDetailsComponent implements OnInit {
+export class AuthenticationComponent implements OnInit {
 
   myForm: FormGroup;
   myForm2: FormGroup;
-
   private allAssets;
   private asset;
   private Transaction;
   private currentId;
   private errorMessage;
-  private myAwardDetailsList;
+  private myAuthenticationList;
 
   
       
@@ -44,7 +43,11 @@ export class AwardDetailsComponent implements OnInit {
         
   
       
-          contestName = new FormControl("", Validators.required);
+          resumeDetails = new FormControl("", Validators.required);
+        
+  
+      
+          resumeAssetId = new FormControl("", Validators.required);
         
   
       
@@ -52,44 +55,16 @@ export class AwardDetailsComponent implements OnInit {
         
   
       
-          organizationName = new FormControl("", Validators.required);
+          authenticationTime = new FormControl("", Validators.required);
         
   
       
-          dateOfAward = new FormControl("", Validators.required);
-        
-  
-      
-          transactionTime = new FormControl("", Validators.required);
-        
-  
-      
-          awardGrade = new FormControl("", Validators.required);
-        
-  
-      
-          description = new FormControl("", Validators.required);
-        
-  
-      
-          isPublic = new FormControl("", Validators.required);
-
-
-
-          userId  = new FormControl("test",Validators.required);
-        
-      
-        
-          transactionId  = new FormControl("",Validators.required);
-        
-      
-        
-          timestamp  = new FormControl("",Validators.required);
+          userId = new FormControl("", Validators.required);
         
   
 
 
-  constructor(private serviceAwardDetails:AwardDetailsService, fb: FormBuilder) {
+  constructor(private serviceAuthentication:AuthenticationService, fb: FormBuilder) {
     this.myForm = fb.group({
     
         
@@ -101,7 +76,11 @@ export class AwardDetailsComponent implements OnInit {
         
     
         
-          contestName:this.contestName,
+          resumeDetails:this.resumeDetails,
+        
+    
+        
+          resumeAssetId:this.resumeAssetId,
         
     
         
@@ -109,74 +88,42 @@ export class AwardDetailsComponent implements OnInit {
         
     
         
-          organizationName:this.organizationName,
-        
-    
-        
-          dateOfAward:this.dateOfAward,
-        
-    
-        
-          transactionTime:this.transactionTime,
-        
-    
-        
-          awardGrade:this.awardGrade,
-        
-    
-        
-          description:this.description,
-        
-    
-        
-          isPublic:this.isPublic
+          authenticationTime:this.authenticationTime
         
     
     });
 
-
-
     this.myForm2 = fb.group({
-    
-      contestName:this.contestName,
-        
     
         
       authorizedParticipantId:this.authorizedParticipantId,
     
 
     
-      organizationName:this.organizationName,
+      resumeDetails:this.resumeDetails,
     
 
     
-      dateOfAward:this.dateOfAward,
-    
-
-    
-      awardGrade:this.awardGrade,
-    
-
-    
-      description:this.description,
-    
-
-    
-      isPublic:this.isPublic,
+      resumeAssetId:this.resumeAssetId,
     
 
     
       userId:this.userId,
     
 
-    /*
+    
+      /*
+      authorizedParticipantType:this.authorizedParticipantType,
+    
+
+    
       transactionId:this.transactionId,
     
 
     
       timestamp:this.timestamp
-    
-*/
+    */
+
 });
   };
 
@@ -186,31 +133,35 @@ export class AwardDetailsComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceAwardDetails.getSystemPing()
-    .toPromise()
-    .then((result) => {
-     var Id;
+    return this.serviceAuthentication.getSystemPing()
+      .toPromise()
+      .then((result) => {
+        var Id;
         Id = result['participant'];
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
-        this.serviceAwardDetails.getSystemQueryAwardDetails("CurrentUserId", this.currentId)
-        .toPromise()
-        .then((awardDetailsList) => {
-          this.myAwardDetailsList = awardDetailsList;
-        })
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        this.serviceAuthentication.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+          .toPromise()
+          .then((authenticationList) => {
+            this.myAuthenticationList = authenticationList;
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
   }
 
 	/**
@@ -240,7 +191,7 @@ export class AwardDetailsComponent implements OnInit {
 
   addAsset(form: any): Promise<any> {
     this.asset = {
-      $class: "hansung.ac.kr.assets.AwardDetails",
+      $class: "hansung.ac.kr.assets.Authentication",
       
         
           "assetId":this.assetId.value,
@@ -251,7 +202,11 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "contestName":this.contestName.value,
+          "resumeDetails":this.resumeDetails.value,
+        
+      
+        
+          "resumeAssetId":this.resumeAssetId.value,
         
       
         
@@ -259,27 +214,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "organizationName":this.organizationName.value,
-        
-      
-        
-          "dateOfAward":this.dateOfAward.value,
-        
-      
-        
-          "transactionTime":this.transactionTime.value,
-        
-      
-        
-          "awardGrade":this.awardGrade.value,
-        
-      
-        
-          "description":this.description.value,
-        
-      
-        
-          "isPublic":this.isPublic.value
+          "authenticationTime":this.authenticationTime.value
         
       
     };
@@ -295,7 +230,11 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "contestName":null,
+          "resumeDetails":null,
+        
+      
+        
+          "resumeAssetId":null,
         
       
         
@@ -303,32 +242,12 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "organizationName":null,
-        
-      
-        
-          "dateOfAward":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null
+          "authenticationTime":null
         
       
     });
 
-    return this.serviceAwardDetails.addAsset(this.asset)
+    return this.serviceAuthentication.addAsset(this.asset)
     .toPromise()
     .then(() => {
 			this.errorMessage = null;
@@ -343,7 +262,11 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "contestName":null,
+          "resumeDetails":null,
+        
+      
+        
+          "resumeAssetId":null,
         
       
         
@@ -351,27 +274,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "organizationName":null,
-        
-      
-        
-          "dateOfAward":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null 
+          "authenticationTime":null 
         
       
       });
@@ -388,37 +291,20 @@ export class AwardDetailsComponent implements OnInit {
 
 
 
-
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: "hansung.ac.kr.transaction.CreateAwardDetails",
-      
-        
-          "contestName":this.contestName.value,
-        
+      $class: "hansung.ac.kr.transaction.CreateAuthentication",
       
         
           "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
-          "organizationName":this.organizationName.value,
+          "resumeDetails":this.resumeDetails.value,
         
       
         
-          "dateOfAward":this.dateOfAward.value,
-        
-      
-        
-          "awardGrade":this.awardGrade.value,
-        
-      
-        
-          "description":this.description.value,
-        
-      
-        
-          "isPublic":this.isPublic.value,
+          "resumeAssetId":this.resumeAssetId.value,
         
       
         
@@ -426,43 +312,31 @@ export class AwardDetailsComponent implements OnInit {
         
       
         /*
+          "authorizedParticipantType":this.authorizedParticipantType.value,
+        
+      
+        
           "transactionId":this.transactionId.value,
         
       
         
           "timestamp":this.timestamp.value
-        */
-      
+        
+      */
     };
 
     this.myForm2.setValue({
       
         
-          "contestName":null,
-        
-      
-        
           "authorizedParticipantId":null,
         
       
         
-          "organizationName":null,
+          "resumeDetails":null,
         
       
         
-          "dateOfAward":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null,
+          "resumeAssetId":null,
         
       
         
@@ -470,47 +344,36 @@ export class AwardDetailsComponent implements OnInit {
         
       
         /*
+          "authorizedParticipantType":null,
+        
+      
+        
           "transactionId":null,
         
       
         
           "timestamp":null
-        */
+          */
+        
       
     });
 
-    return this.serviceAwardDetails.addTransaction(this.Transaction)
+    return this.serviceAuthentication.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
 			this.errorMessage = null;
-      this.myForm2.setValue({
-      
-        
-          "contestName":null,
-        
+      this.myForm.setValue({
       
         
           "authorizedParticipantId":null,
         
       
         
-          "organizationName":null,
+          "resumeDetails":null,
         
       
         
-          "dateOfAward":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null,
+          "resumeAssetId":null,
         
       
         
@@ -518,12 +381,17 @@ export class AwardDetailsComponent implements OnInit {
         
       
         /*
+          "authorizedParticipantType":null,
+        
+      
+        
           "transactionId":null,
         
       
         
           "timestamp":null 
-        */
+          */
+        
       
       });
     })
@@ -540,9 +408,10 @@ export class AwardDetailsComponent implements OnInit {
 
 
 
+
    updateAsset(form: any): Promise<any> {
     this.asset = {
-      $class: "hansung.ac.kr.assets.AwardDetails",
+      $class: "hansung.ac.kr.assets.Authentication",
       
         
           
@@ -556,7 +425,13 @@ export class AwardDetailsComponent implements OnInit {
     
         
           
-            "contestName":this.contestName.value,
+            "resumeDetails":this.resumeDetails.value,
+          
+        
+    
+        
+          
+            "resumeAssetId":this.resumeAssetId.value,
           
         
     
@@ -568,43 +443,13 @@ export class AwardDetailsComponent implements OnInit {
     
         
           
-            "organizationName":this.organizationName.value,
-          
-        
-    
-        
-          
-            "dateOfAward":this.dateOfAward.value,
-          
-        
-    
-        
-          
-            "transactionTime":this.transactionTime.value,
-          
-        
-    
-        
-          
-            "awardGrade":this.awardGrade.value,
-          
-        
-    
-        
-          
-            "description":this.description.value,
-          
-        
-    
-        
-          
-            "isPublic":this.isPublic.value
+            "authenticationTime":this.authenticationTime.value
           
         
     
     };
 
-    return this.serviceAwardDetails.updateAsset(form.get("assetId").value,this.asset)
+    return this.serviceAuthentication.updateAsset(form.get("assetId").value,this.asset)
 		.toPromise()
 		.then(() => {
 			this.errorMessage = null;
@@ -625,7 +470,7 @@ export class AwardDetailsComponent implements OnInit {
 
   deleteAsset(): Promise<any> {
 
-    return this.serviceAwardDetails.deleteAsset(this.currentId)
+    return this.serviceAuthentication.deleteAsset(this.currentId)
 		.toPromise()
 		.then(() => {
 			this.errorMessage = null;
@@ -649,7 +494,7 @@ export class AwardDetailsComponent implements OnInit {
 
   getForm(id: any): Promise<any>{
 
-    return this.serviceAwardDetails.getAsset(id)
+    return this.serviceAuthentication.getAsset(id)
     .toPromise()
     .then((result) => {
 			this.errorMessage = null;
@@ -664,7 +509,11 @@ export class AwardDetailsComponent implements OnInit {
           
         
           
-            "contestName":null,
+            "resumeDetails":null,
+          
+        
+          
+            "resumeAssetId":null,
           
         
           
@@ -672,27 +521,7 @@ export class AwardDetailsComponent implements OnInit {
           
         
           
-            "organizationName":null,
-          
-        
-          
-            "dateOfAward":null,
-          
-        
-          
-            "transactionTime":null,
-          
-        
-          
-            "awardGrade":null,
-          
-        
-          
-            "description":null,
-          
-        
-          
-            "isPublic":null 
+            "authenticationTime":null 
           
         
       };
@@ -716,12 +545,20 @@ export class AwardDetailsComponent implements OnInit {
           formObject.ownerId = null;
         }
       
-        if(result.contestName){
+        if(result.resumeDetails){
           
-            formObject.contestName = result.contestName;
+            formObject.resumeDetails = result.resumeDetails;
           
         }else{
-          formObject.contestName = null;
+          formObject.resumeDetails = null;
+        }
+      
+        if(result.resumeAssetId){
+          
+            formObject.resumeAssetId = result.resumeAssetId;
+          
+        }else{
+          formObject.resumeAssetId = null;
         }
       
         if(result.authorizedParticipantId){
@@ -732,52 +569,12 @@ export class AwardDetailsComponent implements OnInit {
           formObject.authorizedParticipantId = null;
         }
       
-        if(result.organizationName){
+        if(result.authenticationTime){
           
-            formObject.organizationName = result.organizationName;
-          
-        }else{
-          formObject.organizationName = null;
-        }
-      
-        if(result.dateOfAward){
-          
-            formObject.dateOfAward = result.dateOfAward;
+            formObject.authenticationTime = result.authenticationTime;
           
         }else{
-          formObject.dateOfAward = null;
-        }
-      
-        if(result.transactionTime){
-          
-            formObject.transactionTime = result.transactionTime;
-          
-        }else{
-          formObject.transactionTime = null;
-        }
-      
-        if(result.awardGrade){
-          
-            formObject.awardGrade = result.awardGrade;
-          
-        }else{
-          formObject.awardGrade = null;
-        }
-      
-        if(result.description){
-          
-            formObject.description = result.description;
-          
-        }else{
-          formObject.description = null;
-        }
-      
-        if(result.isPublic){
-          
-            formObject.isPublic = result.isPublic;
-          
-        }else{
-          formObject.isPublic = null;
+          formObject.authenticationTime = null;
         }
       
 
@@ -810,7 +607,11 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "contestName":null,
+          "resumeDetails":null,
+        
+      
+        
+          "resumeAssetId":null,
         
       
         
@@ -818,27 +619,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "organizationName":null,
-        
-      
-        
-          "dateOfAward":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null 
+          "authenticationTime":null 
         
       
       });

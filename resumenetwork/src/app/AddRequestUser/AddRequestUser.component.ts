@@ -33,11 +33,23 @@ export class AddRequestUserComponent implements OnInit {
 
   
       
-          user = new FormControl("", Validators.required);
+          requestUserId = new FormControl("", Validators.required);
         
   
       
-          userId = new FormControl("", Validators.required);
+          requestDetails = new FormControl("", Validators.required);
+        
+  
+      
+          targetParticipantId = new FormControl("", Validators.required);
+        
+  
+      
+          targetParticipantType = new FormControl("", Validators.required);
+        
+  
+      
+          requestResumeAssetId = new FormControl("", Validators.required);
         
   
       
@@ -54,11 +66,23 @@ export class AddRequestUserComponent implements OnInit {
     this.myForm = fb.group({
     
         
-          user:this.user,
+          requestUserId:this.requestUserId,
         
     
         
-          userId:this.userId,
+          requestDetails:this.requestDetails,
+        
+    
+        
+          targetParticipantId:this.targetParticipantId,
+        
+    
+        
+          targetParticipantType:this.targetParticipantType,
+        
+    
+        
+          requestResumeAssetId:this.requestResumeAssetId,
         
     
         
@@ -130,11 +154,23 @@ export class AddRequestUserComponent implements OnInit {
       $class: "hansung.ac.kr.transaction.AddRequestUser",
       
         
-          "user":this.user.value,
+          "requestUserId":this.requestUserId.value,
         
       
         
-          "userId":this.userId.value,
+          "requestDetails":this.requestDetails.value,
+        
+      
+        
+          "targetParticipantId":this.targetParticipantId.value,
+        
+      
+        
+          "targetParticipantType":this.targetParticipantType.value,
+        
+      
+        
+          "requestResumeAssetId":this.requestResumeAssetId.value,
         
       
         
@@ -150,11 +186,23 @@ export class AddRequestUserComponent implements OnInit {
     this.myForm.setValue({
       
         
-          "user":null,
+          "requestUserId":null,
         
       
         
-          "userId":null,
+          "requestDetails":null,
+        
+      
+        
+          "targetParticipantId":null,
+        
+      
+        
+          "targetParticipantType":null,
+        
+      
+        
+          "requestResumeAssetId":null,
         
       
         
@@ -174,11 +222,23 @@ export class AddRequestUserComponent implements OnInit {
       this.myForm.setValue({
       
         
-          "user":null,
+          "requestUserId":null,
         
       
         
-          "userId":null,
+          "requestDetails":null,
+        
+      
+        
+          "targetParticipantId":null,
+        
+      
+        
+          "targetParticipantType":null,
+        
+      
+        
+          "requestResumeAssetId":null,
         
       
         
@@ -208,13 +268,31 @@ export class AddRequestUserComponent implements OnInit {
       
         
           
-            "user":this.user.value,
+            "requestUserId":this.requestUserId.value,
           
         
     
         
           
-            "userId":this.userId.value,
+            "requestDetails":this.requestDetails.value,
+          
+        
+    
+        
+          
+            "targetParticipantId":this.targetParticipantId.value,
+          
+        
+    
+        
+          
+            "targetParticipantType":this.targetParticipantType.value,
+          
+        
+    
+        
+          
+            "requestResumeAssetId":this.requestResumeAssetId.value,
           
         
     
@@ -282,11 +360,23 @@ export class AddRequestUserComponent implements OnInit {
       let formObject = {
         
           
-            "user":null,
+            "requestUserId":null,
           
         
           
-            "userId":null,
+            "requestDetails":null,
+          
+        
+          
+            "targetParticipantId":null,
+          
+        
+          
+            "targetParticipantType":null,
+          
+        
+          
+            "requestResumeAssetId":null,
           
         
           
@@ -302,20 +392,44 @@ export class AddRequestUserComponent implements OnInit {
 
 
       
-        if(result.user){
+        if(result.requestUserId){
           
-            formObject.user = result.user;
+            formObject.requestUserId = result.requestUserId;
           
         }else{
-          formObject.user = null;
+          formObject.requestUserId = null;
         }
       
-        if(result.userId){
+        if(result.requestDetails){
           
-            formObject.userId = result.userId;
+            formObject.requestDetails = result.requestDetails;
           
         }else{
-          formObject.userId = null;
+          formObject.requestDetails = null;
+        }
+      
+        if(result.targetParticipantId){
+          
+            formObject.targetParticipantId = result.targetParticipantId;
+          
+        }else{
+          formObject.targetParticipantId = null;
+        }
+      
+        if(result.targetParticipantType){
+          
+            formObject.targetParticipantType = result.targetParticipantType;
+          
+        }else{
+          formObject.targetParticipantType = null;
+        }
+      
+        if(result.requestResumeAssetId){
+          
+            formObject.requestResumeAssetId = result.requestResumeAssetId;
+          
+        }else{
+          formObject.requestResumeAssetId = null;
         }
       
         if(result.transactionId){
@@ -356,11 +470,23 @@ export class AddRequestUserComponent implements OnInit {
     this.myForm.setValue({
       
         
-          "user":null,
+          "requestUserId":null,
         
       
         
-          "userId":null,
+          "requestDetails":null,
+        
+      
+        
+          "targetParticipantId":null,
+        
+      
+        
+          "targetParticipantType":null,
+        
+      
+        
+          "requestResumeAssetId":null,
         
       
         

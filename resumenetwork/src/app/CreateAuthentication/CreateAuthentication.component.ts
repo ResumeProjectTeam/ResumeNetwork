@@ -14,15 +14,15 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { CreateUserInfoInEntService } from './CreateUserInfoInEnt.service';
+import { CreateAuthenticationService } from './CreateAuthentication.service';
 import 'rxjs/add/operator/toPromise';
 @Component({
-	selector: 'app-CreateUserInfoInEnt',
-	templateUrl: './CreateUserInfoInEnt.component.html',
-	styleUrls: ['./CreateUserInfoInEnt.component.css'],
-  providers: [CreateUserInfoInEntService]
+	selector: 'app-CreateAuthentication',
+	templateUrl: './CreateAuthentication.component.html',
+	styleUrls: ['./CreateAuthentication.component.css'],
+  providers: [CreateAuthenticationService]
 })
-export class CreateUserInfoInEntComponent implements OnInit {
+export class CreateAuthenticationComponent implements OnInit {
 
   myForm: FormGroup;
 
@@ -37,27 +37,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
         
   
       
-          enterpriseName = new FormControl("", Validators.required);
+          resumeDetails = new FormControl("", Validators.required);
         
   
       
-          userPosition = new FormControl("", Validators.required);
-        
-  
-      
-          performingTask = new FormControl("", Validators.required);
-        
-  
-      
-          dateOfEmployment = new FormControl("", Validators.required);
-        
-  
-      
-          retirementDate = new FormControl("", Validators.required);
-        
-  
-      
-          isPublic = new FormControl("", Validators.required);
+          resumeAssetId = new FormControl("", Validators.required);
         
   
       
@@ -78,7 +62,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
   
 
 
-  constructor(private serviceCreateUserInfoInEnt:CreateUserInfoInEntService, fb: FormBuilder) {
+  constructor(private serviceCreateAuthentication:CreateAuthenticationService, fb: FormBuilder) {
     this.myForm = fb.group({
     
         
@@ -86,27 +70,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
         
     
         
-          enterpriseName:this.enterpriseName,
+          resumeDetails:this.resumeDetails,
         
     
         
-          userPosition:this.userPosition,
-        
-    
-        
-          performingTask:this.performingTask,
-        
-    
-        
-          dateOfEmployment:this.dateOfEmployment,
-        
-    
-        
-          retirementDate:this.retirementDate,
-        
-    
-        
-          isPublic:this.isPublic,
+          resumeAssetId:this.resumeAssetId,
         
     
         
@@ -134,7 +102,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
 
   loadAll(): Promise<any> {
     let tempList = [];
-    return this.serviceCreateUserInfoInEnt.getAll()
+    return this.serviceCreateAuthentication.getAll()
     .toPromise()
     .then((result) => {
 			this.errorMessage = null;
@@ -183,34 +151,18 @@ export class CreateUserInfoInEntComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: "hansung.ac.kr.transaction.CreateUserInfoInEnt",
+      $class: "hansung.ac.kr.transaction.CreateAuthentication",
       
         
           "authorizedParticipantId":this.authorizedParticipantId.value,
         
       
         
-          "enterpriseName":this.enterpriseName.value,
+          "resumeDetails":this.resumeDetails.value,
         
       
         
-          "userPosition":this.userPosition.value,
-        
-      
-        
-          "performingTask":this.performingTask.value,
-        
-      
-        
-          "dateOfEmployment":this.dateOfEmployment.value,
-        
-      
-        
-          "retirementDate":this.retirementDate.value,
-        
-      
-        
-          "isPublic":this.isPublic.value,
+          "resumeAssetId":this.resumeAssetId.value,
         
       
         
@@ -238,27 +190,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseName":null,
+          "resumeDetails":null,
         
       
         
-          "userPosition":null,
-        
-      
-        
-          "performingTask":null,
-        
-      
-        
-          "dateOfEmployment":null,
-        
-      
-        
-          "retirementDate":null,
-        
-      
-        
-          "isPublic":null,
+          "resumeAssetId":null,
         
       
         
@@ -279,7 +215,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
       
     });
 
-    return this.serviceCreateUserInfoInEnt.addTransaction(this.Transaction)
+    return this.serviceCreateAuthentication.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
 			this.errorMessage = null;
@@ -290,27 +226,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseName":null,
+          "resumeDetails":null,
         
       
         
-          "userPosition":null,
-        
-      
-        
-          "performingTask":null,
-        
-      
-        
-          "dateOfEmployment":null,
-        
-      
-        
-          "retirementDate":null,
-        
-      
-        
-          "isPublic":null,
+          "resumeAssetId":null,
         
       
         
@@ -344,7 +264,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
 
    updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: "hansung.ac.kr.transaction.CreateUserInfoInEnt",
+      $class: "hansung.ac.kr.transaction.CreateAuthentication",
       
         
           
@@ -354,37 +274,13 @@ export class CreateUserInfoInEntComponent implements OnInit {
     
         
           
-            "enterpriseName":this.enterpriseName.value,
+            "resumeDetails":this.resumeDetails.value,
           
         
     
         
           
-            "userPosition":this.userPosition.value,
-          
-        
-    
-        
-          
-            "performingTask":this.performingTask.value,
-          
-        
-    
-        
-          
-            "dateOfEmployment":this.dateOfEmployment.value,
-          
-        
-    
-        
-          
-            "retirementDate":this.retirementDate.value,
-          
-        
-    
-        
-          
-            "isPublic":this.isPublic.value,
+            "resumeAssetId":this.resumeAssetId.value,
           
         
     
@@ -412,7 +308,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
     
     };
 
-    return this.serviceCreateUserInfoInEnt.updateTransaction(form.get("transactionId").value,this.Transaction)
+    return this.serviceCreateAuthentication.updateTransaction(form.get("transactionId").value,this.Transaction)
 		.toPromise()
 		.then(() => {
 			this.errorMessage = null;
@@ -433,7 +329,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
 
   deleteTransaction(): Promise<any> {
 
-    return this.serviceCreateUserInfoInEnt.deleteTransaction(this.currentId)
+    return this.serviceCreateAuthentication.deleteTransaction(this.currentId)
 		.toPromise()
 		.then(() => {
 			this.errorMessage = null;
@@ -457,7 +353,7 @@ export class CreateUserInfoInEntComponent implements OnInit {
 
   getForm(id: any): Promise<any>{
 
-    return this.serviceCreateUserInfoInEnt.getTransaction(id)
+    return this.serviceCreateAuthentication.getTransaction(id)
     .toPromise()
     .then((result) => {
 			this.errorMessage = null;
@@ -468,27 +364,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
           
         
           
-            "enterpriseName":null,
+            "resumeDetails":null,
           
         
           
-            "userPosition":null,
-          
-        
-          
-            "performingTask":null,
-          
-        
-          
-            "dateOfEmployment":null,
-          
-        
-          
-            "retirementDate":null,
-          
-        
-          
-            "isPublic":null,
+            "resumeAssetId":null,
           
         
           
@@ -520,52 +400,20 @@ export class CreateUserInfoInEntComponent implements OnInit {
           formObject.authorizedParticipantId = null;
         }
       
-        if(result.enterpriseName){
+        if(result.resumeDetails){
           
-            formObject.enterpriseName = result.enterpriseName;
+            formObject.resumeDetails = result.resumeDetails;
           
         }else{
-          formObject.enterpriseName = null;
+          formObject.resumeDetails = null;
         }
       
-        if(result.userPosition){
+        if(result.resumeAssetId){
           
-            formObject.userPosition = result.userPosition;
-          
-        }else{
-          formObject.userPosition = null;
-        }
-      
-        if(result.performingTask){
-          
-            formObject.performingTask = result.performingTask;
+            formObject.resumeAssetId = result.resumeAssetId;
           
         }else{
-          formObject.performingTask = null;
-        }
-      
-        if(result.dateOfEmployment){
-          
-            formObject.dateOfEmployment = result.dateOfEmployment;
-          
-        }else{
-          formObject.dateOfEmployment = null;
-        }
-      
-        if(result.retirementDate){
-          
-            formObject.retirementDate = result.retirementDate;
-          
-        }else{
-          formObject.retirementDate = null;
-        }
-      
-        if(result.isPublic){
-          
-            formObject.isPublic = result.isPublic;
-          
-        }else{
-          formObject.isPublic = null;
+          formObject.resumeAssetId = null;
         }
       
         if(result.userId){
@@ -626,27 +474,11 @@ export class CreateUserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseName":null,
+          "resumeDetails":null,
         
       
         
-          "userPosition":null,
-        
-      
-        
-          "performingTask":null,
-        
-      
-        
-          "dateOfEmployment":null,
-        
-      
-        
-          "retirementDate":null,
-        
-      
-        
-          "isPublic":null,
+          "resumeAssetId":null,
         
       
         

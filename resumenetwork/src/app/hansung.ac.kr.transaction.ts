@@ -3,7 +3,6 @@ import {Participant} from './org.hyperledger.composer.system';
 import {Transaction} from './org.hyperledger.composer.system';
 import {Event} from './org.hyperledger.composer.system';
 import {Certificate,AwardDetails,UserInfoInEnt,UserInfoInSch} from './hansung.ac.kr.assets';
-import {User} from './hansung.ac.kr.participants';
 // export namespace hansung.ac.kr.transaction{
    export abstract class TxForOrg extends Transaction {
       orgId: string;
@@ -16,11 +15,21 @@ import {User} from './hansung.ac.kr.participants';
    }
    export abstract class TxForUser extends Transaction {
       userId: string;
+      authorizedParticipantType: string;
    }
-   export class AddRequestUser extends TxForUser {
-      user: User;
+   export class AddRequestUser extends Transaction {
+      requestUserId: string;
+      requestDetails: string;
+      targetParticipantId: string;
+      targetParticipantType: string;
+      requestResumeAssetId: string;
    }
    export class RevokeRequestUser extends TxForUser {
+   }
+   export class CreateAuthentication extends TxForUser {
+      authorizedParticipantId: string;
+      resumeDetails: string;
+      resumeAssetId: string;
    }
    export class CreateResumeInfoUser extends TxForUser {
       dob: Date;
@@ -35,7 +44,7 @@ import {User} from './hansung.ac.kr.participants';
    export class CreateCertificate extends TxForUser {
       certificateName: string;
       certificateScore: number;
-      organizationId: string;
+      authorizedParticipantId: string;
       organizationName: string;
       dob: Date;
       expirationDate: Date;
@@ -43,7 +52,7 @@ import {User} from './hansung.ac.kr.participants';
    }
    export class CreateAwardDetails extends TxForUser {
       contestName: string;
-      organizationId: string;
+      authorizedParticipantId: string;
       organizationName: string;
       dateOfAward: Date;
       awardGrade: string;
@@ -51,7 +60,7 @@ import {User} from './hansung.ac.kr.participants';
       isPublic: boolean;
    }
    export class CreateUserInfoInEnt extends TxForUser {
-      enterpriseId: string;
+      authorizedParticipantId: string;
       enterpriseName: string;
       userPosition: string;
       performingTask: string;
@@ -60,7 +69,7 @@ import {User} from './hansung.ac.kr.participants';
       isPublic: boolean;
    }
    export class CreateUserInfoInSch extends TxForUser {
-      schoolId: string;
+      authorizedParticipantId: string;
       schoolName: string;
       entranceDate: Date;
       graduationDate: Date;
@@ -73,6 +82,8 @@ import {User} from './hansung.ac.kr.participants';
       awardDetails: AwardDetails;
       userInfoInEnt: UserInfoInEnt;
       userInfoInSch: UserInfoInSch;
+      txForUser: TxForUser;
+      resumeAssetId: string;
    }
    export class UserEvent extends Event {
       txForUser: TxForUser;

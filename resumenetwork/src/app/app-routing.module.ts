@@ -17,6 +17,7 @@ import { Routes, RouterModule } from '@angular/router';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 import { HomeComponent } from './home/home.component';
 
+import { AuthenticationComponent } from './Authentication/Authentication.component';
 import { ResumeInfoUserComponent } from './ResumeInfoUser/ResumeInfoUser.component';
 import { CertificateComponent } from './Certificate/Certificate.component';
 import { AwardDetailsComponent } from './AwardDetails/AwardDetails.component';
@@ -32,6 +33,7 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
 
   import { AddRequestUserComponent } from './AddRequestUser/AddRequestUser.component';
   import { RevokeRequestUserComponent } from './RevokeRequestUser/RevokeRequestUser.component';
+  import { CreateAuthenticationComponent } from './CreateAuthentication/CreateAuthentication.component';
   import { CreateResumeInfoUserComponent } from './CreateResumeInfoUser/CreateResumeInfoUser.component';
   import { CreateCertificateComponent } from './CreateCertificate/CreateCertificate.component';
   import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
@@ -41,6 +43,8 @@ const routes: Routes = [
      //{ path: 'transaction', component: TransactionComponent },
     {path: '', component: HomeComponent},
 		
+		{ path: 'Authentication', component: AuthenticationComponent},
+    
 		{ path: 'ResumeInfoUser', component: ResumeInfoUserComponent},
     
 		{ path: 'Certificate', component: CertificateComponent},
@@ -64,6 +68,8 @@ const routes: Routes = [
         { path: 'AddRequestUser', component: AddRequestUserComponent},
         
         { path: 'RevokeRequestUser', component: RevokeRequestUserComponent},
+        
+        { path: 'CreateAuthentication', component: CreateAuthenticationComponent},
         
         { path: 'CreateResumeInfoUser', component: CreateResumeInfoUserComponent},
         

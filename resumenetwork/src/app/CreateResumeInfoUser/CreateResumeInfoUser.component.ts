@@ -32,11 +32,12 @@ export class CreateResumeInfoUserComponent implements OnInit {
 	private errorMessage;
 
   
-          name = new FormControl("", Validators.required);
-
-
       
           dob = new FormControl("", Validators.required);
+        
+  
+      
+          name = new FormControl("", Validators.required);
         
   
       
@@ -68,6 +69,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
   
       
+          authorizedParticipantType = new FormControl("", Validators.required);
+        
+  
+      
           transactionId = new FormControl("", Validators.required);
         
   
@@ -81,11 +86,11 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.myForm = fb.group({
     
         
-          name:this.name,
-
-
-
           dob:this.dob,
+        
+    
+        
+          name:this.name,
         
     
         
@@ -114,6 +119,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
     
         
           userId:this.userId,
+        
+    
+        
+          authorizedParticipantType:this.authorizedParticipantType,
         
     
         
@@ -184,12 +193,12 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.Transaction = {
       $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
       
-
-          "name":this.name.value,
-          
-
         
           "dob":this.dob.value,
+        
+      
+        
+          "name":this.name.value,
         
       
         
@@ -221,6 +230,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
       
         
+          "authorizedParticipantType":this.authorizedParticipantType.value,
+        
+      
+        
           "transactionId":this.transactionId.value,
         
       
@@ -233,12 +246,11 @@ export class CreateResumeInfoUserComponent implements OnInit {
     this.myForm.setValue({
       
         
-
-          "name":null,
-
-
-
           "dob":null,
+        
+      
+        
+          "name":null,
         
       
         
@@ -267,6 +279,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -286,10 +302,11 @@ export class CreateResumeInfoUserComponent implements OnInit {
       this.myForm.setValue({
       
         
-          "name":null,
-
-
           "dob":null,
+        
+      
+        
+          "name":null,
         
       
         
@@ -318,6 +335,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         
@@ -346,12 +367,14 @@ export class CreateResumeInfoUserComponent implements OnInit {
       $class: "hansung.ac.kr.transaction.CreateResumeInfoUser",
       
         
-            "name":this.name.value,
-
-
-
           
             "dob":this.dob.value,
+          
+        
+    
+        
+          
+            "name":this.name.value,
           
         
     
@@ -394,6 +417,12 @@ export class CreateResumeInfoUserComponent implements OnInit {
         
           
             "userId":this.userId.value,
+          
+        
+    
+        
+          
+            "authorizedParticipantType":this.authorizedParticipantType.value,
           
         
     
@@ -460,12 +489,12 @@ export class CreateResumeInfoUserComponent implements OnInit {
 			this.errorMessage = null;
       let formObject = {
         
-
-            "name":null,
-
-
           
             "dob":null,
+          
+        
+          
+            "name":null,
           
         
           
@@ -497,6 +526,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
           
         
           
+            "authorizedParticipantType":null,
+          
+        
+          
             "transactionId":null,
           
         
@@ -508,16 +541,6 @@ export class CreateResumeInfoUserComponent implements OnInit {
 
 
 
-
-      if(result.name){
-          
-         formObject.name = result.name;
-      
-      }else{
-          formObject.name = null;
-       }
-
-
       
         if(result.dob){
           
@@ -525,6 +548,14 @@ export class CreateResumeInfoUserComponent implements OnInit {
           
         }else{
           formObject.dob = null;
+        }
+      
+        if(result.name){
+          
+            formObject.name = result.name;
+          
+        }else{
+          formObject.name = null;
         }
       
         if(result.supportField){
@@ -583,6 +614,14 @@ export class CreateResumeInfoUserComponent implements OnInit {
           formObject.userId = null;
         }
       
+        if(result.authorizedParticipantType){
+          
+            formObject.authorizedParticipantType = result.authorizedParticipantType;
+          
+        }else{
+          formObject.authorizedParticipantType = null;
+        }
+      
         if(result.transactionId){
           
             formObject.transactionId = result.transactionId;
@@ -620,11 +659,12 @@ export class CreateResumeInfoUserComponent implements OnInit {
   resetForm(): void{
     this.myForm.setValue({
       
-
-          "name":null,
-
         
           "dob":null,
+        
+      
+        
+          "name":null,
         
       
         
@@ -653,6 +693,10 @@ export class CreateResumeInfoUserComponent implements OnInit {
       
         
           "userId":null,
+        
+      
+        
+          "authorizedParticipantType":null,
         
       
         

@@ -57,7 +57,7 @@ export class OrganizationComponent implements OnInit {
         
   
       
-          requestUser = new FormControl("", Validators.required);
+          requestResumeList = new FormControl("", Validators.required);
         
   
 
@@ -90,7 +90,7 @@ export class OrganizationComponent implements OnInit {
         
     
         
-          requestUser:this.requestUser
+          requestResumeList:this.requestResumeList
         
     
     });
@@ -178,7 +178,7 @@ export class OrganizationComponent implements OnInit {
         
       
         
-          "requestUser":this.requestUser.value
+          "requestResumeList":this.requestResumeList.value
         
       
     };
@@ -210,7 +210,7 @@ export class OrganizationComponent implements OnInit {
         
       
         
-          "requestUser":null
+          "requestResumeList":null
         
       
     });
@@ -246,7 +246,7 @@ export class OrganizationComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });
@@ -302,7 +302,7 @@ export class OrganizationComponent implements OnInit {
     
         
           
-            "requestUser":this.requestUser.value
+            "requestResumeList":this.requestResumeList.value
           
         
     
@@ -384,7 +384,7 @@ export class OrganizationComponent implements OnInit {
           
         
           
-            "requestUser":null 
+            "requestResumeList":null 
           
         
       };
@@ -440,12 +440,12 @@ export class OrganizationComponent implements OnInit {
           formObject.discription = null;
         }
       
-        if(result.requestUser){
+        if(result.requestResumeList){
           
-            formObject.requestUser = result.requestUser;
+            formObject.requestResumeList = result.requestResumeList;
           
         }else{
-          formObject.requestUser = null;
+          formObject.requestResumeList = null;
         }
       
 
@@ -494,7 +494,7 @@ export class OrganizationComponent implements OnInit {
         
       
         
-          "requestUser":null 
+          "requestResumeList":null 
         
       
       });
