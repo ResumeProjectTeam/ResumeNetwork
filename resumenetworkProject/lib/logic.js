@@ -50,10 +50,22 @@ function CreateAuthentication  (txCreateAuthentication ) {
    var actionDateTime = new Date();
    var me = getCurrentParticipant();
    var factory = getFactory();
+   var indexf = -1;
 
    if(!me) {
         throw new Error('can not find Participant');
     }
+
+   me.requestResumeList.findIndex(function check(element, index, array) {
+     if(element.userId == txCreateAuthentication.ownerId) {
+	indexf = index;
+     }
+  })
+  
+  if(inedxf == -1) {
+     throw new Error("Error: You need to permission" );
+  }
+  
 
    return getAssetRegistry(NAMESAPCE_ASSETS + ".Authentication")
   .then(function (allAuthenticationRegistry) {
