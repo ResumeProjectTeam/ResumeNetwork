@@ -4,10 +4,15 @@
 합칠때
 {
 Certificate, AwardDetails, UserInfoInEnt, UserInfoInSch, Authentication 컴포넌트 전체
+
 data.service 
+
 hansung.ac.kr.assets.ts
+
 hansung.ac.kr.participants.ts
+
 hansung.ac.kr.transaction.ts
+
 User, Organization, Enterprise, School 컴포넌트 전체
 
 }
