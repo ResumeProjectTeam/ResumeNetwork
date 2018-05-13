@@ -42,6 +42,23 @@ rule readAssetBySchool{
 /* Create access to asset */
 
 
+rule OES_CreateAuthentication {
+    description: "real condition is defined in logic.js function"
+    participant(p): "ANY"
+    operation: CREATE
+    resource(r): "hansung.ac.kr.assets.Authentication"
+    transaction(tx): "hansung.ac.kr.transaction.CreateAuthentication"
+    condition: (p.requestResumeList.findIndex(function check(element, index, array) {
+      if(element.userId == r.ownerId) {
+       return true;    
+      }    
+    })
+    )
+    action: ALLOW
+}
+
+
+
 rule UserCreateResumeInfoUser {
     description: ""
   	participant: "hansung.ac.kr.participants.User"
@@ -117,6 +134,24 @@ rule UserRUDresumeElement {
 
 
 /* Full access to creatAssetTransaction */
+
+
+rule OES_TxCreateAuthentication {
+    description: ""
+    participant(p): "ANY"
+    operation: CREATE
+    resource(r): "hansung.ac.kr.transaction.CreateAuthentication"
+    condition: (p.requestResumeList.findIndex(function check(element, index, array) {
+      if(element.userId == r.userId) {
+       return true;
+      }
+    })
+    )
+    action: ALLOW
+}
+
+
+
 
 rule UserTxCreateResumeInfoUser {
     description: ""

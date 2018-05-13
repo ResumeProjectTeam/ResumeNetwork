@@ -61,7 +61,7 @@ function CreateAuthentication  (txCreateAuthentication ) {
    
       var newAuthentication = factory.newResource(NAMESAPCE_ASSETS, "Authentication", txCreateAuthentication.resumeAssetId );
        newAuthentication.authorizedParticipantId = txCreateAuthentication.authorizedParticipantId;
-       newAuthentication.resumeName = txCreateAuthentication.resumeName;
+       newAuthentication.resumeDetails = txCreateAuthentication.resumeName;
        newAuthentication.resumeAssetId =  txCreateAuthentication.resumeAssetId;
        newAuthentication.authenticationTime = actionDateTime;
        newAuthentication.ownerId = txCreateAuthentication.userId;

@@ -37,7 +37,7 @@ transaction RevokeRequestUser extends  TxForUser {
 
 transaction CreateAuthentication extends TxForUser {
     o String authorizedParticipantId
-    o String resumeName
+    o String resumeDeatails
     o String resumeAssetId optional
 }
 
