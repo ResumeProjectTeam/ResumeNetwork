@@ -40,13 +40,29 @@ requestResumeList에 해당 certificate의 내용이 추가된다.
 
 
   export class Organization extends Participant {
+  
+  
       orgId: string;
+      
+      
       orgName: string;
+      
+      
       address: Address;
+      
+      
       contactAdress: string;
+      
+      
       homepage: string;
+      
+      
       discription: string;
+      
+      
       requestResumeList: RequestResume[];
+      
+      
    }
    
    Organization을 예로 들면
