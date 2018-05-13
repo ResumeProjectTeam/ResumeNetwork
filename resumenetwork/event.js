@@ -73,26 +73,26 @@ class SitechainListener{
 		             if(evt['authorizedParticipantType'] == "Organization1"){
                                  addRequestUser.requestDetails = evt['certificateName'];
                                  addRequestUser.targetParticipantType = NAMESPACE_ORG;
-                                 console.log(addRequestUser);
+                
                              }
  
                              if(evt['authorizedParticipantType'] == "Organization2"){
                                  addRequestUser.requestDetails = evt['contestName'];
                                  addRequestUser.targetParticipantType = NAMESPACE_ORG;
-		                 console.log(addRequestUser);
+		         
                              }
 
 
                              if(evt['authorizedParticipantType'] == "Enterprise"){
                                  addRequestUser.requestDetails = evt['EnterpriseName'];
                                  addRequestUser.targetParticipantType = NAMESPACE_ENT;
-                                 console.log(addRequestUser);
+                                
                              }
 
                              if(evt['authorizedParticipantType'] == "School"){
                                 addRequestUser.requestDetails = evt['schoolName'];
                                 addRequestUser.targetParticipantType = NAMESPACE_SCH;
-                                console.log(addRequestUser);
+                             
                              }
 
 

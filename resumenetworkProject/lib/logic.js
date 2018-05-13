@@ -57,15 +57,18 @@ function CreateAuthentication  (txCreateAuthentication ) {
     }
 
    me.requestResumeList.findIndex(function check(element, index, array) {
-     if(element.userId == txCreateAuthentication.ownerId) {
-	indexf = index;
+     console.log("test : " + element.requestResumeAssetId);
+     console.log("test2 : " + txCreateAuthentication.resumeAssetId);
+     if(element.requestResumeAssetId == txCreateAuthentication.resumeAssetId) {
+        indexf = index;
+        console.log(indexf);
      }
   })
-  
-  if(inedxf == -1) {
-     throw new Error("Error: You need to permission" );
-  }
-  
+
+  if(indexf == -1) {
+     console.log(indexf);
+     throw new Error("Error: resume Authentication is failed" );
+  } 
 
    return getAssetRegistry(NAMESAPCE_ASSETS + ".Authentication")
   .then(function (allAuthenticationRegistry) {
