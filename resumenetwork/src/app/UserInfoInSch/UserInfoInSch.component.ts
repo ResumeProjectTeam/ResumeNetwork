@@ -33,6 +33,7 @@ export class UserInfoInSchComponent implements OnInit {
   private currentId;
   private errorMessage;
   private myUserInfoInSch;
+  private myAuthenticationList;
 
   
       
@@ -194,11 +195,20 @@ export class UserInfoInSchComponent implements OnInit {
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
+
         this.serviceUserInfoInSch.getSystemQueryUserInfoInSch("CurrentUserId", this.currentId)
         .toPromise()
         .then((UserInfoInSch) => {
           this.myUserInfoInSch = UserInfoInSch;
         })
+
+        this.serviceUserInfoInSch.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+        .toPromise()
+        .then((authenticationList) => {
+          this.myAuthenticationList = authenticationList;
+          console.log(this.myAuthenticationList);
+        })
+
     })
     .catch((error) => {
         if(error == 'Server error'){

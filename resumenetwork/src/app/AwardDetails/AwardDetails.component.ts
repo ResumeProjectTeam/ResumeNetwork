@@ -33,6 +33,7 @@ export class AwardDetailsComponent implements OnInit {
   private currentId;
   private errorMessage;
   private myAwardDetailsList;
+  private myAuthenticationList;
 
   
       
@@ -194,11 +195,20 @@ export class AwardDetailsComponent implements OnInit {
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
+
         this.serviceAwardDetails.getSystemQueryAwardDetails("CurrentUserId", this.currentId)
         .toPromise()
         .then((awardDetailsList) => {
           this.myAwardDetailsList = awardDetailsList;
         })
+
+        this.serviceAwardDetails.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+          .toPromise()
+          .then((authenticationList) => {
+            this.myAuthenticationList = authenticationList;
+            console.log(this.myAuthenticationList);
+          })
+
     })
     .catch((error) => {
         if(error == 'Server error'){

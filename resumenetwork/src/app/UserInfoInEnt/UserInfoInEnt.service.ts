@@ -15,7 +15,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
-import { UserInfoInEnt } from '../hansung.ac.kr.assets';
+import { UserInfoInEnt, Authentication } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
 import { CreateUserInfoInEnt } from '../hansung.ac.kr.transaction';
 
@@ -68,6 +68,11 @@ export class UserInfoInEntService {
 
     public getSystemQueryUserInfoInEnt(parameterName: string, id: string) : Observable<UserInfoInEnt[]> {
       return this.dataService.getSystemQueryUserInfoInEnt("searchUserInfoInEntByOwnerId", parameterName, id);
+    }
+
+
+    public getSystemQueryAuthentication(parameterName: string, id: string) : Observable<Authentication[]> {
+      return this.dataService.getSystemQueryAuthentication("searchAuthenticationByOwnerId", parameterName, id);
     }
 
 }
