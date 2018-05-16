@@ -4,19 +4,19 @@ import hansung.ac.kr.assets.*
 import hansung.ac.kr.participants.*
 
 abstract transaction TxForOrg {
-    o String orgId
+    o String orgId optional
 }
 
 abstract transaction TxForEnt {
-    o String entId
+    o String entId optional
 }
 
 abstract transaction TxForSch {
-    o String schId
+    o String schId optional
 }
 
 abstract transaction TxForUser {
-    o String userId
+    o String userId optional
     o String authorizedParticipantType optional
 }
 
@@ -41,7 +41,7 @@ transaction CreateAuthentication extends TxForUser {
     o String resumeAssetId optional
 }
 
-transaction CreateResumeInfoUser extends TxForUser {
+transaction CreateResumeInfoUser {
     o DateTime dob
     o String name
     o String supportField
@@ -81,7 +81,7 @@ transaction CreateAwardDetails extends TxForUser {
 transaction CreateUserInfoInEnt extends TxForUser {
     o String authorizedParticipantId
     o String enterpriseName
-    o String userPosition
+    o String userPosition optional
     o String performingTask
     o DateTime dateOfEmployment optional
     o DateTime retirementDate optional

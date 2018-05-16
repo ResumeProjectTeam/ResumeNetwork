@@ -35,7 +35,7 @@ asset Certificate identified by assetId {
     o String organizationName
     o DateTime dob
     o DateTime expirationDate optional
-    o DateTime transactionTime
+    o DateTime transactionTime optional
     o Boolean isPublic
 }
 
@@ -46,7 +46,7 @@ asset AwardDetails identified by assetId {
    o String organizationName
    o String authorizedParticipantId
    o DateTime dateOfAward
-   o DateTime transactionTime
+   o DateTime transactionTime optional
    o String awardGrade optional 
    o String description optional
    o Boolean isPublic
@@ -57,11 +57,11 @@ asset UserInfoInEnt identified by assetId {
     o String ownerId
     o String authorizedParticipantId
     o String enterpriseName
-    o String userPosition
-    o String performingTask
+    o String userPosition optional
+    o String performingTask 
     o DateTime dateOfEmployment optional
     o DateTime retirementDate optional
-    o DateTime transactionTime
+    o DateTime transactionTime optional
     o Boolean isPublic
 }
 
@@ -72,7 +72,7 @@ asset UserInfoInSch identified by assetId {
     o String schoolName
     o DateTime entranceDate
     o DateTime graduationDate optional
-    o DateTime transactionTime
+    o DateTime transactionTime optional
     o String majorField optional
     o Double gradeAverage default=0.0 range=[0.0, 4.5] optional
     o Boolean isPublic
