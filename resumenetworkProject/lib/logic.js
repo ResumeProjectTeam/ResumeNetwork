@@ -169,7 +169,7 @@ function CreateAwardDetails (txCreateAwardDetails) {
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
        txCreateAwardDetails.userId = me.getIdentifier();
-       txCreateAwardDetails.authorizedParticipantType = "Organziation2"
+       txCreateAwardDetails.authorizedParticipantType = "Organization2"
        sendEvent.txForUser = txCreateAwardDetails;
        sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
