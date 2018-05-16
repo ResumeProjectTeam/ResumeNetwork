@@ -77,7 +77,7 @@ export class UserInfoInSchComponent implements OnInit {
 
 
 
-          userId = new FormControl("", Validators.required);
+          userId = new FormControl("test", Validators.required);
         
   
       

@@ -292,7 +292,10 @@
               
                   <td class="participant-properties">{{participant.discription}}</td>
               
-                  <td class="participant-properties">{{participant.requestResumeList}}</td>
+                  <td class="participant-properties" *ngFor="let asset of participant.requestResumeList">
+                    {{ asset.requestDetails}}
+                  </td>
+                
               
               <td>
                 <button (click)="getForm(participant.orgId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateParticipantModal">

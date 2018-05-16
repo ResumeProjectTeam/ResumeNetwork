@@ -33,7 +33,6 @@ export class UserInfoInEntComponent implements OnInit {
   private currentId;
   private errorMessage;
   private myUserInfoInEnt;
-  private myAuthenticationList;
 
   
       
@@ -191,20 +190,10 @@ export class UserInfoInEntComponent implements OnInit {
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
-
         this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("CurrentUserId", this.currentId)
         .toPromise()
         .then((UserInfoInEnt) => {
           this.myUserInfoInEnt = UserInfoInEnt;
-
-
-        this.serviceUserInfoInEnt.getSystemQueryAuthentication("CurrentUserId", this.currentId)
-          .toPromise()
-          .then((authenticationList) => {
-            this.myAuthenticationList = authenticationList;
-            console.log(this.myAuthenticationList);
-          })
-
         })
     })
     .catch((error) => {
@@ -813,7 +802,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "enterpriseId":null,
+          "authorizedParticipantId":null,
         
       
         

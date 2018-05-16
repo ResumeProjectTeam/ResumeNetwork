@@ -206,7 +206,6 @@ export class AwardDetailsComponent implements OnInit {
           .toPromise()
           .then((authenticationList) => {
             this.myAuthenticationList = authenticationList;
-            console.log(this.myAuthenticationList);
           })
 
     })
