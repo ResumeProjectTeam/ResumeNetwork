@@ -66,12 +66,12 @@ export class AwardDetailsService {
     }
 
     public getSystemQueryAwardDetails(parameterName: string, id: string) : Observable<AwardDetails[]> {
-      return this.dataService.getSystemQueryAwardDetails("searchAwardDetailsByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryAwardDetails("searchAwardDetailsById", parameterName, id);
     }
 
 
     public getSystemQueryAuthentication(parameterName: string, id: string) : Observable<Authentication[]> {
-      return this.dataService.getSystemQueryAuthentication("searchAuthenticationByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryAuthentication("searchAuthenticationById", parameterName, id);
     }
 
 

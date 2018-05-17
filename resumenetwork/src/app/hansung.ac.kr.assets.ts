@@ -71,12 +71,5 @@ import {Event} from './org.hyperledger.composer.system';
       gradeAverage: number;
       isPublic: boolean;
    }
-   export class Address {
-      street: string;
-      house: string;
-      city: string;
-      county: string;
-      country: string;
-      zip: string;
-   }
+
 // }

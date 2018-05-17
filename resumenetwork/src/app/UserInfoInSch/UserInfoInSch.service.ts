@@ -66,12 +66,12 @@ export class UserInfoInSchService {
     }
 
     public getSystemQueryUserInfoInSch(parameterName: string, id: string) : Observable<UserInfoInSch[]> {
-      return this.dataService.getSystemQueryUserInfoInSch("searchUserInfoInSchByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryUserInfoInSch("searchUserInfoInSchById", parameterName, id);
     }
 
 
     public getSystemQueryAuthentication(parameterName: string, id: string) : Observable<Authentication[]> {
-      return this.dataService.getSystemQueryAuthentication("searchAuthenticationByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryAuthentication("searchAuthenticationById", parameterName, id);
     }
 
 }

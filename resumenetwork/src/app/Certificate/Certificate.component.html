@@ -377,11 +377,14 @@
             <td class="asset-properties">{{asset.transactionTime}}</td>
 
             <td class="asset-properties">{{asset.isPublic}}</td>
-
-            <td class="left-sort" *ngFor="let asset2 of myAuthenticationList" >
-              <b  *ngIf="asset2.resumeAssetId == asset.assetId;">
-                인증완료
-              </b>
+            
+            <td>
+              <span *ngFor="let asset2 of myAuthenticationList" >
+                <b *ngIf="asset2.resumeAssetId == asset.assetId">
+                  {{authenticationExist()}}
+                </b>
+              </span>
+              {{printAuthentication()}}
             </td>
 
 

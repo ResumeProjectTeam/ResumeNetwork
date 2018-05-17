@@ -35,6 +35,7 @@ export class CertificateComponent implements OnInit {
   private errorMessage;
   private myCertificateList;
   private myAuthenticationList;
+  private isAuthentication;
 
 
   assetId = new FormControl("test", Validators.required);
@@ -179,6 +180,23 @@ export class CertificateComponent implements OnInit {
 
     });
   };
+
+  authenticationExist(){
+    this.isAuthentication = true;
+  }
+
+  printAuthentication(){
+    if(this.isAuthentication == true){
+      this.isAuthentication = false;
+      return "인증 완료";
+    }
+    else{
+      this.isAuthentication = false;
+      return "인증 미완료";
+    }
+  }
+
+
 
   ngOnInit(): void {
     this.loadAll();

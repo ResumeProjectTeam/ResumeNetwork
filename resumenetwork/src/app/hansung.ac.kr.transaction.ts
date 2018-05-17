@@ -25,6 +25,9 @@ import {Certificate,AwardDetails,UserInfoInEnt,UserInfoInSch} from './hansung.ac
       requestResumeAssetId: string;
    }
    export class RevokeRequestUser extends TxForUser {
+    targetargetParticipantType: string;
+    targetParticipantId: string;
+    requestResumeAssetId: string;
    }
    export class CreateAuthentication extends TxForUser {
       authorizedParticipantId: string;

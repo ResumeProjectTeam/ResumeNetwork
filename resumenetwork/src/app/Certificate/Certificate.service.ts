@@ -71,11 +71,11 @@ export class CertificateService {
     }
 
     public getSystemQueryCertificate(parameterName: string, id: string) : Observable<Certificate[]> {
-      return this.dataService.getSystemQueryCertificate("searchCertificateByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryCertificate("searchCertificateById", parameterName, id);
     }
 
     public getSystemQueryAuthentication(parameterName: string, id: string) : Observable<Authentication[]> {
-      return this.dataService.getSystemQueryAuthentication("searchAuthenticationByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryAuthentication("searchAuthenticationById", parameterName, id);
     }
 
 }

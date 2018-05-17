@@ -66,6 +66,6 @@ export class ResumeInfoUserService {
     }
 
     public getSystemQueryResumeInfoUser(parameterName: string, id: string) : Observable<ResumeInfoUser[]> {
-      return this.dataService.getSystemQueryResumeInfoUser("searchResumeInfoUserByOwnerId", parameterName, id);
+      return this.dataService.getSystemQueryResumeInfoUser("searchResumeInfoUserById", parameterName, id);
     }
 }
