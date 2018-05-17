@@ -119,9 +119,10 @@ query searchUserInfoInEntByPerformingTask {
       SELECT hansung.ac.kr.assets.UserInfoInEnt
       WHERE (performingTask == _$targetTask)
 }
+
 query searchCertificateByScore {
   description: "select certificate over score"
   statement:
       SELECT hansung.ac.kr.assets.Certificate
-      WHERE (certificateScore >= _targetScore)
+      WHERE (certificateScore >= _$targetScore)
 }

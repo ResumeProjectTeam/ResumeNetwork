@@ -424,6 +424,7 @@ function revokeRequestUser(revokeRequestUser) {
         
 		      
       
+});
 }
 
 function getRandomIntInclusive(min, max) {
