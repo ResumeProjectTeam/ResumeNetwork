@@ -216,8 +216,8 @@ function CreateUserInfoInEnt (txCreateUserInfoInEnt) {
        
        
        let sendEvent = factory.newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
-       txCreateUserInfoEnt.authorizedParticipantType = "Enterprise"
-       txCreateUserInfoEnt.userId = me.getIdentifer();
+       txCreateUserInfoInEnt.authorizedParticipantType = "Enterprise"
+       txCreateUserInfoInEnt.userId = me.getIdentifier();
        sendEvent.txForUser = txCreateUserInfoInEnt;
        sendEvent.resumeAssetId = randomIntId;
        emit(sendEvent);
