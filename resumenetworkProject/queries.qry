@@ -29,40 +29,40 @@ query searchAllSchool {
       SELECT hansung.ac.kr.participants.School
 }
 
-query searchCertificateByOwnerId {
+query searchCertificateById {
   description: " certificate"
   statement:
       SELECT hansung.ac.kr.assets.Certificate
-      WHERE (ownerId == _$CurrentUserId)
+      WHERE (ownerId == _$targetUserId)
 }
 
-query searchAwardDetailsByOwnerId {
+query searchAwardDetailsById {
   description: " AwardDetails"
   statement:
       SELECT hansung.ac.kr.assets.AwardDetails
-      WHERE (ownerId == _$CurrentUserId)
+      WHERE (ownerId == _$targetUserId)
 }
 
-query searchUserInfoInEntByOwnerId {
+query searchUserInfoInEntById {
   description: " UserInfoInEnt"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInEnt
-      WHERE (ownerId == _$CurrentUserId)
+      WHERE (ownerId == _$targettUserId)
 }
 
 
-query searchUserInfoInSchByOwnerId {
+query searchUserInfoInSchById {
   description: " UserInfoInSch"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch
-      WHERE (ownerId == _$CurrentUserId)
+      WHERE (ownerId == _$targetUserId)
 }
 
-query searchResumeInfoUserByOwnerId {
+query searchResumeInfoUserById {
   description: " ResumeInfoUser"
   statement:
       SELECT hansung.ac.kr.assets.ResumeInfoUser
-      WHERE (ownerId == _$CurrentUserId)
+      WHERE (ownerId == _$targetUserId)
 }
 
 
@@ -102,4 +102,26 @@ query searchUserInfoInSchByName {
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInSch
       WHERE (schoolName == _$targetName)
+}
+
+
+
+query searchAuthenticationById {
+  description: "Authentication find by ownerId"
+  statement:
+      SELECT hansung.ac.kr.assets.Authentication
+      WHERE (ownerId == _$targetUserId)
+}
+
+query searchUserInfoInEntByPerformingTask {
+  description:"select user by performingTask"
+  statement:
+      SELECT hansung.ac.kr.assets.UserInfoInEnt
+      WHERE (performingTask == _$targetTask)
+}
+query searchCertificateByScore {
+  description: "select certificate over score"
+  statement:
+      SELECT hansung.ac.kr.assets.Certificate
+      WHERE (certificateScore >= _targetScore)
 }
