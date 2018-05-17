@@ -6,7 +6,7 @@ participant User identified by userId {
     o String userId regex=/^[^#]*$/
     o String userName
     o DateTime dob
-    o Address address
+    o String address
     o String phoneNumber
     o String email
     o Boolean isPublic
@@ -17,7 +17,7 @@ participant User identified by userId {
 participant Organization identified by orgId {
     o String orgId regex=/^[^#]*$/
     o String orgName
-    o Address address
+    o String address
     o String contactAdress
     o String homepage optional
     o String discription optional
@@ -26,8 +26,8 @@ participant Organization identified by orgId {
 
 participant Enterprise identified by entId {
     o String entId regex=/^[^#]*$/
-  	o String entName
-    o Address address
+    o String entName
+    o String address
     o String contactAdress
     o String hompage optional
     o String numberOfemployees optional
@@ -41,7 +41,7 @@ participant Enterprise identified by entId {
 participant School identified by schId {
  	o String schId regex= /^[^#]*$/
     o String schName
-    o Address address optional
+    o String address optional
     o String contactAdress optional
     o String hompage optional
     o RequestResume[] requestResumeList optional

@@ -31,7 +31,10 @@ transaction AddRequestUser {
     o String requestResumeAssetId
 }
 
-transaction RevokeRequestUser extends  TxForUser {
+transaction RevokeRequestUser {
+    o String targetParticipantType
+    o String targetParticipantId
+    o String requestResumeAssetId
 }
 
 

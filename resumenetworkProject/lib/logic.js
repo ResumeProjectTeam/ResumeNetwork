@@ -373,7 +373,7 @@ function addRequestUser(addRequestUser) {
           return  participantList.update(target);
         }
   	else 
-          throw "Same requestResumeAssetId already exist";
+          throw new Error("Same requestResumeAssetId already exist");
    });
 
 }
@@ -384,48 +384,46 @@ function addRequestUser(addRequestUser) {
  */
 function revokeRequestUser(revokeRequestUser) {
 
+	
+    var index = -1;
+    var participantList = null;
+    var factory = getFactory();
 
-      var me = getCurrentParticipant();
-      var meType = null;
-  	  var index = -1;
 
-  	  if(!me) {
-          throw new Error('getCurrentParticipant is null');
-      }
 
-  	  me.requestUser.findIndex(function testF(element, indexf, array){
-              if(element.getIdentifier() == revokeRequestUser.userId ) {
-               	 index = indexf;
+    return getParticipantRegistry(revokeRequestUser.targetParticipantType)
+   .then(function (participantRegistry) {
+        participantList = participantRegistry;
+
+        return participantRegistry;
+    }).
+      then(function () {
+
+        return participantList.get(revokeRequestUser.targetParticipantId);
+
+    }).then(function (target){
+
+        if(!target.requestResumeList) {
+          throw "requestResumeList not exist";
+        }
+
+        target.requestResumeList.findIndex(function testF(element, indexf, array){
+             
+        if( (element.requestResumeAssetId) == revokeRequestUser.requestResumeAssetId ) {
+                 index = indexf;
               }
-      });
+        });
 
-      if(me.getFullyQualifiedType() === NAMESPACE_ORG) {
-          meType = NAMESPACE_ORG;
-      }
+	if(index > -1) {
+		target.requestResumeList.splice(index, 1);	
+	}
+	else 
+		throw Error("target to delete is not exist");
 
-      else if(me.getFullyQualifiedType() === NAMESPACE_ENT) {
-          meType = NAMESPACE_ENT;
-      }
-
-      else if(me.getFullyQualifiedType() === NAMESPACE_INS) {
-          meType = NAMESPACE_INS;
-      }
-
-      if(index > -1) {
-          me.requestUser.splice(index, 1);
-          return getParticipantRegistry(meType)
-          .then(function (typeRegistry) {
+        return  participantList.update(target);
+        
 		      
-              // emit an event
-              var SendEvent = getFactory().newEvent(NAMESPACE_EVENT_OR_TRANSACTION, 'SendEvent');
-              SendEvent.txForUser =  revokeRequestUser;
-              emit(SendEvent);
-
-              // persist the state of the member
-               
-              return typeRegistry.update(me);
-          });
-      }
+      
 }
 
 function getRandomIntInclusive(min, max) {

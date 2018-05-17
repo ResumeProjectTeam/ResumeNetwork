@@ -77,13 +77,3 @@ asset UserInfoInSch identified by assetId {
     o Double gradeAverage default=0.0 range=[0.0, 4.5] optional
     o Boolean isPublic
 }
-
-
-concept Address {
-    o String street
-    o String house
-    o String city
-    o String county
-    o String country
-    o String zip
-}
