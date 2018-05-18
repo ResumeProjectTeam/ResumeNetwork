@@ -213,7 +213,7 @@ export class CertificateComponent implements OnInit {
         console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceCertificate.getSystemQueryCertificate("CurrentUserId", this.currentId)
+        this.serviceCertificate.getSystemQueryCertificate("targetUserId", this.currentId)
           .toPromise()
           .then((certificateList) => {
             this.myCertificateList = certificateList;
@@ -221,7 +221,7 @@ export class CertificateComponent implements OnInit {
 
 
 
-        this.serviceCertificate.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+        this.serviceCertificate.getSystemQueryAuthentication("targetUserId", this.currentId)
           .toPromise()
           .then((authenticationList) => {
             this.myAuthenticationList = authenticationList;

@@ -17,83 +17,117 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { OrganizationService } from './Organization.service';
 import 'rxjs/add/operator/toPromise';
 @Component({
-	selector: 'app-Organization',
-	templateUrl: './Organization.component.html',
-	styleUrls: ['./Organization.component.css'],
+  selector: 'app-Organization',
+  templateUrl: './Organization.component.html',
+  styleUrls: ['./Organization.component.css'],
   providers: [OrganizationService]
 })
 export class OrganizationComponent implements OnInit {
 
   myForm: FormGroup;
+  myForm2: FormGroup;
 
   private allParticipants;
   private participant;
   private currentId;
-	private errorMessage;
-
-  
-      
-          orgId = new FormControl("", Validators.required);
-        
-  
-      
-          orgName = new FormControl("", Validators.required);
-        
-  
-      
-          address = new FormControl("", Validators.required);
-        
-  
-      
-          contactAdress = new FormControl("", Validators.required);
-        
-  
-      
-          homepage = new FormControl("", Validators.required);
-        
-  
-      
-          discription = new FormControl("", Validators.required);
-        
-  
-      
-          requestResumeList = new FormControl("", Validators.required);
-        
-  
+  private errorMessage;
+  private txCreateAuthentication;
+  private txRevokeRequestUser;
+  private myRequestResumeList;
 
 
-  constructor(private serviceOrganization:OrganizationService, fb: FormBuilder) {
+
+  orgId = new FormControl("", Validators.required);
+
+
+
+  orgName = new FormControl("", Validators.required);
+
+
+
+  address = new FormControl("", Validators.required);
+
+
+
+  contactAdress = new FormControl("", Validators.required);
+
+
+
+  homepage = new FormControl("", Validators.required);
+
+
+
+  discription = new FormControl("", Validators.required);
+
+
+
+  requestResumeList = new FormControl("", Validators.required);
+
+
+
+
+  authorizedParticipantId = new FormControl("", Validators.required);
+
+
+
+  resumeDetails = new FormControl("", Validators.required);
+
+
+
+  resumeAssetId = new FormControl("", Validators.required);
+
+
+
+
+
+  constructor(private serviceOrganization: OrganizationService, fb: FormBuilder) {
     this.myForm = fb.group({
-    
-        
-          orgId:this.orgId,
-        
-    
-        
-          orgName:this.orgName,
-        
-    
-        
-          address:this.address,
-        
-    
-        
-          contactAdress:this.contactAdress,
-        
-    
-        
-          homepage:this.homepage,
-        
-    
-        
-          discription:this.discription,
-        
-    
-        
-          requestResumeList:this.requestResumeList
-        
-    
+
+
+      orgId: this.orgId,
+
+
+
+      orgName: this.orgName,
+
+
+
+      address: this.address,
+
+
+
+      contactAdress: this.contactAdress,
+
+
+
+      homepage: this.homepage,
+
+
+
+      discription: this.discription,
+
+
+
+      requestResumeList: this.requestResumeList
+
+
     });
+
+    this.myForm2 = fb.group({
+
+
+      authorizedParticipantId: this.authorizedParticipantId,
+
+
+
+      resumeDetails: this.resumeDetails,
+
+
+
+      resumeAssetId: this.resumeAssetId,
+
+    });
+
   };
 
   ngOnInit(): void {
@@ -101,7 +135,9 @@ export class OrganizationComponent implements OnInit {
   }
 
   loadAll(): Promise<any> {
-    let tempList = [];
+
+    /*
+      let tempList = [];
     return this.serviceOrganization.getAll()
     .toPromise()
     .then((result) => {
@@ -110,19 +146,39 @@ export class OrganizationComponent implements OnInit {
         tempList.push(participant);
       });
       this.allParticipants = tempList;
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+    */
+    let tempList = [];
+    return this.serviceOrganization.getSystemPing()
+      .toPromise()
+      .then((result) => {
+        var Id;
+        Id = result['participant'];
+        Id = Id.split('#');
+        console.log(Id[1]);
+        this.currentId = Id[1];
+
+        this.currentId = "admin";
+
+        this.serviceOrganization.getSingle(this.currentId)
+          .toPromise()
+          .then((organization) => {
+            this.myRequestResumeList = organization.requestResumeList;
+          })
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
   }
+
+
 
 	/**
    * Event handler for changing the checked state of a checkbox (handles array enumeration values)
@@ -149,355 +205,423 @@ export class OrganizationComponent implements OnInit {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: "hansung.ac.kr.participants.Organization",
-      
-        
-          "orgId":this.orgId.value,
-        
-      
-        
-          "orgName":this.orgName.value,
-        
-      
-        
-          "address":this.address.value,
-        
-      
-        
-          "contactAdress":this.contactAdress.value,
-        
-      
-        
-          "homepage":this.homepage.value,
-        
-      
-        
-          "discription":this.discription.value,
-        
-      
-        
-          "requestResumeList":this.requestResumeList.value
-        
-      
-    };
+createAuthentication(authorizedParticipantId:string , resumeDetails:string, resumeAssetId:string ): Promise<any> {
+  this.txCreateAuthentication = {
+    $class : "hansung.ac.kr.transaction.CreateAuthentication",
 
-    this.myForm.setValue({
-      
-        
-          "orgId":null,
-        
-      
-        
-          "orgName":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "contactAdress":null,
-        
-      
-        
-          "homepage":null,
-        
-      
-        
-          "discription":null,
-        
-      
-        
-          "requestResumeList":null
-        
-      
-    });
 
-    return this.serviceOrganization.addParticipant(this.participant)
+      "authorizedParticipantId": authorizedParticipantId,
+
+
+
+      "resumeDetails": resumeDetails,
+
+
+
+      "resumeAssetId": resumeAssetId,
+
+  }
+
+    return this.serviceOrganization.createAuthentication(this.txCreateAuthentication)
     .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm.setValue({
-      
-        
-          "orgId":null,
-        
-      
-        
-          "orgName":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "contactAdress":null,
-        
-      
-        
-          "homepage":null,
-        
-      
-        
-          "discription":null,
-        
-      
-        
-          "requestResumeList":null 
-        
-      
+      .then(() => {
+        this.errorMessage = null;
+
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else {
+          this.errorMessage = error;
+        }
       });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+
+  }
+
+  revokeRequestUser(requestResumeAssetId:string): Promise<any> {
+    this.txRevokeRequestUser = {
+      $class : "hansung.ac.kr.transaction.RevokeRequestUser",
+
+
+      "targetParticipantType": "hansung.ac.kr.participants.Organization",
+
+
+
+      "targetParticipantId": this.currentId,
+
+
+
+      "requestResumeAssetId": requestResumeAssetId
+
+    }
+
+    return this.serviceOrganization.revokeRequestUser(this.txRevokeRequestUser)
+    .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
   }
 
 
-   updateParticipant(form: any): Promise<any> {
+  addParticipant(form: any): Promise<any> {
     this.participant = {
       $class: "hansung.ac.kr.participants.Organization",
-      
-        
-          
-        
-    
-        
-          
-            "orgName":this.orgName.value,
-          
-        
-    
-        
-          
-            "address":this.address.value,
-          
-        
-    
-        
-          
-            "contactAdress":this.contactAdress.value,
-          
-        
-    
-        
-          
-            "homepage":this.homepage.value,
-          
-        
-    
-        
-          
-            "discription":this.discription.value,
-          
-        
-    
-        
-          
-            "requestResumeList":this.requestResumeList.value
-          
-        
-    
+
+
+      "orgId": this.orgId.value,
+
+
+
+      "orgName": this.orgName.value,
+
+
+
+      "address": this.address.value,
+
+
+
+      "contactAdress": this.contactAdress.value,
+
+
+
+      "homepage": this.homepage.value,
+
+
+
+      "discription": this.discription.value,
+
+
+
+      "requestResumeList": this.requestResumeList.value
+
+
     };
 
-    return this.serviceOrganization.updateParticipant(form.get("orgId").value,this.participant)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-            else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
+    this.myForm.setValue({
+
+
+      "orgId": null,
+
+
+
+      "orgName": null,
+
+
+
+      "address": null,
+
+
+
+      "contactAdress": null,
+
+
+
+      "homepage": null,
+
+
+
+      "discription": null,
+
+
+
+      "requestResumeList": null
+
+
     });
+
+    return this.serviceOrganization.addParticipant(this.participant)
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+        this.myForm.setValue({
+
+
+          "orgId": null,
+
+
+
+          "orgName": null,
+
+
+
+          "address": null,
+
+
+
+          "contactAdress": null,
+
+
+
+          "homepage": null,
+
+
+
+          "discription": null,
+
+
+
+          "requestResumeList": null
+
+
+        });
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+  }
+
+
+  updateParticipant(form: any): Promise<any> {
+    this.participant = {
+      $class: "hansung.ac.kr.participants.Organization",
+
+
+
+
+
+
+
+      "orgName": this.orgName.value,
+
+
+
+
+
+      "address": this.address.value,
+
+
+
+
+
+      "contactAdress": this.contactAdress.value,
+
+
+
+
+
+      "homepage": this.homepage.value,
+
+
+
+
+
+      "discription": this.discription.value,
+
+
+
+
+
+      "requestResumeList": this.requestResumeList.value
+
+
+
+    };
+
+    return this.serviceOrganization.updateParticipant(form.get("orgId").value, this.participant)
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
   }
 
 
   deleteParticipant(): Promise<any> {
 
     return this.serviceOrganization.deleteParticipant(this.currentId)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-			else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
   }
 
-  setId(id: any): void{
+  setId(id: any): void {
     this.currentId = id;
   }
 
-  getForm(id: any): Promise<any>{
+  getForm(id: any): Promise<any> {
 
     return this.serviceOrganization.getparticipant(id)
-    .toPromise()
-    .then((result) => {
-			this.errorMessage = null;
-      let formObject = {
-        
-          
-            "orgId":null,
-          
-        
-          
-            "orgName":null,
-          
-        
-          
-            "address":null,
-          
-        
-          
-            "contactAdress":null,
-          
-        
-          
-            "homepage":null,
-          
-        
-          
-            "discription":null,
-          
-        
-          
-            "requestResumeList":null 
-          
-        
-      };
+      .toPromise()
+      .then((result) => {
+        this.errorMessage = null;
+        let formObject = {
+
+
+          "orgId": null,
 
 
 
-      
-        if(result.orgId){
-          
-            formObject.orgId = result.orgId;
-          
-        }else{
+          "orgName": null,
+
+
+
+          "address": null,
+
+
+
+          "contactAdress": null,
+
+
+
+          "homepage": null,
+
+
+
+          "discription": null,
+
+
+
+          "requestResumeList": null
+
+
+        };
+
+
+
+
+        if (result.orgId) {
+
+          formObject.orgId = result.orgId;
+
+        } else {
           formObject.orgId = null;
         }
-      
-        if(result.orgName){
-          
-            formObject.orgName = result.orgName;
-          
-        }else{
+
+        if (result.orgName) {
+
+          formObject.orgName = result.orgName;
+
+        } else {
           formObject.orgName = null;
         }
-      
-        if(result.address){
-          
-            formObject.address = result.address;
-          
-        }else{
+
+        if (result.address) {
+
+          formObject.address = result.address;
+
+        } else {
           formObject.address = null;
         }
-      
-        if(result.contactAdress){
-          
-            formObject.contactAdress = result.contactAdress;
-          
-        }else{
+
+        if (result.contactAdress) {
+
+          formObject.contactAdress = result.contactAdress;
+
+        } else {
           formObject.contactAdress = null;
         }
-      
-        if(result.homepage){
-          
-            formObject.homepage = result.homepage;
-          
-        }else{
+
+        if (result.homepage) {
+
+          formObject.homepage = result.homepage;
+
+        } else {
           formObject.homepage = null;
         }
-      
-        if(result.discription){
-          
-            formObject.discription = result.discription;
-          
-        }else{
+
+        if (result.discription) {
+
+          formObject.discription = result.discription;
+
+        } else {
           formObject.discription = null;
         }
-      
-        if(result.requestResumeList){
-          
-            formObject.requestResumeList = result.requestResumeList;
-          
-        }else{
+
+        if (result.requestResumeList) {
+
+          formObject.requestResumeList = result.requestResumeList;
+
+        } else {
           formObject.requestResumeList = null;
         }
-      
 
-      this.myForm.setValue(formObject);
 
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        this.myForm.setValue(formObject);
+
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
-        else{
-            this.errorMessage = error;
+        else {
+          this.errorMessage = error;
         }
-    });
+      });
 
   }
 
-  resetForm(): void{
+  resetForm(): void {
     this.myForm.setValue({
-      
-        
-          "orgId":null,
-        
-      
-        
-          "orgName":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "contactAdress":null,
-        
-      
-        
-          "homepage":null,
-        
-      
-        
-          "discription":null,
-        
-      
-        
-          "requestResumeList":null 
-        
-      
-      });
+
+
+      "orgId": null,
+
+
+
+      "orgName": null,
+
+
+
+      "address": null,
+
+
+
+      "contactAdress": null,
+
+
+
+      "homepage": null,
+
+
+
+      "discription": null,
+
+
+
+      "requestResumeList": null
+
+
+    });
   }
 
 }

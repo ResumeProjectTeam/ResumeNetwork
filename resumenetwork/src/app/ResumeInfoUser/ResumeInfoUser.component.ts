@@ -192,7 +192,7 @@ export class ResumeInfoUserComponent implements OnInit {
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
-        this.serviceResumeInfoUser.getSystemQueryResumeInfoUser("CurrentUserId", this.currentId)
+        this.serviceResumeInfoUser.getSystemQueryResumeInfoUser("targetUserId", this.currentId)
           .toPromise()
           .then((resumeInfoUser) => {
             this.myResumeInfoUser = resumeInfoUser;

@@ -196,13 +196,13 @@ export class AwardDetailsComponent implements OnInit {
         console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceAwardDetails.getSystemQueryAwardDetails("CurrentUserId", this.currentId)
+        this.serviceAwardDetails.getSystemQueryAwardDetails("targetUserId", this.currentId)
         .toPromise()
         .then((awardDetailsList) => {
           this.myAwardDetailsList = awardDetailsList;
         })
 
-        this.serviceAwardDetails.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+        this.serviceAwardDetails.getSystemQueryAuthentication("targetUserId", this.currentId)
           .toPromise()
           .then((authenticationList) => {
             this.myAuthenticationList = authenticationList;

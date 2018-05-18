@@ -196,13 +196,13 @@ export class UserInfoInSchComponent implements OnInit {
         console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceUserInfoInSch.getSystemQueryUserInfoInSch("CurrentUserId", this.currentId)
+        this.serviceUserInfoInSch.getSystemQueryUserInfoInSch("targetUserId", this.currentId)
         .toPromise()
         .then((UserInfoInSch) => {
           this.myUserInfoInSch = UserInfoInSch;
         })
 
-        this.serviceUserInfoInSch.getSystemQueryAuthentication("CurrentUserId", this.currentId)
+        this.serviceUserInfoInSch.getSystemQueryAuthentication("targetUserId", this.currentId)
         .toPromise()
         .then((authenticationList) => {
           this.myAuthenticationList = authenticationList;

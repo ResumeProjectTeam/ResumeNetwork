@@ -33,6 +33,7 @@ export class UserInfoInEntComponent implements OnInit {
   private currentId;
   private errorMessage;
   private myUserInfoInEnt;
+  private myAuthenticationList;
 
   
       
@@ -75,7 +76,7 @@ export class UserInfoInEntComponent implements OnInit {
           isPublic = new FormControl("", Validators.required);
 
 
-          userId = new FormControl("",Validators.required);  
+          userId = new FormControl("test",Validators.required);  
 
     
           transactionId = new FormControl("",Validators.required);  
@@ -190,10 +191,18 @@ export class UserInfoInEntComponent implements OnInit {
         Id = Id.split('#');
         console.log(Id[1]);
         this.currentId = Id[1];
-        this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("CurrentUserId", this.currentId)
+
+        this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("targetUserId", this.currentId)
         .toPromise()
         .then((UserInfoInEnt) => {
           this.myUserInfoInEnt = UserInfoInEnt;
+        })
+
+        this.serviceUserInfoInEnt.getSystemQueryAuthentication("targetUserId", this.currentId)
+        .toPromise()
+        .then((authenticationList) => {
+          this.myAuthenticationList = authenticationList;
+          console.log(this.myAuthenticationList);
         })
     })
     .catch((error) => {

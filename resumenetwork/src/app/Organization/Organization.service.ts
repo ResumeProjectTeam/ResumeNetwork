@@ -17,6 +17,7 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Organization } from '../hansung.ac.kr.participants';
 import 'rxjs/Rx';
+import { CreateAuthentication, RevokeRequestUser } from '../hansung.ac.kr.transaction';
 
 // Can be injected into a constructor
 @Injectable()
@@ -24,11 +25,17 @@ export class OrganizationService {
 
 	
 		private NAMESPACE: string = 'Organization';
-	
+    private NAMESPACE2: string = 'CreateAuthentication';
+    private NAMESPACE3: string = 'RevokeRequestUser';
 
 
 
-    constructor(private dataService: DataService<Organization>) {
+    constructor(
+      private dataService: DataService<Organization>,
+      private dataService2: DataService<CreateAuthentication>,
+      private dataService3: DataService<RevokeRequestUser>
+
+    ) {
     };
 
     public getAll(): Observable<Organization[]> {
@@ -42,6 +49,14 @@ export class OrganizationService {
     public addParticipant(itemToAdd: any): Observable<Organization> {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
+  
+    public createAuthentication(itemToAdd: any): Observable<CreateAuthentication> {
+      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+    }
+
+    public revokeRequestUser(itemToAdd: any): Observable<RevokeRequestUser> {
+      return this.dataService3.add(this.NAMESPACE3, itemToAdd);
+    }
 
     public updateParticipant(id: any, itemToUpdate: any): Observable<Organization> {
       return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
@@ -50,5 +65,14 @@ export class OrganizationService {
     public deleteParticipant(id: any): Observable<Organization> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
+
+    public getSystemPing(): Observable<JSON> {
+      return this.dataService.getSystemPing();
+    }
+
+    public getSingle(id: string): Observable<Organization> {
+      return this.dataService.getSingle(this.NAMESPACE, id);
+    }
+
 
 }
