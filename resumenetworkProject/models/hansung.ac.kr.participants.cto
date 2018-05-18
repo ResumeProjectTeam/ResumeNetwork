@@ -51,7 +51,7 @@ participant School identified by schId {
 concept RequestResume {
     o String userId
     o String requestDetails
-    --> User user optional
+    o String participantType
     o String requestResumeAssetId 
 }
 

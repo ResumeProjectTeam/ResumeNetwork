@@ -5,6 +5,7 @@ import hansung.ac.kr.participants.*
 asset Authentication identified by assetId {
     o String assetId
     o String ownerId
+    o String approvalStatus
     o String resumeDetails
     o String resumeAssetId
     o String authorizedParticipantId

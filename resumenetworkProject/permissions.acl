@@ -7,7 +7,40 @@
 
 
 
+
+
+/* For Authentication Asset */
+
+rule updateAuthenticationByAny{
+    description: "Real condition is defined in logic.js File"
+    participant(p): "hansung.ac.kr.participants.Enterprise"
+    operation: UPDATE
+    resource(r): "hansung.ac.kr.assets.Authentication"
+    condition: (r.requestResumeList.forEach(function (requestResume){
+    	if(requestResume.requestResumeAssetId == r.resumeAssetId){
+		return true;
+	}
+    }))
+    action: ALLOW
+}
+
+
+
+rule readAuthenticationByAny{
+    description: ""
+    participant: "ANY"
+    operation: READ
+    resource: "hansung.ac.kr.assets.Authentication"
+    action: ALLOW
+}
+
+
+
+
+
+
 /* Read asset */
+
 
 rule readAssetByEnterprise{
     description: ""
@@ -41,7 +74,7 @@ rule readAssetBySchool{
 
 /* Create access to asset */
 
-
+/*
 rule OES_CreateAuthentication {
     description: "real condition is defined in logic.js function"
     participant: "ANY"
@@ -51,7 +84,7 @@ rule OES_CreateAuthentication {
     condition: (true)
     action: ALLOW
 }
-
+*/
 
 
 rule UserCreateResumeInfoUser {
@@ -130,7 +163,7 @@ rule UserRUDresumeElement {
 
 /* Full access to creatAssetTransaction */
 
-
+/*
 rule OES_TxCreateAuthentication {
     description: "real condition is defined in logic.js function"
     participant: "ANY"
@@ -139,7 +172,7 @@ rule OES_TxCreateAuthentication {
     condition: (true)
     action: ALLOW
 }
-
+*/
 
 
 
@@ -183,6 +216,19 @@ rule UserTxCreateUserInfoInSch {
 	resource: "hansung.ac.kr.transaction.CreateUserInfoInSch"
     action: ALLOW
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

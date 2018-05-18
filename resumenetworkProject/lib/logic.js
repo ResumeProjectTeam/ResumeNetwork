@@ -76,6 +76,7 @@ function CreateAuthentication  (txCreateAuthentication ) {
    
       var newAuthentication = factory.newResource(NAMESAPCE_ASSETS, "Authentication", txCreateAuthentication.resumeAssetId );
        newAuthentication.authorizedParticipantId = txCreateAuthentication.authorizedParticipantId;
+       newAuthentication.approvalStatus = "미인증";
        newAuthentication.resumeDetails = txCreateAuthentication.resumeDetails;
        newAuthentication.resumeAssetId =  txCreateAuthentication.resumeAssetId;
        newAuthentication.authenticationTime = actionDateTime;
@@ -367,6 +368,7 @@ function addRequestUser(addRequestUser) {
            newRequestResume.userId = addRequestUser.requestUserId;
            newRequestResume.requestDetails =  addRequestUser.requestDetails;
            newRequestResume.requestResumeAssetId = addRequestUser.requestResumeAssetId;
+	   newRequestResume.participantType = addRequestUser.targetParticipantType;
            // Need to insert Relation User Type user 
 
           target.requestResumeList.push(newRequestResume);

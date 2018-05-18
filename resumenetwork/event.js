@@ -126,43 +126,27 @@ class SitechainListener{
 
                             this.NetworkConnection.submitTransaction(addRequestUser);
 
-/*
+
                             let createAuthentication = factory.newTransaction('hansung.ac.kr.transaction', 'CreateAuthentication');
                     
                    
-        	             createAuthentication.authorizedParticipantId = evt['authorizedParticipantId'];
+        	            createAuthentication.authorizedParticipantId = evt['authorizedParticipantId'];
                       
-                   
-			     if(evt['authorizedParticipantType'] == "Organization1"){
-                                 createAuthentication.resumeName = evt['certificateName'];
-                                 createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
-        		     }
+                            createAuthentication.resumeDetails = addRequestUser.requestDetails;
+                        
+                            createAuthentication.resumeAssetId =  addRequestUser.requestResumeAssetId;
+        		     
+                            createAuthentication.userId =  addRequestUser.requestUserId;
 
-
-			     if(evt['authorizedParticipantType'] == "Organization2"){ 
-                                  createAuthentication.resumeName = evt['contestName'];
-                                  createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
-        		     }
-
-
-			if(evt['authorizedParticipantType'] == "Enterprise"){ 
-                             createAuthentication.resumeName = evt['contestName'];
-                             createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
-        		}
-
-
-
-			if(evt['authorizedParticipantType'] == "School"){ 
-                             createAuthentication.resumeName = evt['schoolName'];
-                             createAuthentication.resumeAssetId = getEvent['resumeAssetId'];
-        		}
-                        createAuthentication.userId = evt['userId'];
-			console.log(createAuthentication);
+        		    console.log(createAuthentication);
 			
-			this.NetworkConnection.submitTransaction(createAuthentication);
-
-
-                        */
+		            this.NetworkConnection.submitTransaction(createAuthentication);
+             
+			    console.log("");
+			    console.log("AddRequestUser and CreateAuthentication is completed");
+      			    console.log("");
+			    console.log("--------------------------------------------------------------");
+ 
 			}catch(err){
                           console.log("error in event.js : " + err);
                         }
