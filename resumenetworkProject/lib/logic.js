@@ -56,19 +56,6 @@ function CreateAuthentication  (txCreateAuthentication ) {
         throw new Error('can not find Participant');
     }
 
-   me.requestResumeList.findIndex(function check(element, index, array) {
-     console.log("test : " + element.requestResumeAssetId);
-     console.log("test2 : " + txCreateAuthentication.resumeAssetId);
-     if(element.requestResumeAssetId == txCreateAuthentication.resumeAssetId) {
-        indexf = index;
-        console.log(indexf);
-     }
-  })
-
-  if(indexf == -1) {
-     console.log(indexf);
-     throw new Error("Error: resume Authentication is failed" );
-  } 
 
    return getAssetRegistry(NAMESAPCE_ASSETS + ".Authentication")
   .then(function (allAuthenticationRegistry) {
