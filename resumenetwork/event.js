@@ -138,7 +138,6 @@ class SitechainListener{
         		     
                             createAuthentication.userId =  addRequestUser.requestUserId;
 
-        		    console.log(createAuthentication);
 			
 		            this.NetworkConnection.submitTransaction(createAuthentication);
              
