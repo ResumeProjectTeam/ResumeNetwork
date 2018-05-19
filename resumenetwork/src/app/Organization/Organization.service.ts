@@ -18,6 +18,7 @@ import { Observable } from 'rxjs/Observable';
 import { Organization } from '../hansung.ac.kr.participants';
 import 'rxjs/Rx';
 import { CreateAuthentication, RevokeRequestUser } from '../hansung.ac.kr.transaction';
+import { Authentication } from '../hansung.ac.kr.assets';
 
 // Can be injected into a constructor
 @Injectable()
@@ -25,14 +26,14 @@ export class OrganizationService {
 
 	
 		private NAMESPACE: string = 'Organization';
-    private NAMESPACE2: string = 'CreateAuthentication';
+    private NAMESPACE2: string = 'Authentication';
     private NAMESPACE3: string = 'RevokeRequestUser';
 
 
 
     constructor(
       private dataService: DataService<Organization>,
-      private dataService2: DataService<CreateAuthentication>,
+      private dataService2: DataService<Authentication>,
       private dataService3: DataService<RevokeRequestUser>
 
     ) {
@@ -50,8 +51,12 @@ export class OrganizationService {
       return this.dataService.add(this.NAMESPACE, itemToAdd);
     }
   
-    public createAuthentication(itemToAdd: any): Observable<CreateAuthentication> {
-      return this.dataService2.add(this.NAMESPACE2, itemToAdd);
+    public updateAuthentication(id: any, itemToUpdate: any): Observable<Authentication> {
+      return this.dataService2.update(this.NAMESPACE2, id, itemToUpdate);
+    }
+
+    public updateAsset(id: any, itemToUpdate: any): Observable<Authentication> {
+      return this.dataService2.update(this.NAMESPACE2, id, itemToUpdate);
     }
 
     public revokeRequestUser(itemToAdd: any): Observable<RevokeRequestUser> {

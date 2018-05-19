@@ -47,7 +47,7 @@ import {Event} from './org.hyperledger.composer.system';
    export class RequestResume {
       userId: string;
       requestDetails: string;
-      user: User;
+      participantType: string;
       requestResumeAssetId: string;
    }
    export enum IndustryCategory {

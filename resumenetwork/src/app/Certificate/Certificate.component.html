@@ -106,7 +106,7 @@
           </div>
 
 
-            <!--
+          <!--
               
           <div class="form-group text-left">
             <label for="userId">userId</label>
@@ -377,14 +377,15 @@
             <td class="asset-properties">{{asset.transactionTime}}</td>
 
             <td class="asset-properties">{{asset.isPublic}}</td>
-            
+
             <td>
-              <span *ngFor="let asset2 of myAuthenticationList" >
+              <span *ngFor="let asset2 of myAuthenticationList">
                 <b *ngIf="asset2.resumeAssetId == asset.assetId">
-                  {{authenticationExist()}}
+                  {{authenticationExist(asset2.approvalStatus)}}
                 </b>
               </span>
               {{printAuthentication()}}
+
             </td>
 
 

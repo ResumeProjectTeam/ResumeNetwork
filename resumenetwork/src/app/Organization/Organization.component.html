@@ -11,6 +11,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+
+
 <div class="modal fade" id="addParticipantModal" tabindex="-1" role="dialog" aria-labelledby="addParticipantModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -300,22 +302,24 @@
 
           <tr *ngFor="let asset of myRequestResumeList">
 
-            <td class="asset-properties">{{asset.userId}}</td>
+              
+            <td  class="asset-properties">{{asset.userId}}</td>
 
-            <td class="asset-properties">{{asset.requestDetails}}</td>
+            <td *ngIf="asset.requestDetails"class="asset-properties">{{asset.requestDetails}}</td>
 
-            <td class="asset-properties">{{asset.requestResumeAssetId}}</td>
+            <td *ngIf="asset.requestResumeAssetId" class="asset-properties">{{asset.requestResumeAssetId}}</td>
+
             <td>
               <form>
 
                 <div>
-                  <button (click)="createAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId);" type="submit">승인</button>
+                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증' );" type="submit">승인</button>
                   <button (click)="revokeRequestUser(asset.requestResumeAssetId);" type="submit">거부</button>
                 </div>
               </form>
             </td>
             
-            <!--
+          <!--
             <tr *ngFor="let participant of allParticipants">
   
           

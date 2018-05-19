@@ -6,6 +6,7 @@ import {Event} from './org.hyperledger.composer.system';
    export class Authentication extends Asset {
       assetId: string;
       ownerId: string;
+      approvalStatus: string;
       resumeDetails: string;
       resumeAssetId: string;
       authorizedParticipantId: string;

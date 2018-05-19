@@ -38,6 +38,7 @@ export class CertificateComponent implements OnInit {
   private isAuthentication;
 
 
+
   assetId = new FormControl("test", Validators.required);
 
 
@@ -181,19 +182,24 @@ export class CertificateComponent implements OnInit {
     });
   };
 
-  authenticationExist(){
-    this.isAuthentication = true;
+  authenticationExist(approvalStatus : string){
+    console.log(approvalStatus);
+    this.isAuthentication = approvalStatus;
+    //return true;
   }
 
   printAuthentication(){
-    if(this.isAuthentication == true){
+
+ /*   if(this.isAuthentication == true){
       this.isAuthentication = false;
-      return "인증 완료";
+      return approvalStatus;
     }
     else{
       this.isAuthentication = false;
-      return "인증 미완료";
+      return approvalStatus;
     }
+    */
+   return this.isAuthentication;
   }
 
 
@@ -328,8 +334,6 @@ export class CertificateComponent implements OnInit {
     };
 
 
-    console.log(this.Transaction);
-
 
     this.myForm2.setValue({
 
@@ -379,6 +383,8 @@ export class CertificateComponent implements OnInit {
     return this.serviceCertificate.addTransaction(this.Transaction)
       .toPromise()
       .then(() => {
+
+        this.loadAll();
         this.errorMessage = null;
         this.myForm2.setValue({
 

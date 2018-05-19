@@ -31,7 +31,7 @@ export class OrganizationComponent implements OnInit {
   private participant;
   private currentId;
   private errorMessage;
-  private txCreateAuthentication;
+  private txUpdateAuthentication;
   private txRevokeRequestUser;
   private myRequestResumeList;
 
@@ -147,6 +147,7 @@ export class OrganizationComponent implements OnInit {
       });
       this.allParticipants = tempList;
     */
+
     let tempList = [];
     return this.serviceOrganization.getSystemPing()
       .toPromise()
@@ -204,38 +205,65 @@ export class OrganizationComponent implements OnInit {
   hasArrayValue(name: string, value: any): boolean {
     return this[name].value.indexOf(value) !== -1;
   }
+  updateAuthentication(ownerId: string, resumeDetails:string , resumeAssetId:string , approval:string) : Promise<any> {
+    
 
-createAuthentication(authorizedParticipantId:string , resumeDetails:string, resumeAssetId:string ): Promise<any> {
-  this.txCreateAuthentication = {
-    $class : "hansung.ac.kr.transaction.CreateAuthentication",
+    
+    this.txUpdateAuthentication = {
+      $class: "hansung.ac.kr.assets.Authentication",
+    
+            "ownerId":ownerId,
+          
+        
+    
+          
+            "resumeDetails":resumeDetails,
+          
+        
+    
+        
+            "resumeAssetId":resumeAssetId,
+          
+        
+    
+
+            "approvalStatus":approval,
 
 
-      "authorizedParticipantId": authorizedParticipantId,
+        
+          
+            "authorizedParticipantId":this.currentId,
+          
+        
+    
+        
+          
+            "authenticationTime":new Date().getTime()
+          
+        
+    
+    };
+     return this.serviceOrganization.updateAsset(resumeAssetId, this.txUpdateAuthentication)
+		.toPromise()
+		.then(() => {
+      this.revokeRequestUser(resumeAssetId);
+      this.errorMessage = null;
+    
+		})
+		.catch((error) => {
+            if(error == 'Server error'){
+				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+			}
+            else if(error == '404 - Not Found'){
+				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+			}
+			else{
+				this.errorMessage = error;
+			}
+    });
 
 
 
-      "resumeDetails": resumeDetails,
-
-
-
-      "resumeAssetId": resumeAssetId,
-
-  }
-
-    return this.serviceOrganization.createAuthentication(this.txCreateAuthentication)
-    .toPromise()
-      .then(() => {
-        this.errorMessage = null;
-
-      })
-      .catch((error) => {
-        if (error == 'Server error') {
-          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else {
-          this.errorMessage = error;
-        }
-      });
 
   }
 
@@ -260,6 +288,7 @@ createAuthentication(authorizedParticipantId:string , resumeDetails:string, resu
     .toPromise()
       .then(() => {
         this.errorMessage = null;
+        this.loadAll();
 
       })
       .catch((error) => {
