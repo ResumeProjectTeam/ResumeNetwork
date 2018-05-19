@@ -32,8 +32,9 @@ export class UserInfoInEntComponent implements OnInit {
   private Transaction;
   private currentId;
   private errorMessage;
-  private myUserInfoInEnt;
+  private myUserInfoInEntList;
   private myAuthenticationList;
+  private isAuthentication;
 
   
       
@@ -65,7 +66,7 @@ export class UserInfoInEntComponent implements OnInit {
         
   
       
-          retirementDate = new FormControl("");
+          retirementDate = new FormControl("2001-01-01", Validators.required);
         
   
       
@@ -166,16 +167,23 @@ export class UserInfoInEntComponent implements OnInit {
         userId:this.userId,
     
 
-      /*
-        transactionId:this.transactionId,
-    
-
-    
-        timestamp:this.timestamp
-     */
-
     });
   };
+
+
+
+  authenticationExist(approvalStatus : string){
+    this.isAuthentication = approvalStatus;
+
+  }
+
+  printAuthentication(){
+
+   return this.isAuthentication;
+  }
+
+
+
 
   ngOnInit(): void {
     this.loadAll();
@@ -184,39 +192,78 @@ export class UserInfoInEntComponent implements OnInit {
   loadAll(): Promise<any> {
     let tempList = [];
     return this.serviceUserInfoInEnt.getSystemPing()
-    .toPromise()
-    .then((result) => {
-     var Id;
+      .toPromise()
+      .then((result) => {
+        var Id;
         Id = result['participant'];
         Id = Id.split('#');
-        console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("targetUserId", this.currentId)
-        .toPromise()
-        .then((UserInfoInEnt) => {
-          this.myUserInfoInEnt = UserInfoInEnt;
-        })
+        
+     
+        this.getMyUserInfoInEntList();
+      });
 
-        this.serviceUserInfoInEnt.getSystemQueryAuthentication("targetUserId", this.currentId)
-        .toPromise()
-        .then((authenticationList) => {
-          this.myAuthenticationList = authenticationList;
-          console.log(this.myAuthenticationList);
-        })
+
+  }
+
+
+
+  getMyUserInfoInEntList(): Promise<any> {
+    return   this.serviceUserInfoInEnt.getSystemQueryUserInfoInEnt("targetUserId", this.currentId)
+    .toPromise()
+    .then((userInfoInEnt) => {
+
+      this.myUserInfoInEntList = userInfoInEnt;
+      this.getMyAuthenticationList();
     })
     .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-        }
-        else{
-            this.errorMessage = error;
-        }
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
     });
   }
+
+
+  getMyAuthenticationList(): Promise<any> {
+    return   this.serviceUserInfoInEnt.getSystemQueryAuthentication("targetUserId", this.currentId)
+    .toPromise()
+    .then((authenticationList) => {
+      this.myAuthenticationList = authenticationList;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
+    });
+  }
+
+
+
+
+
 
 	/**
    * Event handler for changing the checked state of a checkbox (handles array enumeration values)
@@ -243,153 +290,6 @@ export class UserInfoInEntComponent implements OnInit {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addAsset(form: any): Promise<any> {
-    this.asset = {
-      $class: "hansung.ac.kr.assets.UserInfoInEnt",
-      
-        
-          "assetId":this.assetId.value,
-        
-      
-        
-          "ownerId":this.ownerId.value,
-        
-      
-        
-          "authorizedParticipantId":this.authorizedParticipantId.value,
-        
-      
-        
-          "enterpriseName":this.enterpriseName.value,
-        
-      
-        
-          "userPosition":this.userPosition.value,
-        
-      
-        
-          "performingTask":this.performingTask.value,
-        
-      
-        
-          "dateOfEmployment":this.dateOfEmployment.value,
-        
-      
-        
-          "retirementDate":this.retirementDate.value,
-        
-      
-        
-          "transactionTime":this.transactionTime.value,
-        
-      
-        
-          "isPublic":this.isPublic.value
-        
-      
-    };
-
-    this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
-        
-          "ownerId":null,
-        
-      
-        
-          "authorizedParticipantId":null,
-        
-      
-        
-          "enterpriseName":null,
-        
-      
-        
-          "userPosition":null,
-        
-      
-        
-          "performingTask":null,
-        
-      
-        
-          "dateOfEmployment":null,
-        
-      
-        
-          "retirementDate":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "isPublic":null
-        
-      
-    });
-
-    return this.serviceUserInfoInEnt.addAsset(this.asset)
-    .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
-        
-          "ownerId":null,
-        
-      
-        
-          "authorizedParticipantId":null,
-        
-      
-        
-          "enterpriseName":null,
-        
-      
-        
-          "userPosition":null,
-        
-      
-        
-          "performingTask":null,
-        
-      
-        
-          "dateOfEmployment":null,
-        
-      
-        
-          "retirementDate":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "isPublic":null 
-        
-      
-      });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
-  }
 
 
 
@@ -425,16 +325,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "userId":this.userId.value,
-        
-      
-        /*
-          "transactionId":this.transactionId.value,
-        
-      
-        
-          "timestamp":this.timestamp.value
-          */
+          "userId":this.userId.value
         
       
     };
@@ -470,23 +361,15 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "userId":null,
+          "userId":null
         
-      
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null
-        */
-      
     });
 
     return this.serviceUserInfoInEnt.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
-			this.errorMessage = null;
+      this.errorMessage = null;
+      this.loadAll();
       this.myForm2.setValue({
       
         
@@ -521,13 +404,6 @@ export class UserInfoInEntComponent implements OnInit {
           "userId":null,
         
       
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null 
-        */
       
       });
     })
@@ -608,6 +484,7 @@ export class UserInfoInEntComponent implements OnInit {
     return this.serviceUserInfoInEnt.updateAsset(form.get("assetId").value,this.asset)
 		.toPromise()
 		.then(() => {
+      this.loadAll();
 			this.errorMessage = null;
 		})
 		.catch((error) => {
@@ -629,7 +506,9 @@ export class UserInfoInEntComponent implements OnInit {
     return this.serviceUserInfoInEnt.deleteAsset(this.currentId)
 		.toPromise()
 		.then(() => {
-			this.errorMessage = null;
+      this.loadAll();
+      this.errorMessage = null;
+      this.deleteAsset2();
 		})
 		.catch((error) => {
             if(error == 'Server error'){
@@ -643,6 +522,32 @@ export class UserInfoInEntComponent implements OnInit {
 			}
     });
   }
+
+
+  deleteAsset2(): Promise<any> {
+    return this.serviceUserInfoInEnt.deleteAsset2(this.currentId)
+      .toPromise()
+      .then(() => {
+        this.loadAll();
+        this.errorMessage = null;
+       
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+  }
+
+
+
+
 
   setId(id: any): void{
     this.currentId = id;

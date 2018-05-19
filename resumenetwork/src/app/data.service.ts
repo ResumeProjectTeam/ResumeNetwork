@@ -54,6 +54,7 @@ export class DataService<Type> {
         console.log('Add ' + ns);
         console.log('asset', asset);
         */
+
         return this.http.post(this.actionUrl + ns, asset)
           .map(this.extractData)
           .catch(this.handleError);
@@ -72,7 +73,7 @@ export class DataService<Type> {
     }
 
     public delete(ns: string, id: string): Observable<Type> {
-        //console.log('Delete ' + ns);
+        console.log(this.actionUrl + ns + '/' + id);
 
         return this.http.delete(this.actionUrl + ns + '/' + id)
           .map(this.extractData)

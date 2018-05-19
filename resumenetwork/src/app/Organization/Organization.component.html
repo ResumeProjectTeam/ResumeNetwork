@@ -313,8 +313,8 @@
               <form>
 
                 <div>
-                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증' );" type="submit">승인</button>
-                  <button (click)="revokeRequestUser(asset.requestResumeAssetId);" type="submit">거부</button>
+                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증완료' );" type="submit">승인</button>
+                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증거부' );" type="submit">거부</button>
                 </div>
               </form>
             </td>

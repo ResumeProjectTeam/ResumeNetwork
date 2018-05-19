@@ -207,6 +207,7 @@ export class OrganizationComponent implements OnInit {
   }
   updateAuthentication(ownerId: string, resumeDetails:string , resumeAssetId:string , approval:string) : Promise<any> {
     
+    this.revokeRequestUser(resumeAssetId);
 
     
     this.txUpdateAuthentication = {
@@ -246,7 +247,6 @@ export class OrganizationComponent implements OnInit {
      return this.serviceOrganization.updateAsset(resumeAssetId, this.txUpdateAuthentication)
 		.toPromise()
 		.then(() => {
-      this.revokeRequestUser(resumeAssetId);
       this.errorMessage = null;
     
 		})
@@ -255,7 +255,8 @@ export class OrganizationComponent implements OnInit {
 				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
 			}
             else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        this.errorMessage = "경고 : 실패했습니다. (해당 사용자가 이력을 삭제 했을 수 있습니다.)  \n(요청 리스트에서 삭제됩니다 - 이 메세지를 다시보지 않기를 체크하시면 세션이 끊기기 전까지  이 경고를 볼 수 없습니다)"
+        alert(this.errorMessage);
 			}
 			else{
 				this.errorMessage = error;

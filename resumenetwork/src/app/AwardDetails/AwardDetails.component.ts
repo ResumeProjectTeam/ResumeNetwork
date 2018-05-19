@@ -34,6 +34,7 @@ export class AwardDetailsComponent implements OnInit {
   private errorMessage;
   private myAwardDetailsList;
   private myAuthenticationList;
+  private isAuthentication;
 
   
       
@@ -170,16 +171,14 @@ export class AwardDetailsComponent implements OnInit {
       userId:this.userId,
     
 
-    /*
-      transactionId:this.transactionId,
-    
 
-    
-      timestamp:this.timestamp
-    
-*/
 });
   };
+
+
+
+
+
 
   ngOnInit(): void {
     this.loadAll();
@@ -188,39 +187,90 @@ export class AwardDetailsComponent implements OnInit {
   loadAll(): Promise<any> {
     let tempList = [];
     return this.serviceAwardDetails.getSystemPing()
-    .toPromise()
-    .then((result) => {
-     var Id;
+      .toPromise()
+      .then((result) => {
+        var Id;
         Id = result['participant'];
         Id = Id.split('#');
-        console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceAwardDetails.getSystemQueryAwardDetails("targetUserId", this.currentId)
-        .toPromise()
-        .then((awardDetailsList) => {
-          this.myAwardDetailsList = awardDetailsList;
-        })
+  
+        this.getMyAwardDetailsList();
+      });
 
-        this.serviceAwardDetails.getSystemQueryAuthentication("targetUserId", this.currentId)
-          .toPromise()
-          .then((authenticationList) => {
-            this.myAuthenticationList = authenticationList;
-          })
 
+  }
+
+
+
+  authenticationExist(approvalStatus : string){
+    this.isAuthentication = approvalStatus;
+
+  }
+
+  printAuthentication(){
+
+   return this.isAuthentication;
+  }
+
+
+
+
+
+
+
+  getMyAwardDetailsList(): Promise<any> {
+    return   this.serviceAwardDetails.getSystemQueryAwardDetails("targetUserId", this.currentId)
+    .toPromise()
+    .then((awardDetailsList) => {
+      this.myAwardDetailsList = awardDetailsList;
+      this.getMyAuthenticationList();
     })
     .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-        }
-        else{
-            this.errorMessage = error;
-        }
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
     });
   }
+
+
+  getMyAuthenticationList(): Promise<any> {
+    return   this.serviceAwardDetails.getSystemQueryAuthentication("targetUserId", this.currentId)
+    .toPromise()
+    .then((authenticationList) => {
+      this.myAuthenticationList = authenticationList;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
+    });
+  }
+
+
+
 
 	/**
    * Event handler for changing the checked state of a checkbox (handles array enumeration values)
@@ -431,16 +481,9 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "userId":this.userId.value,
+          "userId":this.userId.value
         
       
-        /*
-          "transactionId":this.transactionId.value,
-        
-      
-        
-          "timestamp":this.timestamp.value
-        */
       
     };
 
@@ -475,22 +518,17 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "userId":null,
+          "userId":null
         
       
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null
-        */
+  
       
     });
 
     return this.serviceAwardDetails.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
+      this.loadAll();
 			this.errorMessage = null;
       this.myForm2.setValue({
       
@@ -523,17 +561,9 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "userId":null,
+          "userId":null
         
-      
-        /*
-          "transactionId":null,
-        
-      
-        
-          "timestamp":null 
-        */
-      
+
       });
     })
     .catch((error) => {
@@ -616,6 +646,7 @@ export class AwardDetailsComponent implements OnInit {
     return this.serviceAwardDetails.updateAsset(form.get("assetId").value,this.asset)
 		.toPromise()
 		.then(() => {
+      this.loadAll();
 			this.errorMessage = null;
 		})
 		.catch((error) => {
@@ -637,7 +668,9 @@ export class AwardDetailsComponent implements OnInit {
     return this.serviceAwardDetails.deleteAsset(this.currentId)
 		.toPromise()
 		.then(() => {
-			this.errorMessage = null;
+      this.loadAll();
+      this.errorMessage = null;
+      this.deleteAsset2();
 		})
 		.catch((error) => {
             if(error == 'Server error'){
@@ -651,6 +684,33 @@ export class AwardDetailsComponent implements OnInit {
 			}
     });
   }
+
+
+
+  deleteAsset2(): Promise<any> {
+    return this.serviceAwardDetails.deleteAsset2(this.currentId)
+      .toPromise()
+      .then(() => {
+        this.loadAll();
+        this.errorMessage = null;
+       
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+  }
+
+
+
+
 
   setId(id: any): void{
     this.currentId = id;

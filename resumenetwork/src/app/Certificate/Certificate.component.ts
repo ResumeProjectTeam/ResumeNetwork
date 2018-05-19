@@ -183,22 +183,12 @@ export class CertificateComponent implements OnInit {
   };
 
   authenticationExist(approvalStatus : string){
-    console.log(approvalStatus);
     this.isAuthentication = approvalStatus;
-    //return true;
+
   }
 
   printAuthentication(){
 
- /*   if(this.isAuthentication == true){
-      this.isAuthentication = false;
-      return approvalStatus;
-    }
-    else{
-      this.isAuthentication = false;
-      return approvalStatus;
-    }
-    */
    return this.isAuthentication;
   }
 
@@ -208,6 +198,60 @@ export class CertificateComponent implements OnInit {
     this.loadAll();
   }
 
+
+  getMyCertificateList(): Promise<any> {
+    return   this.serviceCertificate.getSystemQueryCertificate("targetUserId", this.currentId)
+    .toPromise()
+    .then((certificateList) => {
+      this.myCertificateList = certificateList;
+      this.getMyAuthenticationList();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
+    });
+  }
+
+
+  getMyAuthenticationList(): Promise<any> {
+    return   this.serviceCertificate.getSystemQueryAuthentication("targetUserId", this.currentId)
+    .toPromise()
+    .then((authenticationList) => {
+      this.myAuthenticationList = authenticationList;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    .catch((error) => {
+      if (error == 'Server error') {
+        this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+      }
+      else if (error == '404 - Not Found') {
+        this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+      }
+      else {
+        this.errorMessage = error;
+      }
+
+    });
+  }
+
+
+
+
   loadAll(): Promise<any> {
     let tempList = [];
     return this.serviceCertificate.getSystemPing()
@@ -216,43 +260,11 @@ export class CertificateComponent implements OnInit {
         var Id;
         Id = result['participant'];
         Id = Id.split('#');
-        console.log(Id[1]);
         this.currentId = Id[1];
 
-        this.serviceCertificate.getSystemQueryCertificate("targetUserId", this.currentId)
-          .toPromise()
-          .then((certificateList) => {
-            this.myCertificateList = certificateList;
-          })
-
-
-
-        this.serviceCertificate.getSystemQueryAuthentication("targetUserId", this.currentId)
-          .toPromise()
-          .then((authenticationList) => {
-            this.myAuthenticationList = authenticationList;
-            console.log(this.myAuthenticationList);
-          })
-
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
-      .catch((error) => {
-        if (error == 'Server error') {
-          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else if (error == '404 - Not Found') {
-          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-        }
-        else {
-          this.errorMessage = error;
-        }
-
+  
+        this.getMyCertificateList();
       });
-
 
 
   }
@@ -322,15 +334,6 @@ export class CertificateComponent implements OnInit {
       "userId": this.userId.value,
 
 
-      /*
-        "transactionId":this.transactionId.value,
-      
-    
-      
-        "timestamp":this.timestamp.value
-        */
-
-
     };
 
 
@@ -369,21 +372,13 @@ export class CertificateComponent implements OnInit {
       "userId": null,
 
 
-      /*
-       "transactionId":null,
-     
-   
-     
-       "timestamp":null
-       */
-
-
     });
 
     return this.serviceCertificate.addTransaction(this.Transaction)
       .toPromise()
       .then(() => {
-
+        
+        
         this.loadAll();
         this.errorMessage = null;
         this.myForm2.setValue({
@@ -420,15 +415,6 @@ export class CertificateComponent implements OnInit {
           "userId": null,
 
 
-          /*
-            "transactionId":null,
-          
-        
-          
-            "timestamp":null 
-            */
-
-
         });
       })
       .catch((error) => {
@@ -441,168 +427,12 @@ export class CertificateComponent implements OnInit {
       });
 
 
-
-
-
-  }
-
-
-  addAsset(form: any): Promise<any> {
-    this.asset = {
-      $class: "hansung.ac.kr.assets.Certificate",
-
-
-      "assetId": this.assetId.value,
-
-
-
-      "ownerId": this.ownerId.value,
-
-
-
-      "certificateName": this.certificateName.value,
-
-
-
-      "certificateScore": this.certificateScore.value,
-
-
-
-      "authorizedParticipantId": this.authorizedParticipantId.value,
-
-
-
-      "organizationName": this.organizationName.value,
-
-
-
-      "dob": this.dob.value,
-
-
-
-      "expirationDate": this.expirationDate.value,
-
-
-
-      "transactionTime": this.transactionTime.value,
-
-
-
-      "isPublic": this.isPublic.value
-
-
-    };
-
-    this.myForm.setValue({
-
-
-      "assetId": null,
-
-
-
-      "ownerId": null,
-
-
-
-      "certificateName": null,
-
-
-
-      "certificateScore": null,
-
-
-
-      "authorizedParticipantId": null,
-
-
-
-      "organizationName": null,
-
-
-
-      "dob": null,
-
-
-
-      "expirationDate": null,
-
-
-
-      "transactionTime": null,
-
-
-
-      "isPublic": null
-
-
-    });
-
-    return this.serviceCertificate.addAsset(this.asset)
-      .toPromise()
-      .then(() => {
-        this.errorMessage = null;
-        this.myForm.setValue({
-
-
-          "assetId": null,
-
-
-
-          "ownerId": null,
-
-
-
-          "certificateName": null,
-
-
-
-          "certificateScore": null,
-
-
-
-          "authorizedParticipantId": null,
-
-
-
-          "organizationName": null,
-
-
-
-          "dob": null,
-
-
-
-          "expirationDate": null,
-
-
-
-          "transactionTime": null,
-
-
-
-          "isPublic": null
-
-
-        });
-      })
-      .catch((error) => {
-        if (error == 'Server error') {
-          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else {
-          this.errorMessage = error;
-        }
-      });
   }
 
 
   updateAsset(form: any): Promise<any> {
     this.asset = {
       $class: "hansung.ac.kr.assets.Certificate",
-
-
-
-
 
 
 
@@ -663,6 +493,7 @@ export class CertificateComponent implements OnInit {
     return this.serviceCertificate.updateAsset(form.get("assetId").value, this.asset)
       .toPromise()
       .then(() => {
+        this.loadAll();
         this.errorMessage = null;
       })
       .catch((error) => {
@@ -680,11 +511,12 @@ export class CertificateComponent implements OnInit {
 
 
   deleteAsset(): Promise<any> {
-
     return this.serviceCertificate.deleteAsset(this.currentId)
       .toPromise()
       .then(() => {
+        this.loadAll();
         this.errorMessage = null;
+        this.deleteAsset2();
       })
       .catch((error) => {
         if (error == 'Server error') {
@@ -698,6 +530,30 @@ export class CertificateComponent implements OnInit {
         }
       });
   }
+
+  deleteAsset2(): Promise<any> {
+    return this.serviceCertificate.deleteAsset2(this.currentId)
+      .toPromise()
+      .then(() => {
+        this.loadAll();
+        this.errorMessage = null;
+       
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+  }
+
+
+
 
   setId(id: any): void {
     this.currentId = id;

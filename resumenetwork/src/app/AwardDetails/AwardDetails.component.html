@@ -330,8 +330,11 @@
                 <th class="info">description</th>
             
                 <th class="info">isPublic</th>
+
+                <th class="info">isAuthentication</th>
             
-              <th class="info-actions">Actions</th>
+                <th class="info-actions">Actions</th>
+                
           </tr>
         </thead>
         <tbody>
@@ -357,9 +360,21 @@
                 <td class="asset-properties">{{asset.description}}</td>
             
                 <td class="asset-properties">{{asset.isPublic}}</td>
+
+
+                <td class="asset-properties">
+                    <span *ngFor="let asset2 of myAuthenticationList">
+                      <b *ngIf="asset2.resumeAssetId == asset.assetId">
+                        {{authenticationExist(asset2.approvalStatus)}}
+                      </b>
+                    </span>
+                    {{printAuthentication()}}
+      
+                  </td>
+      
             
             <td>
-              <button (click)="getForm(asset.assetId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">
+              <!--              <button (click)="getForm(asset.assetId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   width="12.8px" height="12.8px" viewBox="0 0 30.7 30.7" style="enable-background:new 0 0 30.7 30.7;" xml:space="preserve">
                <g>
@@ -371,6 +386,7 @@
                </g>
                </svg>
               </button>
+              -->
 
               <button (click)="setId(asset.assetId);" type="button" class="btn btn-delete" data-toggle="modal" data-target="#deleteAssetModal">
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

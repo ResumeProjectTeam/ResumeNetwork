@@ -17,7 +17,6 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
 import { Certificate, Authentication } from '../hansung.ac.kr.assets';
 import 'rxjs/Rx';
-import { CreateCertificateComponent } from '../CreateCertificate/CreateCertificate.component';
 import { CreateCertificate } from '../hansung.ac.kr.transaction';
 
 
@@ -29,11 +28,12 @@ export class CertificateService {
     //private businessNetworkConnection: BusinessNetworkConnection = null;
 		private NAMESPACE: string = 'Certificate';
     private NAMESPACE2: string = 'CreateCertificate';
-
+    private NAMESPACE3: string = 'Authentication';
 
     constructor(
       private dataService: DataService<Certificate> ,
       private dataService2: DataService<CreateCertificate>,
+      private dataService3: DataService<Authentication>
     ) {
     };
 
@@ -65,6 +65,11 @@ export class CertificateService {
     public deleteAsset(id: any): Observable<Certificate> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
+
+    public deleteAsset2(id: any): Observable<Authentication> {
+      return this.dataService3.delete(this.NAMESPACE3, id);
+    }
+
 
     public getSystemPing(): Observable<JSON> {
       return this.dataService.getSystemPing();

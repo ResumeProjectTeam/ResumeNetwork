@@ -47,7 +47,7 @@ query searchUserInfoInEntById {
   description: " UserInfoInEnt"
   statement:
       SELECT hansung.ac.kr.assets.UserInfoInEnt
-      WHERE (ownerId == _$targettUserId)
+      WHERE (ownerId == _$targetUserId)
 }
 
 

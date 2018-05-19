@@ -26,28 +26,6 @@
 
 
 
-
-          <!--
-              <div class="form-group text-left">
-                <label for="assetId">assetId</label>
-                
-                  <input formControlName="assetId" type="hidden" class="form-control" value="test">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="ownerId">ownerId</label>
-                
-                  <input formControlName="ownerId" type="hidden" class="form-control" value="test">
-                
-              </div>
-            
-            -->
-
-
           <div class="form-group text-left">
             <label for="certificateName">certificateName</label>
 
@@ -104,26 +82,6 @@
             <input formControlName="expirationDate" type="text" class="form-control">
 
           </div>
-
-
-          <!--
-              
-          <div class="form-group text-left">
-            <label for="userId">userId</label>
-
-            <input formControlName="userId" type="text" class="form-control">
-
-          </div>
-
-
-        
-              <div class="form-group text-left">
-                <label for="transactionTime">transactionTime</label>
-                
-                  <input formControlName="transactionTime" type="text" class="form-control">
-                
-              </div>
-            -->
 
 
 
@@ -378,7 +336,7 @@
 
             <td class="asset-properties">{{asset.isPublic}}</td>
 
-            <td>
+            <td class="asset-properties">
               <span *ngFor="let asset2 of myAuthenticationList">
                 <b *ngIf="asset2.resumeAssetId == asset.assetId">
                   {{authenticationExist(asset2.approvalStatus)}}
@@ -388,8 +346,9 @@
 
             </td>
 
-
+            
             <td>
+              <!--
               <button (click)="getForm(asset.assetId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   width="12.8px" height="12.8px" viewBox="0 0 30.7 30.7" style="enable-background:new 0 0 30.7 30.7;" xml:space="preserve">
@@ -403,7 +362,8 @@
                   </g>
                 </svg>
               </button>
-
+            -->
+            
               <button (click)="setId(asset.assetId);" type="button" class="btn btn-delete" data-toggle="modal" data-target="#deleteAssetModal">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   width="13.8px" height="16px" viewBox="0 0 65.9 76.2" style="enable-background:new 0 0 65.9 76.2;" xml:space="preserve">
