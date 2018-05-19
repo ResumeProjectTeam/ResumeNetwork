@@ -13,7 +13,7 @@
 
 rule updateAuthenticationByAny{
     description: "Real condition is defined in logic.js File"
-    participant(p): "hansung.ac.kr.participants.Enterprise"
+    participant(p): "ANY"
     operation: UPDATE
     resource(r): "hansung.ac.kr.assets.Authentication"
     condition: (r.requestResumeList.forEach(function (requestResume){
@@ -34,8 +34,16 @@ rule readAuthenticationByAny{
     action: ALLOW
 }
 
+rule deleteAuthenticationByOES{
+    description: ""
+    participant(p): "ANY"
+    operation: DELETE
+    resource(r): "hansung.ac.kr.assets.Authentication"
+    condition: (p.requestResumeList)
+    action: ALLOW
 
 
+}
 
 
 
