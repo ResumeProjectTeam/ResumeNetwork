@@ -35,6 +35,7 @@ export class UserInfoInEntComponent implements OnInit {
   private myUserInfoInEntList;
   private myAuthenticationList;
   private isAuthentication;
+  
 
   
       
@@ -202,8 +203,18 @@ export class UserInfoInEntComponent implements OnInit {
         
      
         this.getMyUserInfoInEntList();
+      })
+      .catch((error) => {
+          if(error == 'Server error'){
+              this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+          }
+          else if(error == '404 - Not Found'){
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+          }
+          else{
+              this.errorMessage = error;
+          }
       });
-
 
   }
 
@@ -357,7 +368,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "isPublic":null,
+          "isPublic":false,
         
       
         
@@ -397,7 +408,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "isPublic":null,
+          "isPublic":false,
         
       
         
@@ -412,7 +423,8 @@ export class UserInfoInEntComponent implements OnInit {
             this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
         else{
-            this.errorMessage = error;
+          this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
         }
     });
   }
@@ -495,7 +507,8 @@ export class UserInfoInEntComponent implements OnInit {
 				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
 			}
 			else{
-				this.errorMessage = error;
+				this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
 			}
     });
   }
@@ -598,7 +611,7 @@ export class UserInfoInEntComponent implements OnInit {
           
         
           
-            "isPublic":null 
+            "isPublic":false 
           
         
       };
@@ -683,7 +696,7 @@ export class UserInfoInEntComponent implements OnInit {
             formObject.isPublic = result.isPublic;
           
         }else{
-          formObject.isPublic = null;
+          formObject.isPublic = false;
         }
       
 
@@ -744,7 +757,7 @@ export class UserInfoInEntComponent implements OnInit {
         
       
         
-          "isPublic":null 
+          "isPublic":false 
         
       
       });

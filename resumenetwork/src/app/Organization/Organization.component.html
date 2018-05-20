@@ -268,18 +268,7 @@
         <thead class="thead">
           <tr class="thead-cols">
 
-            <th class="info">대상자ID</th>
 
-
-            <th class="info">상세내용</th>
-
-
-            <th class="info">이력ID</th>
-
-
-            <th class="info-actions">Actions</th>
-
-            <!--
                   <th class="info">orgId</th>
               
                   <th class="info">orgName</th>
@@ -294,32 +283,13 @@
               
                   <th class="info">requestResumeList</th>
               
-                <th class="info-actions">Actions</th>
-              -->
+
           </tr>
         </thead>
         <tbody>
 
-          <tr *ngFor="let asset of myRequestResumeList">
-
-              
-            <td  class="asset-properties">{{asset.userId}}</td>
-
-            <td *ngIf="asset.requestDetails"class="asset-properties">{{asset.requestDetails}}</td>
-
-            <td *ngIf="asset.requestResumeAssetId" class="asset-properties">{{asset.requestResumeAssetId}}</td>
-
-            <td>
-              <form>
-
-                <div>
-                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증완료' );" type="submit">승인</button>
-                  <button (click)="updateAuthentication(asset.userId, asset.requestDetails, asset.requestResumeAssetId, '인증거부' );" type="submit">거부</button>
-                </div>
-              </form>
-            </td>
             
-          <!--
+   
             <tr *ngFor="let participant of allParticipants">
   
           
@@ -365,7 +335,7 @@
                  </svg>
                 </button>
               </td>
-                 -->
+                
           </tr>
         </tbody>
       </table>

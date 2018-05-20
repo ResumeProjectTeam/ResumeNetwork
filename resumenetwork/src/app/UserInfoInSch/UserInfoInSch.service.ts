@@ -26,12 +26,13 @@ export class UserInfoInSchService {
 	
 		private NAMESPACE: string = 'UserInfoInSch';
     private NAMESPACE2: string = 'CreateUserInfoInSch';
-
+    private NAMESPACE3: string = 'Authentication';
 
 
     constructor(
       private dataService: DataService<UserInfoInSch>,
-      private dataService2: DataService<CreateUserInfoInSch>
+      private dataService2: DataService<CreateUserInfoInSch>,
+      private dataService3: DataService<Authentication>
     
     ) {
     };
@@ -60,6 +61,11 @@ export class UserInfoInSchService {
     public deleteAsset(id: any): Observable<UserInfoInSch> {
       return this.dataService.delete(this.NAMESPACE, id);
     }
+
+    public deleteAsset2(id: any): Observable<Authentication> {
+      return this.dataService3.delete(this.NAMESPACE3, id);
+    }
+
 
     public getSystemPing(): Observable<JSON> {
       return this.dataService.getSystemPing();

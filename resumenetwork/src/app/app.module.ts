@@ -17,64 +17,49 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { DataService }     from './data.service';
+import { DataService } from './data.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 
-import { AuthenticationComponent } from './Authentication/Authentication.component';
+
 import { ResumeInfoUserComponent } from './ResumeInfoUser/ResumeInfoUser.component';
 import { CertificateComponent } from './Certificate/Certificate.component';
 import { AwardDetailsComponent } from './AwardDetails/AwardDetails.component';
 import { UserInfoInEntComponent } from './UserInfoInEnt/UserInfoInEnt.component';
 import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component';
 
-
-  import { UserComponent } from './User/User.component';
-  import { OrganizationComponent } from './Organization/Organization.component';
-  import { EnterpriseComponent } from './Enterprise/Enterprise.component';
-  import { SchoolComponent } from './School/School.component';
+import { RequestResumeComponent } from './RequestResume/RequestResume.component';
 
 
-  import { AddRequestUserComponent } from './AddRequestUser/AddRequestUser.component';
-  import { RevokeRequestUserComponent } from './RevokeRequestUser/RevokeRequestUser.component';
-  import { CreateAuthenticationComponent } from './CreateAuthentication/CreateAuthentication.component';
-  import { CreateResumeInfoUserComponent } from './CreateResumeInfoUser/CreateResumeInfoUser.component';
-  import { CreateCertificateComponent } from './CreateCertificate/CreateCertificate.component';
-  import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
-  import { CreateUserInfoInEntComponent } from './CreateUserInfoInEnt/CreateUserInfoInEnt.component';
-  import { CreateUserInfoInSchComponent } from './CreateUserInfoInSch/CreateUserInfoInSch.component';
+import { UserComponent } from './User/User.component';
+import { OrganizationComponent } from './Organization/Organization.component';
+import { EnterpriseComponent } from './Enterprise/Enterprise.component';
+import { SchoolComponent } from './School/School.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
-		HomeComponent,
+    HomeComponent,
     // TransactionComponent,
-    AuthenticationComponent,
+
     ResumeInfoUserComponent,
     CertificateComponent,
     AwardDetailsComponent,
     UserInfoInEntComponent,
-    
-    UserInfoInSchComponent
+    UserInfoInSchComponent,
+    RequestResumeComponent,
+    UserComponent,
+    OrganizationComponent,
+    EnterpriseComponent,
+
+    SchoolComponent
     ,
 
-    UserComponent,
-      OrganizationComponent,
-      EnterpriseComponent,
-      
-      SchoolComponent
-      ,
 
-    AddRequestUserComponent,
-        RevokeRequestUserComponent,
-        CreateAuthenticationComponent,
-        CreateResumeInfoUserComponent,
-        CreateCertificateComponent,
-        CreateAwardDetailsComponent,
-        CreateUserInfoInEntComponent,
-        
-        CreateUserInfoInSchComponent
-        
+
   ],
   imports: [
     BrowserModule,

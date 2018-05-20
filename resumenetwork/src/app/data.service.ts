@@ -34,14 +34,14 @@ export class DataService<Type> {
     }
 
     public getAll(ns: string): Observable<Type[]> {
-        //console.log('GetAll ' + ns + ' to ' + this.actionUrl + ns);
+        
         return this.http.get(`${this.actionUrl}${ns}`)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     public getSingle(ns: string, id: string): Observable<Type> {
-        //console.log('GetSingle ' + ns);
+       
 
         return this.http.get(this.actionUrl + ns + '/' + id + this.resolveSuffix)
           .map(this.extractData)
@@ -49,11 +49,7 @@ export class DataService<Type> {
     }
 
     public add(ns: string, asset: Type): Observable<Type> {
-       /*
-        console.log('Entered DataService add');
-        console.log('Add ' + ns);
-        console.log('asset', asset);
-        */
+      
 
         return this.http.post(this.actionUrl + ns, asset)
           .map(this.extractData)
@@ -61,28 +57,21 @@ export class DataService<Type> {
     }
 
     public update(ns: string, id: string, itemToUpdate: Type): Observable<Type> {
-        /*
-        console.log('Update ' + ns);
-        console.log('what is the id?', id);
-        console.log('what is the updated item?', itemToUpdate);
-        console.log('what is the updated item?', JSON.stringify(itemToUpdate));
-        */
+       
         return this.http.put(`${this.actionUrl}${ns}/${id}`, itemToUpdate)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     public delete(ns: string, id: string): Observable<Type> {
-        console.log(this.actionUrl + ns + '/' + id);
-
+      
         return this.http.delete(this.actionUrl + ns + '/' + id)
           .map(this.extractData)
           .catch(this.handleError);
     }
 
     private handleError(error: any): Observable<string> {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
+       
         let errMsg = (error.message) ? error.message :
           error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
@@ -96,7 +85,7 @@ export class DataService<Type> {
 
 
     public getSystemIdentities(): Observable<Type> {
-        //console.log("system Identities : " + this.actionUrl +   "system/identities");
+       
 
         return this.http.get(this.actionUrl + "system/identities")
           .map(this.extractData)
@@ -104,7 +93,7 @@ export class DataService<Type> {
     }
 
     public getSystemPing() :Observable<JSON> {
-        //console.log("system ping : " + this.actionUrl +   "system/ping");
+       
         return this.http.get(this.actionUrl + "system/ping")
           .map(this.extractData)
           .catch(this.handleError);
@@ -113,7 +102,7 @@ export class DataService<Type> {
 
 
     public getSystemQueryAuthentication(ns: string,  parameterName: string, param: string): Observable<Authentication[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+       
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)
@@ -123,7 +112,7 @@ export class DataService<Type> {
 
 
     public getSystemQueryResumeInfoUser(ns: string,  parameterName: string, param: string): Observable<ResumeInfoUser[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+        
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)
@@ -132,7 +121,7 @@ export class DataService<Type> {
 
     
     public getSystemQueryCertificate(ns: string,  parameterName: string, param: string): Observable<Certificate[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+        
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)
@@ -140,7 +129,7 @@ export class DataService<Type> {
     }
 
     public getSystemQueryAwardDetails(ns: string,  parameterName: string, param: string): Observable<AwardDetails[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+       
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)
@@ -148,7 +137,7 @@ export class DataService<Type> {
     }
 
     public getSystemQueryUserInfoInEnt(ns: string,  parameterName: string, param: string): Observable<UserInfoInEnt[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+       
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)
@@ -156,7 +145,7 @@ export class DataService<Type> {
     }
 
     public getSystemQueryUserInfoInSch(ns: string,  parameterName: string, param: string): Observable<UserInfoInSch[]> {
-        //console.log("system query : " + this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param);
+       
 
         return this.http.get(this.actionUrl + "queries/" + ns + '?' + parameterName + "=" + param)
           .map(this.extractData)

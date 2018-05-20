@@ -166,13 +166,6 @@ export class ResumeInfoUserComponent implements OnInit {
       userId: this.userId,
 
 
-      /*
-        transactionId:this.transactionId,
-      
-  
-      
-        timestamp:this.timestamp
-        */
 
     });
 
@@ -236,151 +229,6 @@ export class ResumeInfoUserComponent implements OnInit {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addAsset(form: any): Promise<any> {
-    this.asset = {
-      $class: "hansung.ac.kr.assets.ResumeInfoUser",
-
-
-      "assetId": this.assetId.value,
-
-
-      "ownerId": this.ownerId.value,
-
-
-      "name": this.name.value,
-
-
-
-      "dob": this.dob.value,
-
-
-
-      "supportField": this.supportField.value,
-
-
-
-      "salaryRequirement": this.salaryRequirement.value,
-
-
-
-      "majorActivities": this.majorActivities.value,
-
-
-
-      "socialExperience": this.socialExperience.value,
-
-
-
-      "skillsAndCapabilities": this.skillsAndCapabilities.value,
-
-
-
-      "isPublic": this.isPublic.value
-
-
-    };
-
-    this.myForm.setValue({
-
-
-      "assetId": null,
-
-
-      "ownerId": null,
-
-
-
-      "name": null,
-
-
-
-      "dob": null,
-
-
-
-      "supportField": null,
-
-
-
-      "salaryRequirement": null,
-
-
-
-      "majorActivities": null,
-
-
-
-      "socialExperience": null,
-
-
-
-      "skillsAndCapabilities": null,
-
-
-
-      "isPublic": null
-
-
-    });
-
-    return this.serviceResumeInfoUser.addAsset(this.asset)
-      .toPromise()
-      .then(() => {
-        this.errorMessage = null;
-        this.myForm.setValue({
-
-
-          "assetId": null,
-
-
-
-          "ownerId": null,
-
-
-          "name": null,
-
-
-
-          "dob": null,
-
-
-
-          "supportField": null,
-
-
-
-          "salaryRequirement": null,
-
-
-
-          "majorActivities": null,
-
-
-
-          "socialExperience": null,
-
-
-
-          "skillsAndCapabilities": null,
-
-
-
-          "isPublic": null
-
-
-        });
-      })
-      .catch((error) => {
-        if (error == 'Server error') {
-          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else {
-          this.errorMessage = error;
-        }
-      });
-  }
-
-
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
@@ -421,15 +269,9 @@ export class ResumeInfoUserComponent implements OnInit {
       "userId": this.userId.value,
 
 
-      /*
-        "transactionId":this.transactionId.value,
-      
-    
-      
-        "timestamp":this.timestamp.value
-      */
-
     };
+
+
 
     this.myForm2.setValue({
 
@@ -461,27 +303,22 @@ export class ResumeInfoUserComponent implements OnInit {
 
 
 
-      "isPublic": null,
+      "isPublic": false,
 
 
 
       "userId": null,
 
 
-      /*
-        "transactionId":null,
-      
-    
-      
-        "timestamp":null
-      */
 
     });
+
 
     return this.serviceResumeInfoUser.addTransaction(this.Transaction)
       .toPromise()
       .then(() => {
         this.errorMessage = null;
+        this.loadAll();
         this.myForm2.setValue({
 
 
@@ -512,20 +349,13 @@ export class ResumeInfoUserComponent implements OnInit {
 
 
 
-          "isPublic": null,
+          "isPublic": false,
 
 
 
           "userId": null,
 
 
-          /*
-            "transactionId":null,
-          
-        
-          
-            "timestamp":null 
-          */
 
         });
       })
@@ -534,7 +364,8 @@ export class ResumeInfoUserComponent implements OnInit {
           this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
         else {
-          this.errorMessage = error;
+          this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
         }
       });
   }
@@ -558,11 +389,7 @@ export class ResumeInfoUserComponent implements OnInit {
 
 
 
-
-
       "supportField": this.supportField.value,
-
-
 
 
 
@@ -599,6 +426,7 @@ export class ResumeInfoUserComponent implements OnInit {
     return this.serviceResumeInfoUser.updateAsset(form.get("assetId").value, this.asset)
       .toPromise()
       .then(() => {
+        this.loadAll();
         this.errorMessage = null;
       })
       .catch((error) => {
@@ -609,7 +437,8 @@ export class ResumeInfoUserComponent implements OnInit {
           this.errorMessage = "404 - Could not find API route. Please check your available APIs."
         }
         else {
-          this.errorMessage = error;
+          this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
         }
       });
   }
@@ -620,6 +449,7 @@ export class ResumeInfoUserComponent implements OnInit {
     return this.serviceResumeInfoUser.deleteAsset(this.currentId)
       .toPromise()
       .then(() => {
+        this.loadAll();
         this.errorMessage = null;
       })
       .catch((error) => {
@@ -681,7 +511,7 @@ export class ResumeInfoUserComponent implements OnInit {
 
 
 
-          "isPublic": null
+          "isPublic": false
 
 
         };
@@ -767,7 +597,7 @@ export class ResumeInfoUserComponent implements OnInit {
           formObject.isPublic = result.isPublic;
 
         } else {
-          formObject.isPublic = null;
+          formObject.isPublic = false;
         }
 
 
@@ -791,7 +621,7 @@ export class ResumeInfoUserComponent implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
 
-
+      
       "assetId": null,
 
 
@@ -825,7 +655,7 @@ export class ResumeInfoUserComponent implements OnInit {
 
 
 
-      "isPublic": null
+      "isPublic": false
 
 
     });

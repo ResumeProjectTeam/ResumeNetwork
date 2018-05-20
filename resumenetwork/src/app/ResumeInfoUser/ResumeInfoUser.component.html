@@ -19,7 +19,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="addAssetModalLabel">Create asset</h4>
-        <p class="modal-intro">Enter the required values below.</p>
+        <p class="modal-intro"> * 입력칸은 반드시 채워주세요</p>
       </div>
       <form [formGroup]="myForm2">
         <div class="modal-body">
@@ -27,25 +27,8 @@
 
 
 
-          <!--
-              <div class="form-group text-left">
-                <label for="assetId">assetId</label>
-                
-                  <input formControlName="assetId" type="text" class="form-control">
-                
-              </div>
-
-              <div class="form-group text-left">
-                <label for="ownerId">ownerId</label>
-                
-                  <input formControlName="ownerId" type="text" class="form-control">
-                
-              </div>
-            -->
-
-
           <div class="form-group text-left">
-            <label for="name">name</label>
+            <label for="name">이름*</label>
 
             <input formControlName="name" type="text" class="form-control">
 
@@ -54,7 +37,7 @@
 
 
           <div class="form-group text-left">
-            <label for="dob">dob</label>
+            <label for="dob">생년월일* (ex.2000-01-01)</label>
 
             <input formControlName="dob" type="text" class="form-control">
 
@@ -64,7 +47,7 @@
 
 
           <div class="form-group text-left">
-            <label for="supportField">supportField</label>
+            <label for="supportField">전공분야*</label>
 
             <input formControlName="supportField" type="text" class="form-control">
 
@@ -74,7 +57,7 @@
 
 
           <div class="form-group text-left">
-            <label for="salaryRequirement">salaryRequirement</label>
+            <label for="salaryRequirement">희망연봉</label>
 
             <input formControlName="salaryRequirement" type="text" class="form-control">
 
@@ -84,7 +67,7 @@
 
 
           <div class="form-group text-left">
-            <label for="majorActivities">majorActivities</label>
+            <label for="majorActivities">주요활동</label>
 
             <input formControlName="majorActivities" type="text" class="form-control">
 
@@ -94,17 +77,15 @@
 
 
           <div class="form-group text-left">
-            <label for="socialExperience">socialExperience</label>
+            <label for="socialExperience">사회경험</label>
 
             <input formControlName="socialExperience" type="text" class="form-control">
 
           </div>
 
 
-
-
           <div class="form-group text-left">
-            <label for="skillsAndCapabilities">skillsAndCapabilities</label>
+            <label for="skillsAndCapabilities">보유기술 및 기타능력</label>
 
             <input formControlName="skillsAndCapabilities" type="text" class="form-control">
 
@@ -114,7 +95,7 @@
 
 
           <div class="form-group text-left">
-            <label for="isPublic">isPublic</label>
+            <label for="isPublic">공개여부</label>
 
             <input formControlName="isPublic" type="checkbox" class="form-control">
 
@@ -124,8 +105,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button (click)="addTransaction(myForm2);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+          <button (click)="addTransaction(myForm2);" type="submit" class="btn btn-success" data-dismiss="modal">확인</button>
 
         </div>
       </form>
@@ -144,13 +125,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="updateAssetModalLabel">Update Asset</h4>
+        <p class="modal-intro"> * 입력칸은 반드시 채워주세요</p>
       </div>
       <form [formGroup]="myForm">
         <div class="modal-body">
 
 
           <div class="form-group text-left">
-            <label for="name">name</label>
+            <label for="name">이름</label>
 
 
             <input [ngModel]="name" formControlName="name" class="form-control" disabled="disabled">
@@ -160,27 +142,27 @@
 
 
 
-          <div class="form-group text-left">
+          <div class="form-group text-left" style="display:none;">
             <label for="assetId">assetId</label>
 
 
-            <input [ngModel]="assetId" formControlName="assetId" class="form-control" disabled="disabled">
+            <input [ngModel]="assetId" formControlName="assetId" class="form-control" disabled="disabled" >
 
 
           </div>
 
 
-          <div class="form-group text-left">
+          <div class="form-group text-left" style="display:none;">
             <label for="ownerId">ownerId</label>
 
 
-            <input [ngModel]="ownerId" formControlName="ownerId" class="form-control" disabled="disabled">
+            <input [ngModel]="ownerId" formControlName="ownerId" class="form-control" disabled="disabled" >
 
 
           </div>
 
           <div class="form-group text-left">
-            <label for="dob">dob</label>
+            <label for="dob">생년월일* (ex.2000-01-01)</label>
 
 
             <input [ngModel]="dob" formControlName="dob" type="text" class="form-control">
@@ -189,7 +171,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="supportField">supportField</label>
+            <label for="supportField">전공분야*</label>
 
 
             <input [ngModel]="supportField" formControlName="supportField" type="text" class="form-control">
@@ -198,7 +180,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="salaryRequirement">salaryRequirement</label>
+            <label for="salaryRequirement">희망연봉</label>
 
 
             <input [ngModel]="salaryRequirement" formControlName="salaryRequirement" type="text" class="form-control">
@@ -207,7 +189,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="majorActivities">majorActivities</label>
+            <label for="majorActivities">주요활동</label>
 
 
             <input [ngModel]="majorActivities" formControlName="majorActivities" type="text" class="form-control">
@@ -216,7 +198,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="socialExperience">socialExperience</label>
+            <label for="socialExperience">사회경험</label>
 
 
             <input [ngModel]="socialExperience" formControlName="socialExperience" type="text" class="form-control">
@@ -225,7 +207,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="skillsAndCapabilities">skillsAndCapabilities</label>
+            <label for="skillsAndCapabilities">보유기술 및 기타능력</label>
 
 
             <input [ngModel]="skillsAndCapabilities" formControlName="skillsAndCapabilities" type="text" class="form-control">
@@ -234,7 +216,7 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="isPublic">isPublic</label>
+            <label for="isPublic">공개여부</label>
 
 
             <input [ngModel]="isPublic" formControlName="isPublic" type="checkbox" class="form-control">
@@ -246,8 +228,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button (click)="updateAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+          <button (click)="updateAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">확인</button>
         </div>
       </form>
     </div>
@@ -267,11 +249,11 @@
       </div>
       <form [formGroup]="myForm" (ngSubmit)="deleteAsset()">
         <div class="modal-body">
-          Are you sure you want to delete this asset?
+         삭제 하시겠습니까?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-          <button (click)="deleteAsset()" type="submit" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">아니요</button>
+          <button (click)="deleteAsset()" type="submit" class="btn btn-danger" data-dismiss="modal">예</button>
         </div>
       </form>
     </div>
@@ -316,27 +298,23 @@
         <thead class="thead">
           <tr class="thead-cols">
 
-            <th class="info">name</th>
+            <th class="info">이름</th>
 
-            <th class="info">assetId</th>
+            <th class="info">생년월일</th>
 
-            <th class="info">ownerId</th>
+            <th class="info">전공분야</th>
 
-            <th class="info">dob</th>
+            <th class="info">희망연봉</th>
 
-            <th class="info">supportField</th>
+            <th class="info">주요활동</th>
 
-            <th class="info">salaryRequirement</th>
+            <th class="info">사회경험</th>
 
-            <th class="info">majorActivities</th>
+            <th class="info">보유기술 및 기타능력</th>
 
-            <th class="info">socialExperience</th>
+            <th class="info">공개여부</th>
 
-            <th class="info">skillsAndCapabilities</th>
-
-            <th class="info">isPublic</th>
-
-            <th class="info-actions">Actions</th>
+            <th class="info-actions">처리</th>
           </tr>
         </thead>
         <tbody>
@@ -345,10 +323,6 @@
 
 
             <td class="asset-properties">{{asset.name}}</td>
-
-            <td class="asset-properties">{{asset.assetId}}</td>
-
-            <td class="asset-properties">{{asset.ownerId}}</td>
 
             <td class="asset-properties">{{asset.dob}}</td>
 

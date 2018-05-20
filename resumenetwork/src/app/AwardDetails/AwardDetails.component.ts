@@ -196,6 +196,18 @@ export class AwardDetailsComponent implements OnInit {
 
   
         this.getMyAwardDetailsList();
+      })
+
+      .catch((error) => {
+          if(error == 'Server error'){
+              this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+          }
+          else if(error == '404 - Not Found'){
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+          }
+          else{
+              this.errorMessage = error;
+          }
       });
 
 
@@ -297,155 +309,6 @@ export class AwardDetailsComponent implements OnInit {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addAsset(form: any): Promise<any> {
-    this.asset = {
-      $class: "hansung.ac.kr.assets.AwardDetails",
-      
-        
-          "assetId":this.assetId.value,
-        
-      
-        
-          "ownerId":this.ownerId.value,
-        
-      
-        
-          "contestName":this.contestName.value,
-        
-      
-        
-          "authorizedParticipantId":this.authorizedParticipantId.value,
-        
-      
-        
-          "organizationName":this.organizationName.value,
-        
-      
-        
-          "dateOfAward":this.dateOfAward.value,
-        
-      
-        
-          "transactionTime":this.transactionTime.value,
-        
-      
-        
-          "awardGrade":this.awardGrade.value,
-        
-      
-        
-          "description":this.description.value,
-        
-      
-        
-          "isPublic":this.isPublic.value
-        
-      
-    };
-
-    this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
-        
-          "ownerId":null,
-        
-      
-        
-          "contestName":null,
-        
-      
-        
-          "authorizedParticipantId":null,
-        
-      
-        
-          "organizationName":null,
-        
-      
-        
-          "dateOfAward":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null
-        
-      
-    });
-
-    return this.serviceAwardDetails.addAsset(this.asset)
-    .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm.setValue({
-      
-        
-          "assetId":null,
-        
-      
-        
-          "ownerId":null,
-        
-      
-        
-          "contestName":null,
-        
-      
-        
-          "authorizedParticipantId":null,
-        
-      
-        
-          "organizationName":null,
-        
-      
-        
-          "dateOfAward":null,
-        
-      
-        
-          "transactionTime":null,
-        
-      
-        
-          "awardGrade":null,
-        
-      
-        
-          "description":null,
-        
-      
-        
-          "isPublic":null 
-        
-      
-      });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
-  }
-
-
 
 
   addTransaction(form: any): Promise<any> {
@@ -514,7 +377,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "isPublic":null,
+          "isPublic":false,
         
       
         
@@ -557,7 +420,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "isPublic":null,
+          "isPublic":false,
         
       
         
@@ -571,7 +434,8 @@ export class AwardDetailsComponent implements OnInit {
             this.errorMessage = "Could not connect to REST server. Please check your configuration details";
         }
         else{
-            this.errorMessage = error;
+          this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
         }
     });
   }
@@ -657,7 +521,8 @@ export class AwardDetailsComponent implements OnInit {
 				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
 			}
 			else{
-				this.errorMessage = error;
+				this.errorMessage = "입력 내용이 잘못 되었습니다.";
+          alert(this.errorMessage);
 			}
     });
   }
@@ -761,7 +626,7 @@ export class AwardDetailsComponent implements OnInit {
           
         
           
-            "isPublic":null 
+            "isPublic":false 
           
         
       };
@@ -846,7 +711,7 @@ export class AwardDetailsComponent implements OnInit {
             formObject.isPublic = result.isPublic;
           
         }else{
-          formObject.isPublic = null;
+          formObject.isPublic = false;
         }
       
 
@@ -907,7 +772,7 @@ export class AwardDetailsComponent implements OnInit {
         
       
         
-          "isPublic":null 
+          "isPublic":false 
         
       
       });

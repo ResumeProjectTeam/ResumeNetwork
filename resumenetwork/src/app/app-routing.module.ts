@@ -17,13 +17,13 @@ import { Routes, RouterModule } from '@angular/router';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 import { HomeComponent } from './home/home.component';
 
-import { AuthenticationComponent } from './Authentication/Authentication.component';
 import { ResumeInfoUserComponent } from './ResumeInfoUser/ResumeInfoUser.component';
 import { CertificateComponent } from './Certificate/Certificate.component';
 import { AwardDetailsComponent } from './AwardDetails/AwardDetails.component';
 import { UserInfoInEntComponent } from './UserInfoInEnt/UserInfoInEnt.component';
 import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component';
 
+import { RequestResumeComponent } from './RequestResume/RequestResume.component';
 
   import { UserComponent } from './User/User.component';
   import { OrganizationComponent } from './Organization/Organization.component';
@@ -31,19 +31,12 @@ import { UserInfoInSchComponent } from './UserInfoInSch/UserInfoInSch.component'
   import { SchoolComponent } from './School/School.component';
 
 
-  import { AddRequestUserComponent } from './AddRequestUser/AddRequestUser.component';
-  import { RevokeRequestUserComponent } from './RevokeRequestUser/RevokeRequestUser.component';
-  import { CreateAuthenticationComponent } from './CreateAuthentication/CreateAuthentication.component';
-  import { CreateResumeInfoUserComponent } from './CreateResumeInfoUser/CreateResumeInfoUser.component';
-  import { CreateCertificateComponent } from './CreateCertificate/CreateCertificate.component';
-  import { CreateAwardDetailsComponent } from './CreateAwardDetails/CreateAwardDetails.component';
-  import { CreateUserInfoInEntComponent } from './CreateUserInfoInEnt/CreateUserInfoInEnt.component';
-  import { CreateUserInfoInSchComponent } from './CreateUserInfoInSch/CreateUserInfoInSch.component';  
+ 
 const routes: Routes = [
      //{ path: 'transaction', component: TransactionComponent },
     {path: '', component: HomeComponent},
 		
-		{ path: 'Authentication', component: AuthenticationComponent},
+	
     
 		{ path: 'ResumeInfoUser', component: ResumeInfoUserComponent},
     
@@ -55,6 +48,7 @@ const routes: Routes = [
     
 		{ path: 'UserInfoInSch', component: UserInfoInSchComponent},
     
+    { path: 'RequestResume', component: RequestResumeComponent},
     
       { path: 'User', component: UserComponent},
       
@@ -65,21 +59,6 @@ const routes: Routes = [
       { path: 'School', component: SchoolComponent},
       
       
-        { path: 'AddRequestUser', component: AddRequestUserComponent},
-        
-        { path: 'RevokeRequestUser', component: RevokeRequestUserComponent},
-        
-        { path: 'CreateAuthentication', component: CreateAuthenticationComponent},
-        
-        { path: 'CreateResumeInfoUser', component: CreateResumeInfoUserComponent},
-        
-        { path: 'CreateCertificate', component: CreateCertificateComponent},
-        
-        { path: 'CreateAwardDetails', component: CreateAwardDetailsComponent},
-        
-        { path: 'CreateUserInfoInEnt', component: CreateUserInfoInEntComponent},
-        
-        { path: 'CreateUserInfoInSch', component: CreateUserInfoInSchComponent},
         
 		{path: '**', redirectTo:''}
 

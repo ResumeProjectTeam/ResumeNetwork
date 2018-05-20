@@ -31,8 +31,7 @@ export class OrganizationComponent implements OnInit {
   private participant;
   private currentId;
   private errorMessage;
-  private txUpdateAuthentication;
-  private txRevokeRequestUser;
+
   private myRequestResumeList;
 
 
@@ -113,21 +112,6 @@ export class OrganizationComponent implements OnInit {
 
     });
 
-    this.myForm2 = fb.group({
-
-
-      authorizedParticipantId: this.authorizedParticipantId,
-
-
-
-      resumeDetails: this.resumeDetails,
-
-
-
-      resumeAssetId: this.resumeAssetId,
-
-    });
-
   };
 
   ngOnInit(): void {
@@ -136,7 +120,7 @@ export class OrganizationComponent implements OnInit {
 
   loadAll(): Promise<any> {
 
-    /*
+    
       let tempList = [];
     return this.serviceOrganization.getAll()
     .toPromise()
@@ -146,25 +130,6 @@ export class OrganizationComponent implements OnInit {
         tempList.push(participant);
       });
       this.allParticipants = tempList;
-    */
-
-    let tempList = [];
-    return this.serviceOrganization.getSystemPing()
-      .toPromise()
-      .then((result) => {
-        var Id;
-        Id = result['participant'];
-        Id = Id.split('#');
-        console.log(Id[1]);
-        this.currentId = Id[1];
-
-        this.currentId = "admin";
-
-        this.serviceOrganization.getSingle(this.currentId)
-          .toPromise()
-          .then((organization) => {
-            this.myRequestResumeList = organization.requestResumeList;
-          })
       })
       .catch((error) => {
         if (error == 'Server error') {
@@ -204,102 +169,6 @@ export class OrganizationComponent implements OnInit {
    */
   hasArrayValue(name: string, value: any): boolean {
     return this[name].value.indexOf(value) !== -1;
-  }
-  updateAuthentication(ownerId: string, resumeDetails:string , resumeAssetId:string , approval:string) : Promise<any> {
-    
-    this.revokeRequestUser(resumeAssetId);
-
-    
-    this.txUpdateAuthentication = {
-      $class: "hansung.ac.kr.assets.Authentication",
-    
-            "ownerId":ownerId,
-          
-        
-    
-          
-            "resumeDetails":resumeDetails,
-          
-        
-    
-        
-            "resumeAssetId":resumeAssetId,
-          
-        
-    
-
-            "approvalStatus":approval,
-
-
-        
-          
-            "authorizedParticipantId":this.currentId,
-          
-        
-    
-        
-          
-            "authenticationTime":new Date().getTime()
-          
-        
-    
-    };
-     return this.serviceOrganization.updateAsset(resumeAssetId, this.txUpdateAuthentication)
-		.toPromise()
-		.then(() => {
-      this.errorMessage = null;
-    
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-            else if(error == '404 - Not Found'){
-        this.errorMessage = "경고 : 실패했습니다. (해당 사용자가 이력을 삭제 했을 수 있습니다.)  \n(요청 리스트에서 삭제됩니다 - 이 메세지를 다시보지 않기를 체크하시면 세션이 끊기기 전까지  이 경고를 볼 수 없습니다)"
-        alert(this.errorMessage);
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
-
-
-
-
-  }
-
-  revokeRequestUser(requestResumeAssetId:string): Promise<any> {
-    this.txRevokeRequestUser = {
-      $class : "hansung.ac.kr.transaction.RevokeRequestUser",
-
-
-      "targetParticipantType": "hansung.ac.kr.participants.Organization",
-
-
-
-      "targetParticipantId": this.currentId,
-
-
-
-      "requestResumeAssetId": requestResumeAssetId
-
-    }
-
-    return this.serviceOrganization.revokeRequestUser(this.txRevokeRequestUser)
-    .toPromise()
-      .then(() => {
-        this.errorMessage = null;
-        this.loadAll();
-
-      })
-      .catch((error) => {
-        if (error == 'Server error') {
-          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else {
-          this.errorMessage = error;
-        }
-      });
   }
 
 
