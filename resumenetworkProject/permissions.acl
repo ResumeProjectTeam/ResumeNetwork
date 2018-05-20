@@ -155,7 +155,7 @@ rule UserFullAccessResumeInfoUser {
   	participant(p): "hansung.ac.kr.participants.User"
   	operation: ALL
 	resource(r): "hansung.ac.kr.assets.ResumeInfoUser"
-    condition: ( ("ResumeAssetInfoUser" + p.getIdentifier())  == r.assetId )
+    condition: (  p.getIdentifier()  == r.assetId )
     action: ALLOW
 }
 
