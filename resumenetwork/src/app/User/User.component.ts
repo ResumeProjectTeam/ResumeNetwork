@@ -17,9 +17,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { UserService } from './User.service';
 import 'rxjs/add/operator/toPromise';
 @Component({
-	selector: 'app-User',
-	templateUrl: './User.component.html',
-	styleUrls: ['./User.component.css'],
+  selector: 'app-User',
+  templateUrl: './User.component.html',
+  styleUrls: ['./User.component.css'],
   providers: [UserService]
 })
 export class UserComponent implements OnInit {
@@ -29,78 +29,88 @@ export class UserComponent implements OnInit {
   private allParticipants;
   private participant;
   private currentId;
-	private errorMessage;
+  private errorMessage;
 
-  
-      
-          userId = new FormControl("", Validators.required);
-        
-  
-      
-          userName = new FormControl("", Validators.required);
-        
-  
-      
-          dob = new FormControl("", Validators.required);
-        
-  
-      
-          address = new FormControl("", Validators.required);
-        
-  
-      
-          phoneNumber = new FormControl("", Validators.required);
-        
-  
-      
-          email = new FormControl("", Validators.required);
-        
-  
-      
-          isPublic = new FormControl("", Validators.required);
-        
-  
-      
-          isHuntingForJob = new FormControl("", Validators.required);
-        
-  
+  private targetUser;
+  private targetResumeInfoUser;
+  private targetCertificate;
+  private targetAwardDetails;
+  private targetUserInfoInEnt;
+  private targetUserInfoInSch;
+
+  private myAuthenticationList;
+  private isAuthentication;
 
 
-  constructor(private serviceUser:UserService, fb: FormBuilder) {
+
+  userId = new FormControl("", Validators.required);
+
+
+
+  userName = new FormControl("", Validators.required);
+
+
+
+  dob = new FormControl("", Validators.required);
+
+
+
+  address = new FormControl("", Validators.required);
+
+
+
+  phoneNumber = new FormControl("", Validators.required);
+
+
+
+  email = new FormControl("", Validators.required);
+
+
+
+  isPublic = new FormControl("", Validators.required);
+
+
+
+  isHuntingForJob = new FormControl("", Validators.required);
+
+
+
+
+  constructor(private serviceUser: UserService, fb: FormBuilder) {
     this.myForm = fb.group({
-    
-        
-          userId:this.userId,
-        
-    
-        
-          userName:this.userName,
-        
-    
-        
-          dob:this.dob,
-        
-    
-        
-          address:this.address,
-        
-    
-        
-          phoneNumber:this.phoneNumber,
-        
-    
-        
-          email:this.email,
-        
-    
-        
-          isPublic:this.isPublic,
-        
-    
-        
-          isHuntingForJob:this.isHuntingForJob
-        
-    
+
+
+      userId: this.userId,
+
+
+
+      userName: this.userName,
+
+
+
+      dob: this.dob,
+
+
+
+      address: this.address,
+
+
+
+      phoneNumber: this.phoneNumber,
+
+
+
+      email: this.email,
+
+
+
+      isPublic: this.isPublic,
+
+
+
+      isHuntingForJob: this.isHuntingForJob
+
+
     });
   };
 
@@ -108,28 +118,32 @@ export class UserComponent implements OnInit {
     this.loadAll();
   }
 
+
+
+
   loadAll(): Promise<any> {
     let tempList = [];
     return this.serviceUser.getAll()
-    .toPromise()
-    .then((result) => {
-			this.errorMessage = null;
-      result.forEach(participant => {
-        tempList.push(participant);
+      .toPromise()
+      .then((result) => {
+        this.errorMessage = null;
+
+        result.forEach(participant => {
+          tempList.push(participant);
+        });
+        this.allParticipants = tempList;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
       });
-      this.allParticipants = tempList;
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
   }
 
 	/**
@@ -157,389 +171,466 @@ export class UserComponent implements OnInit {
     return this[name].value.indexOf(value) !== -1;
   }
 
-  addParticipant(form: any): Promise<any> {
+
+
+  updateParticipant(form: any): Promise<any> {
     this.participant = {
       $class: "hansung.ac.kr.participants.User",
-      
-        
-          "userId":this.userId.value,
-        
-      
-        
-          "userName":this.userName.value,
-        
-      
-        
-          "dob":this.dob.value,
-        
-      
-        
-          "address":this.address.value,
-        
-      
-        
-          "phoneNumber":this.phoneNumber.value,
-        
-      
-        
-          "email":this.email.value,
-        
-      
-        
-          "isPublic":this.isPublic.value,
-        
-      
-        
-          "isHuntingForJob":this.isHuntingForJob.value
-        
-      
+
+
+
+
+
+
+
+      "userName": this.userName.value,
+
+
+
+
+
+      "dob": this.dob.value,
+
+
+
+
+
+      "address": this.address.value,
+
+
+
+
+
+      "phoneNumber": this.phoneNumber.value,
+
+
+
+
+
+      "email": this.email.value,
+
+
+
+
+
+      "isPublic": this.isPublic.value,
+
+
+
+
+
+      "isHuntingForJob": this.isHuntingForJob.value
+
+
+
     };
 
-    this.myForm.setValue({
-      
-        
-          "userId":null,
-        
-      
-        
-          "userName":null,
-        
-      
-        
-          "dob":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "phoneNumber":null,
-        
-      
-        
-          "email":null,
-        
-      
-        
-          "isPublic":null,
-        
-      
-        
-          "isHuntingForJob":null
-        
-      
-    });
-
-    return this.serviceUser.addParticipant(this.participant)
-    .toPromise()
-    .then(() => {
-			this.errorMessage = null;
-      this.myForm.setValue({
-      
-        
-          "userId":null,
-        
-      
-        
-          "userName":null,
-        
-      
-        
-          "dob":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "phoneNumber":null,
-        
-      
-        
-          "email":null,
-        
-      
-        
-          "isPublic":null,
-        
-      
-        
-          "isHuntingForJob":null 
-        
-      
+    return this.serviceUser.updateParticipant(form.get("userId").value, this.participant)
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
       });
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
-  }
-
-
-   updateParticipant(form: any): Promise<any> {
-    this.participant = {
-      $class: "hansung.ac.kr.participants.User",
-      
-        
-          
-        
-    
-        
-          
-            "userName":this.userName.value,
-          
-        
-    
-        
-          
-            "dob":this.dob.value,
-          
-        
-    
-        
-          
-            "address":this.address.value,
-          
-        
-    
-        
-          
-            "phoneNumber":this.phoneNumber.value,
-          
-        
-    
-        
-          
-            "email":this.email.value,
-          
-        
-    
-        
-          
-            "isPublic":this.isPublic.value,
-          
-        
-    
-        
-          
-            "isHuntingForJob":this.isHuntingForJob.value
-          
-        
-    
-    };
-
-    return this.serviceUser.updateParticipant(form.get("userId").value,this.participant)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-            else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
   }
 
 
   deleteParticipant(): Promise<any> {
 
     return this.serviceUser.deleteParticipant(this.currentId)
-		.toPromise()
-		.then(() => {
-			this.errorMessage = null;
-		})
-		.catch((error) => {
-            if(error == 'Server error'){
-				this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-			}
-			else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-			}
-			else{
-				this.errorMessage = error;
-			}
-    });
+      .toPromise()
+      .then(() => {
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
   }
 
-  setId(id: any): void{
+  setId(id: any): void {
     this.currentId = id;
   }
 
-  getForm(id: any): Promise<any>{
-
-    return this.serviceUser.getparticipant(id)
-    .toPromise()
-    .then((result) => {
-			this.errorMessage = null;
-      let formObject = {
-        
-          
-            "userId":null,
-          
-        
-          
-            "userName":null,
-          
-        
-          
-            "dob":null,
-          
-        
-          
-            "address":null,
-          
-        
-          
-            "phoneNumber":null,
-          
-        
-          
-            "email":null,
-          
-        
-          
-            "isPublic":null,
-          
-        
-          
-            "isHuntingForJob":null 
-          
-        
-      };
 
 
 
-      
-        if(result.userId){
-          
-            formObject.userId = result.userId;
-          
-        }else{
-          formObject.userId = null;
-        }
-      
-        if(result.userName){
-          
-            formObject.userName = result.userName;
-          
-        }else{
-          formObject.userName = null;
-        }
-      
-        if(result.dob){
-          
-            formObject.dob = result.dob;
-          
-        }else{
-          formObject.dob = null;
-        }
-      
-        if(result.address){
-          
-            formObject.address = result.address;
-          
-        }else{
-          formObject.address = null;
-        }
-      
-        if(result.phoneNumber){
-          
-            formObject.phoneNumber = result.phoneNumber;
-          
-        }else{
-          formObject.phoneNumber = null;
-        }
-      
-        if(result.email){
-          
-            formObject.email = result.email;
-          
-        }else{
-          formObject.email = null;
-        }
-      
-        if(result.isPublic){
-          
-            formObject.isPublic = result.isPublic;
-          
-        }else{
-          formObject.isPublic = null;
-        }
-      
-        if(result.isHuntingForJob){
-          
-            formObject.isHuntingForJob = result.isHuntingForJob;
-          
-        }else{
-          formObject.isHuntingForJob = null;
-        }
-      
 
-      this.myForm.setValue(formObject);
 
-    })
-    .catch((error) => {
-        if(error == 'Server error'){
-            this.errorMessage = "Could not connect to REST server. Please check your configuration details";
-        }
-        else if(error == '404 - Not Found'){
-				this.errorMessage = "404 - Could not find API route. Please check your available APIs."
-        }
-        else{
-            this.errorMessage = error;
-        }
-    });
+  getUserDetails(id: any) {
+    this.setId(id);
+    this.getMyAuthenticationList();
+    this.getUser(id)
+    this.getResumeInfoUserById(id);
+    this.getCertificateById(id);
+    this.getAwardDetailsById(id);
+    this.getUserInfoInEntById(id);
+    this.getUserInfoInSchById(id);
+
 
   }
 
-  resetForm(): void{
-    this.myForm.setValue({
-      
-        
-          "userId":null,
-        
-      
-        
-          "userName":null,
-        
-      
-        
-          "dob":null,
-        
-      
-        
-          "address":null,
-        
-      
-        
-          "phoneNumber":null,
-        
-      
-        
-          "email":null,
-        
-      
-        
-          "isPublic":null,
-        
-      
-        
-          "isHuntingForJob":null 
-        
-      
+
+  getUser(id: any): Promise<any> {
+    return this.serviceUser.getParticipant(id)
+      .toPromise()
+      .then((result) => {
+        this.targetUser = result;
+         //console.log(this.targetUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+
       });
+  }
+
+
+
+
+
+  getMyAuthenticationList(): Promise<any> {
+    return this.serviceUser.getSystemQueryAuthentication("targetUserId", this.currentId)
+      .toPromise()
+      .then((authenticationList) => {
+        this.myAuthenticationList = authenticationList;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+
+      });
+  }
+
+
+
+  getResumeInfoUserById(id: any): Promise<any> {
+
+    return this.serviceUser.getSystemQueryResumeInfoUser(id)
+      .toPromise()
+      .then((result) => {
+        this.targetResumeInfoUser = result;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+
+
+
+  getCertificateById(id: any): Promise<any> {
+
+    return this.serviceUser.getSystemQueryCertificate(id)
+      .toPromise()
+      .then((result) => {
+        this.targetCertificate = result;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+  getAwardDetailsById(id: any): Promise<any> {
+
+    return this.serviceUser.getSystemQueryAwardDetails(id)
+      .toPromise()
+      .then((result) => {
+        this.targetAwardDetails = result;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+  getUserInfoInEntById(id: any): Promise<any> {
+
+    return this.serviceUser.getSystemQueryUserInfoInEnt(id)
+      .toPromise()
+      .then((result) => {
+        this.targetUserInfoInEnt = result;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+  getUserInfoInSchById(id: any): Promise<any> {
+
+    return this.serviceUser.getSystemQueryUserInfoInSch(id)
+      .toPromise()
+      .then((result) => {
+        this.targetUserInfoInSch = result;
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+
+
+
+  authenticationExist(approvalStatus: string) {
+    this.isAuthentication = approvalStatus;
+
+  }
+
+  printAuthentication() {
+
+    return this.isAuthentication;
+  }
+
+
+
+
+
+
+  getForm(id: any): Promise<any> {
+
+    return this.serviceUser.getParticipant(id)
+      .toPromise()
+      .then((result) => {
+        this.errorMessage = null;
+        let formObject = {
+
+
+          "userId": null,
+
+
+
+          "userName": null,
+
+
+
+          "dob": null,
+
+
+
+          "address": null,
+
+
+
+          "phoneNumber": null,
+
+
+
+          "email": null,
+
+
+
+          "isPublic": null,
+
+
+
+          "isHuntingForJob": null
+
+
+        };
+
+
+
+
+        if (result.userId) {
+
+          formObject.userId = result.userId;
+
+        } else {
+          formObject.userId = null;
+        }
+
+        if (result.userName) {
+
+          formObject.userName = result.userName;
+
+        } else {
+          formObject.userName = null;
+        }
+
+        if (result.dob) {
+
+          formObject.dob = result.dob;
+
+        } else {
+          formObject.dob = null;
+        }
+
+        if (result.address) {
+
+          formObject.address = result.address;
+
+        } else {
+          formObject.address = null;
+        }
+
+        if (result.phoneNumber) {
+
+          formObject.phoneNumber = result.phoneNumber;
+
+        } else {
+          formObject.phoneNumber = null;
+        }
+
+        if (result.email) {
+
+          formObject.email = result.email;
+
+        } else {
+          formObject.email = null;
+        }
+
+        if (result.isPublic) {
+
+          formObject.isPublic = result.isPublic;
+
+        } else {
+          formObject.isPublic = null;
+        }
+
+        if (result.isHuntingForJob) {
+
+          formObject.isHuntingForJob = result.isHuntingForJob;
+
+        } else {
+          formObject.isHuntingForJob = null;
+        }
+
+
+        this.myForm.setValue(formObject);
+
+      })
+      .catch((error) => {
+        if (error == 'Server error') {
+          this.errorMessage = "Could not connect to REST server. Please check your configuration details";
+        }
+        else if (error == '404 - Not Found') {
+          this.errorMessage = "404 - Could not find API route. Please check your available APIs."
+        }
+        else {
+          this.errorMessage = error;
+        }
+      });
+
+  }
+
+  resetForm(): void {
+    this.myForm.setValue({
+
+
+      "userId": null,
+
+
+
+      "userName": null,
+
+
+
+      "dob": null,
+
+
+
+      "address": null,
+
+
+
+      "phoneNumber": null,
+
+
+
+      "email": null,
+
+
+
+      "isPublic": null,
+
+
+
+      "isHuntingForJob": null
+
+
+    });
   }
 
 }
