@@ -324,9 +324,9 @@
 
             <td class="asset-properties">{{asset.performingTask}}</td>
 
-            <td class="asset-properties">{{asset.dateOfEmployment}}</td>
+            <td class="asset-properties">{{transferToDate(asset.dateOfEmployment)}}</td>
 
-            <td class="asset-properties">{{asset.retirementDate}}</td>
+            <td class="asset-properties">{{transferToDate(asset.retirementDate) }}</td>
 
       
 
@@ -334,7 +334,7 @@
 
 
             <td class="asset-properties">
-              <span *ngFor="let asset2 of myAuthenticationList">
+              <span *ngFor="let asset2 of myAuthenticationWList">
                 <b *ngIf="asset2.resumeAssetId == asset.assetId">
                   {{authenticationExist(asset2.approvalStatus)}}
                 </b>

@@ -172,6 +172,18 @@ export class OrganizationComponent implements OnInit {
   }
 
 
+  transferToDate(target : string): string{
+
+    var targetDate = new Date(target);
+    var options = {
+      year: "numeric", month: "short", day: "numeric"
+    };
+    var result = targetDate.toLocaleDateString('ko-KR', options);
+     return result;
+  }
+
+
+
   addParticipant(form: any): Promise<any> {
     this.participant = {
       $class: "hansung.ac.kr.participants.Organization",
