@@ -29,10 +29,10 @@ participant Enterprise identified by entId {
     o String entName
     o String address
     o String contactAdress
-    o String hompage optional
+    o String homepage optional
     o String numberOfemployees optional
     o String sales optional
-    o IndustryCategory industryCategory optional
+    o String industryCategory optional
     o String discription optional
     o RequestResume[] requestResumeList optional
 
@@ -43,7 +43,7 @@ participant School identified by schId {
     o String schName
     o String address optional
     o String contactAdress optional
-    o String hompage optional
+    o String homepage optional
     o RequestResume[] requestResumeList optional
 
 }

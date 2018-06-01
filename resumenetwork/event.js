@@ -32,7 +32,13 @@ class SitechainListener{
                 return this.NetworkConnection.connect(this.CONNECTION_PROFILE_NAME)
                 .then((result) => {
 			console.log("");
-                        console.log("Business network connection completed")
+                        console.log("Business network connection completed");
+
+
+	                console.log("");
+                        console.log("-------------------- subscrib start --------------------");
+                        console.log("");
+
 		        this.Factory = result.getFactory();
                         this.businessNetworkDefinition = result;
                         //LOG.info(this.businessNetworkDefinition.getIdentifier());
@@ -58,9 +64,6 @@ class SitechainListener{
                   
                         try{	
                             let factory = this.Factory;
-			    console.log("");
-		            console.log("-------------------- subscrib start --------------------");
-			    console.log("");
                             let addRequestUser =  factory.newTransaction('hansung.ac.kr.transaction', 'AddRequestUser');
 
 			    console.log("");
@@ -72,17 +75,17 @@ class SitechainListener{
 			     addRequestUser.requestResumeAssetId = getEvent['resumeAssetId'];
 
 
-                             console.log(evt['authorizedParticipantType']);
-                             console.log(evt['authorizedParticipantId']);
-                             console.log(getEvent['resumeAssetId']);
+                             console.log("인증승인 참여자 타입 : " + evt['authorizedParticipantType']);
+                             console.log("인증승인 참여자 ID : "  + evt['authorizedParticipantId']);
+                             console.log("인증에셋 ID : " + getEvent['resumeAssetId']);
 
                               
 		             if(evt['authorizedParticipantType'] == "Organization1"){
                                  addRequestUser.requestDetails = 
 			          "자격증 이름 : " + evt['certificateName'] 
 				+ " , 점수 : " + evt['certificateScore']
-			        + " , 발급일 : " + evt['dob']
-			        + " , 만료일 : " + evt['expirationDate'];
+			        + " , 발급일 : " +  this.transferToDate(evt['dob'])
+			        + " , 만료일 : " +  this.transferToDate(evt['expirationDate']);
                                  addRequestUser.targetParticipantType = NAMESPACE_ORG;
                 
                              }
@@ -91,7 +94,7 @@ class SitechainListener{
                                  addRequestUser.requestDetails =
 				   "대회명 : " + evt['contestName']
 				 + " , 수상내역 : " + evt['awardGrade']
-				 + " , 수상날짜 : " + evt['dateOfAward']
+				 + " , 수상날짜 : " +  this.transferToDate(evt['dateOfAward'])
 			         + " , 상세내용 : " + evt['description'];
                                  addRequestUser.targetParticipantType = NAMESPACE_ORG;
 		         
@@ -103,8 +106,8 @@ class SitechainListener{
 				 "회사명 : " +  evt['EnterpriseName']
 				 + " , 직책 : " + evt['userPosition']
 				 + " , 업무 : " + evt['performingTask']
-				 + " , 입사일 : " + evt['dateOfEmployment']
-				 + " , 퇴사일 : " + evt['retirementDate'];
+				 + " , 입사일 : " +  this.transferToDate(evt['dateOfEmployment'])
+				 + " , 퇴사일 : " +  this.transferToDate(evt['retirementDate']);
 			
 				;
                                  addRequestUser.targetParticipantType = NAMESPACE_ENT;
@@ -114,13 +117,12 @@ class SitechainListener{
                              if(evt['authorizedParticipantType'] == "School"){
                                 addRequestUser.requestDetails =
 				"학교명 : " +  evt['schoolName']
-				+ " 학점 : " + evt['gradeAverage'] 
-				+ " , 전공 : " + evt['majorField']
-				+ " , 입학일 : " +  evt['entranceDate']
-				+ " , 졸업일 : " + evt['graduationDate']
-				;
-                                addRequestUser.targetParticipantType = NAMESPACE_SCH;
-                             
+				+ ", 학점 : " + evt['gradeAverage'] 
+				+ ", 전공 : " + evt['majorField']
+				+ ", 입학일 : " +   this.transferToDate(evt['entranceDate'])
+				+ ",  졸업일 : " +   this.transferToDate(evt['graduationDate']);
+                                addRequestUser.targetParticipantType = NAMESPACE_SCH;     
+                      
                              }
 
 
@@ -152,6 +154,20 @@ class SitechainListener{
                        
        })
      }
+
+
+    transferToDate(target){
+
+    if(target == null){
+      return "";
+    }
+
+
+    var targetDate = new Date(target);
+    var result = targetDate.getFullYear() + "년 " + targetDate.getMonth() + "월 " + targetDate.getDate() + "일";
+     return result;
+  }
+
 
 }
 

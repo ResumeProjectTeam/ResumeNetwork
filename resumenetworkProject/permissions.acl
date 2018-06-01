@@ -5,22 +5,22 @@
  * added them to their authorized list.
  */
 
-
-
+rule revokeRequestByOES {
+    description: ""
+    participant: "ANY"
+    operation: CREATE
+    resource: "hansung.ac.kr.transaction.RevokeRequestUser"
+    action: ALLOW
+}
 
 
 /* For Authentication Asset */
 
 rule updateAuthenticationByAny{
     description: "Real condition is defined in logic.js File"
-    participant(p): "ANY"
-    operation: UPDATE
-    resource(r): "hansung.ac.kr.assets.Authentication"
-    condition: (r.requestResumeList.forEach(function (requestResume){
-    	if(requestResume.requestResumeAssetId == r.resumeAssetId){
-		return true;
-	}
-    }))
+    participant: "ANY"
+    operation: UPDATE, READ
+    resource: "hansung.ac.kr.assets.Authentication"
     action: ALLOW
 }
 
@@ -77,7 +77,15 @@ rule readAssetBySchool{
     action: ALLOW
 }
 
+rule readAssetByForiegnUser {
+    description: ""
+    participant(p): "hansung.ac.kr.participants.User"
+    operation: READ
+    resource(r): "hansung.ac.kr.assets.**"
+    condition: (r.isPublic == true)
+    action: ALLOW
 
+}
 
 
 /* Create access to asset */
