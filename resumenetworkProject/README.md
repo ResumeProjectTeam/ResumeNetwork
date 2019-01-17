@@ -3,20 +3,40 @@
 This business network defines:
 
 **Participant**
-`SampleParticipant`
+`User`
+`Organization`
+`Enterprise`
+`School`
+
 
 **Asset**
-`SampleAsset`
+`Authentication`
+`ResumeInfoUser`
+`Certificate`
+`AwardDetails`
+`UserInfoInOrg`
+`UserInfoInEnt`
+`UserInfoInSch`
+
 
 **Transaction**
-`SampleTransaction`
+`AddRequestUser`
+`RevokeRequestUser`
+`CreateAuthentication`
+`CreateResumeInfoUser`
+`CreateCertificate`
+`CreateAwardDetails`
+`CreateUserInfoInEnt`
+`CreateUserInfoInSch`
 
 **Event**
-`SampleEvent`
+`SendEvent`
+`UserEvent` 
+`OrganizationEvent` 
+`EnterpriseEvent`
+`SchoolEvent` 
 
-SampleAssets are owned by a SampleParticipant, and the value property on a SampleAsset can be modified by submitting a SampleTransaction. The SampleTransaction emits a SampleEvent that notifies applications of the old and new values for each modified SampleAsset.
 
-To test this Business Network Definition in the **Test** tab:
 
 Create a `SampleParticipant` participant:
 
