@@ -8,3 +8,15 @@
 블록체인 오픈소스 Hyperledger Fabric을 이용하여 Rest Server를 구현하고
 
 Angular로 Front-end를 구현했습니다.
+
+
+## Program Stacks
+*Hyperledger Composer
+*OAuth(Github)
+*Angular6
+*Node js
+
+## Development Environment
+*javascript, typescript
+*Ubuntu 16 LTS AWS
+*Docker
