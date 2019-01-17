@@ -38,38 +38,38 @@ This business network defines:
 
 
 
-Create a `SampleParticipant` participant:
+```typescript
+/**
+ * @param {hansung.ac.kr.transaction.CreateAuthentication }  txCreateAuthentication   - the member to be processed
+ * @transaction
+ */
+function CreateAuthentication  (txCreateAuthentication ) {
+   var actionDateTime = new Date();
+   var me = getCurrentParticipant();
+   var factory = getFactory();
+   var indexf = -1;
 
-```
-{
-  "$class": "org.acme.sample.SampleParticipant",
-  "participantId": "Toby",
-  "firstName": "Tobias",
-  "lastName": "Hunter"
+   if(!me) {
+        throw new Error('can not find Participant');
+    }
+
+
+   return getAssetRegistry(NAMESAPCE_ASSETS + ".Authentication")
+  .then(function (allAuthenticationRegistry) {
+
+
+      var newAuthentication = factory.newResource(NAMESAPCE_ASSETS, "Authentication", txCreateAuthentication.resumeAssetId );
+       newAuthentication.authorizedParticipantId = txCreateAuthentication.authorizedParticipantId;
+       newAuthentication.approvalStatus = "미인증";
+       newAuthentication.resumeDetails = txCreateAuthentication.resumeDetails;
+       newAuthentication.resumeAssetId =  txCreateAuthentication.resumeAssetId;
+       newAuthentication.authenticationTime = actionDateTime;
+       newAuthentication.ownerId = txCreateAuthentication.userId;
+       return allAuthenticationRegistry.add(newAuthentication);
+       })
+        .catch(function (error){
+        throw error;
+       });
 }
-```
-
-Create a `SampleAsset` asset:
 
 ```
-{
-  "$class": "org.acme.sample.SampleAsset",
-  "assetId": "assetId:1",
-  "owner": "resource:org.acme.sample.SampleParticipant#Toby",
-  "value": "original value"
-}
-```
-
-Submit a `SampleTransaction` transaction:
-
-```
-{
-  "$class": "org.acme.sample.SampleTransaction",
-  "asset": "resource:org.acme.sample.SampleAsset#assetId:1",
-  "newValue": "new value"
-}
-```
-
-After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted. As a result, the value of the `assetId:1` should now be `new value` in the Asset Registry.
-
-Congratulations!
