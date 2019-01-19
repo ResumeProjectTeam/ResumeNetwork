@@ -1,11 +1,17 @@
 # ResumeNetwork Network
 
 package.json : BNA파일 생성시 구성요소(비즈니스네트워크명, 버전, 의존 라이브러리) 설정
+
 permissions.acl : 트랜잭션에 대한 네트워크 참가자의 권한과 실행조건 정의
+
 queries.qry : DB에 사용되는 query문 정의
+
 card파일 : 네트워크 참가자로써 참여할 수 있게 해주는 파일
+
 lib 폴더 : 트랜잭션의 실제 작동될 코드를 포함하는 스크립트 파일 존재
+
 models 폴더 : 네트워크 참가자, 자산, 트랜잭션 등을 
+
 
 This business network defines:
 
